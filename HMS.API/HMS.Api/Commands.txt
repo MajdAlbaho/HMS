@@ -1,0 +1,5 @@
+﻿Rescaffold database
+Scaffold-DbContext "Server=Majd-pc;Database=HMS;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Repositories/HMSDb -Force
+
+Generate migation
+add-migration BasicReservationTables -Context EstadioContext
