@@ -26,13 +26,10 @@
                         "styles": [
                             "src/styles.css",
                             "node_modules/ngx-toastr/toastr.css",
-                            "node_modules/bootstrap/dist/css/bootstrap.min.css",
-                            "src/assets/css/adminlte.css"
+                            "node_modules/font-awesome/css/font-awesome.css"
                         ],
                         "scripts": [
-                            "node_modules/jquery/dist/jquery.min.js",
-                            "node_modules/bootstrap/dist/js/bootstrap.min.js",
-                            "src/assets/js/adminlte.min.js"
+                            "node_modules"
                         ]
                     },
                     "configurations": {
