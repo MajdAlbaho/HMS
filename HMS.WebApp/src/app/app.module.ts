@@ -12,7 +12,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { UserService } from './services/user.service';
 import { AuthInterceptor } from './auth/auth.interceptor';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './Reception/home/home.component';
+import { GuestsComponent } from './Reception/guests/guests.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { HomeComponent } from './home/home.component';
     RegistrationComponent,
     LoginComponent,
     ForbiddenComponent,
-    HomeComponent
+    HomeComponent,
+    GuestsComponent
   ],
   imports: [
     BrowserModule,
