@@ -28,6 +28,8 @@
     <link rel="stylesheet" href="plugins/fullcalendar-timegrid/main.min.css">
     <link rel="stylesheet" href="plugins/fullcalendar-bootstrap/main.min.css">
 
+    <!-- Siet.css -->
+    <link rel="stylesheet" href="./dist/css/Site.css">
 
 
 </head>
@@ -46,81 +48,37 @@
                     <a href="#" class="nav-link" data-toggle="modal" data-target="#exampleModal">New Reservation</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
+                        <a href="#" class="nav-link" data-toggle="modal" data-target="#exampleModal">Edit Reservation</a>
+                    </li>
+                <li class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link" data-toggle="modal" data-target="#exampleModal">Booking Check</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">Contact</a>
+                        <a href="#" class="nav-link" data-toggle="modal" data-target="#exampleModal">Guests</a>
+                    </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                        <a href="#" class="nav-link" data-toggle="modal" data-target="#exampleModal">Rooms</a>
+                    </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="#" class="nav-link text-primary"><i class="fa fa-check" aria-hidden="true"></i>
+                        Check in</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">Contact</a>
-                </li>
-
+                        <a href="#" class="nav-link text-danger"><i class="fas fa-sign-out-alt" aria-hidden="true"></i>
+                            Check out</a>
+                    </li>
             </ul>
 
 
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
-                <!-- Messages Dropdown Menu -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-comments"></i>
-                        <span class="badge badge-danger navbar-badge">3</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        Brad Diesel
-                                        <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                                    </h3>
-                                    <p class="text-sm">Call me whenever you can...</p>
-                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        John Pierce
-                                        <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                                    </h3>
-                                    <p class="text-sm">I got your message bro</p>
-                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <!-- Message Start -->
-                            <div class="media">
-                                <div class="media-body">
-                                    <h3 class="dropdown-item-title">
-                                        Nora Silvester
-                                        <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                                    </h3>
-                                    <p class="text-sm">The subject goes here</p>
-                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                                </div>
-                            </div>
-                            <!-- Message End -->
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
-                    </div>
-                </li>
+               
                 <!-- Notifications Dropdown Menu -->
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
                         <i class="far fa-bell"></i>
-                        <span class="badge badge-warning navbar-badge">15</span>
+                        <span class="badge badge-danger navbar-badge">15</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <span class="dropdown-item dropdown-header">15 Notifications</span>
@@ -177,8 +135,8 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="index.html" class="brand-link">
-                <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">HMS</span>
+                <img src="dist/img/HMS_logo.png" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <span class="brand-text font-weight-light">H.M.S</span>
             </a>
 
             <!-- Sidebar -->
@@ -187,7 +145,8 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="mt-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="dist/img/Hotel_logo.jpg" class="img-thumbnail img-rounded elevation-2">
+                        <a target="_blank" href="https://www.facebook.com/CiteaApartHotel">
+                        <img src="dist/img/Hotel_logo.jpg" class="img-thumbnail img-rounded elevation-2"></a>
                     </div>
                 </div>
 
@@ -211,7 +170,7 @@
                             <a href="pages/widgets.html" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
-                                    Guests
+                                    Guest list
                                     <span class="right badge badge-danger">New</span>
                                 </p>
                             </a>
@@ -289,8 +248,6 @@
             </div>
             <!-- /.sidebar -->
         </aside>
-
-
 
 
 
