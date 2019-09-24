@@ -29,7 +29,8 @@
                             "node_modules/bootstrap/dist/css/bootstrap.min.css",
                             "src/assets/css/adminlte.css",
                             "node_modules/ionicons/dist/css/ionicons.css",
-                            "node_modules/font-awesome/css/font-awesome.min.css"
+                            "node_modules/font-awesome/css/font-awesome.min.css",
+                            "src/plugins/icheck-bootstrap/icheck-bootstrap.min.css"
                         ],
                         "scripts": [
                             "node_modules/jquery/dist/jquery.min.js",

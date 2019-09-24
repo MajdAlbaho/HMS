@@ -1,16 +1,55 @@
-<img src="../../../../assets/img/single_user.png" class="mx-auto d-block">
-<form #form='ngForm' class="mb-4" autocomplete="off" (submit)="onSubmit(form)">
-    <div class="form-group">
-        <label>Username</label>
-        <input class="form-control" #UserName="ngModel" name="UserName" [(ngModel)]="formModel.UserName" required>
+<div class="login-box">
+    <div class="login-logo">
+      <a href=""><b>HMS</b>LTE</a>
     </div>
-    <div class="form-group">
-        <label>Password</label>
-        <input type="password" class="form-control" #Password="ngModel" name="Password" [(ngModel)]="formModel.Password" required>
+    <!-- /.login-logo -->
+    <div class="card">
+      <div class="card-body login-card-body">
+        <p class="login-box-msg">Sign in to start the system</p>
+  
+        <form action="../../index3.html" method="post">
+          <div class="input-group mb-3">
+            <input type="email" class="form-control" placeholder="Email">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fa fa-envelope"></span>
+              </div>
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <input type="password" class="form-control" placeholder="Password">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fa fa-lock"></span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-8">
+              <div class="icheck-primary">
+                <input type="checkbox" id="remember">
+                <label for="remember">
+                  Remember Me
+                </label>
+              </div>
+            </div>
+            <!-- /.col -->
+            <div class="col-4">
+              <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+            </div>
+            <!-- /.col -->
+          </div>
+        </form>
+  
+
+  
+        <p class="mb-1">
+          <a href="#">I forgot my password</a>
+        </p>
+        
+      </div>
+      <!-- /.login-card-body -->
     </div>
-    <div class="form-row">
-        <div class="form-group col-md-8 offset-md-2">
-            <button type="submit" class="btn btn-lg btn-block" [disabled]="form.invalid">Login</button>
-        </div>
-    </div>
-</form>
+  </div>
+  <!-- /.login-box -->
+  
