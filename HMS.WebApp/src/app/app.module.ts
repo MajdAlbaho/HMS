@@ -7,13 +7,15 @@ import { RegistrationComponent } from './auth/user/registration/registration.com
 import { LoginComponent } from './auth/user/login/login.component';
 import { ForbiddenComponent } from './auth/forbidden/forbidden.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { UserService } from './services/user.service';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { HomeComponent } from './Reception/home/home.component';
 import { GuestsComponent } from './Reception/guests/guests.component';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import { GuestsComponent } from './Reception/guests/guests.component';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    
     ToastrModule.forRoot({
       progressBar: true
     }),
