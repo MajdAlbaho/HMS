@@ -14,6 +14,8 @@ import { UserService } from './services/user.service';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { HomeComponent } from './Reception/home/home.component';
 import { GuestsComponent } from './Reception/guests/guests.component';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+
 
 @NgModule({
   declarations: [
@@ -31,13 +33,7 @@ import { GuestsComponent } from './Reception/guests/guests.component';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    TranslateModule.forRoot({
-      loader: {
-          provide: TranslateLoader,
-          useFactory: HttpLoaderFactory,
-          deps: [HttpClient]
-      }
-  }),
+    
     ToastrModule.forRoot({
       progressBar: true
     }),
