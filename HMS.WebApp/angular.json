@@ -26,14 +26,14 @@
                         "styles": [
                             "src/styles.css",
                             "node_modules/ngx-toastr/toastr.css",
-                            "node_modules/bootstrap/dist/css/bootstrap.min.css",
+                            "node_modules/bootstrap-v4-rtl/dist/css/bootstrap.min.css",
                             "src/assets/css/adminlte.css",
                             "node_modules/ionicons/dist/css/ionicons.css",
                             "node_modules/font-awesome/css/font-awesome.min.css"
                         ],
                         "scripts": [
                             "node_modules/jquery/dist/jquery.min.js",
-                            "node_modules/bootstrap/dist/js/bootstrap.min.js",
+                            "node_modules/bootstrap-v4-rtl/dist/js/bootstrap.min.js",
                             "src/assets/js/adminlte.min.js"
                         ]
                     },
