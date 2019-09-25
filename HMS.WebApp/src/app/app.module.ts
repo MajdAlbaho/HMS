@@ -12,13 +12,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { UserService } from './services/user.service';
 import { AuthInterceptor } from './auth/auth.interceptor';
-import { HomeComponent } from './home/home.component';
-import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http);
-}
+import { HomeComponent } from './Reception/home/home.component';
+import { GuestsComponent } from './Reception/guests/guests.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +22,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     RegistrationComponent,
     LoginComponent,
     ForbiddenComponent,
-    HomeComponent
+    HomeComponent,
+    GuestsComponent
   ],
   imports: [
     BrowserModule,
