@@ -14,8 +14,13 @@ import { UserService } from './services/user.service';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { HomeComponent } from './Reception/home/home.component';
 import { GuestsComponent } from './Reception/guests/guests.component';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
+export function createTranslateLoader(http: HttpClient) {
+	return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -25,7 +30,8 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
     LoginComponent,
     ForbiddenComponent,
     HomeComponent,
-    GuestsComponent
+    GuestsComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +39,13 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+          useFactory: createTranslateLoader, // exported factory function needed for AoT compilation
+          deps: [HttpClient]
+      }
+    }),
     ToastrModule.forRoot({
       progressBar: true
     }),

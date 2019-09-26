@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.779
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HMS.Api", "HMS.Api\HMS.Api.csproj", "{6534D731-25E1-4F26-8971-4B1DC949AF95}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HMS.Api", "HMS.Api\HMS.Api.csproj", "{6534D731-25E1-4F26-8971-4B1DC949AF95}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HMS.Models", "HMS.Models\HMS.Models.csproj", "{C91502CF-50E0-4F55-8AB5-5BE3100A88B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{6534D731-25E1-4F26-8971-4B1DC949AF95}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6534D731-25E1-4F26-8971-4B1DC949AF95}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6534D731-25E1-4F26-8971-4B1DC949AF95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C91502CF-50E0-4F55-8AB5-5BE3100A88B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C91502CF-50E0-4F55-8AB5-5BE3100A88B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C91502CF-50E0-4F55-8AB5-5BE3100A88B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C91502CF-50E0-4F55-8AB5-5BE3100A88B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

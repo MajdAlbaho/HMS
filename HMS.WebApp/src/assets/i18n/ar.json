@@ -1,5 +1,5 @@
 {
-    "welcomeMessage": "شكرا لانضمامك {{ FirstName }} , يسرنا وجودك هنا",
+    "welcomeMessage": "شكرا لانضمامك {{ firstName }} , يسرنا وجودك هنا",
     "login": {
         "username": "أدخل اسمك",
         "password": "كلمة المرور هنا"

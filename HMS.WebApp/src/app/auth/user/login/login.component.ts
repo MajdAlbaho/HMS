@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ export class LoginComponent implements OnInit {
     UserName: '',
     Password: ''
   }
-  constructor(private service: UserService, private router: Router, private toastr: ToastrService) { }
+  constructor(private service: UserService, private router: Router, private toastr: ToastrService,
+     private translate : TranslateService) { }
 
   ngOnInit() {
     if (localStorage.getItem('token') != null)
@@ -35,4 +37,9 @@ export class LoginComponent implements OnInit {
       }
     );
   }
+
+  onLanguageSelected(value:string){
+    this.translate.setDefaultLang(value);
+    this.translate.use(value);
+}
 }
