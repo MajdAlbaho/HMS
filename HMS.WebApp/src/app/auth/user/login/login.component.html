@@ -28,32 +28,22 @@
                     <div class="col-8">
                         <div class="icheck-primary">
                             <input type="checkbox" id="remember">
-                            <label for="remember">
-                  Remember Me
-                </label>
-
+                            <label for="remember">Remember Me</label>
                         </div>
                     </div>
-                    <!-- /.col -->
-                    <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
-                    </div>
-                    <!-- /.col -->
                 </div>
             </form>
 
-
-
-            <p class="mb-1">
-                <a href="#">I forgot my password</a>
-            </p>
-            <select class='select-option' #languageList (change)='onLanguageSelected(languageList.value)'>
+            
+            <div class="col-4 float-right mt-4">
+                <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+            </div>
+            
+            <select class="form-control mt-4 " style="width:auto;" #languageList (change)='onLanguageSelected(languageList.value)'>
               <option class='option' value='en'>English</option>
               <option class='option' value='ar'>Arabic</option>
               <option class='option' value='fri'>Farisi</option>
           </select>
-            <p>{{ 'welcomeMessage' | translate:user }}</p>
-
 
         </div>
         <!-- /.login-card-body -->

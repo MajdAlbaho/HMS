@@ -1,7 +1,5 @@
 <app-sidebar></app-sidebar>
 
-<div>{{ 'HELLO' | translate }}</div>
-
 <div class="wrapper">
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -109,110 +107,98 @@
         <section class="content">
             <div class="container-fluid">
 
-                <!-- Info boxes -->
-                <div class="row">
 
 
 
-
-                    <!-- Calendar -->
-                    <div class="col-md-8">
-                        <div class="card">
-
-                            <div class="card-header">
-                                <h3 class="card-title">Calendar</h3>
-
-                                <div class="card-tools">
-                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-              <i class="fa fa-minus"></i>
-            </button>
-                                </div>
-                            </div>
-
-
-                            <div class="card-body p-0">
-                                <!-- THE CALENDAR -->
-                                <div id="calendar"></div>
-                            </div>
-                            <!-- /.card-body -->
-                        </div>
-                        <!-- /.card -->
+                    
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">Reservations Table</h3>
+  
+                  <div class="card-tools">
+                    <div class="input-group input-group-sm">
+                      <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+  
+                      <div class="input-group-append">
+                        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                      </div>
                     </div>
-                    <!-- /Calendar -->
-
-
-
-
-
-                    <div id="external-events"> </div>
-
-
-
-
-
-
-
-                    <!-- Guests -->
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-header border-transparent">
-                                <h3 class="card-title">Guests Arrival Today</h3>
-
-                                <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                <i class="fa fa-minus"></i>
-                                </button>
-                                </div>
-                            </div>
-                            <!-- /.card-header -->
-                            <div class="card-body p-0">
-                                <div class="table-responsive">
-                                    <table class="table m-0">
-                                        <thead>
-                                            <tr>
-                                                <th>Room</th>
-                                                <th>Guest Name</th>
-                                                <th>Status</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                                                <td>Samsung Smart TV</td>
-                                                <td><span class="badge badge-warning">Pending</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                                <td>iPhone 6 Plus</td>
-                                                <td><span class="badge badge-danger">Canceled</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                                <td>Samsung Smart TV</td>
-                                                <td><span class="badge badge-info">Arrived</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                                                <td>Samsung Smart TV</td>
-                                                <td><span class="badge badge-warning">Pending</span></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <!-- /.table-responsive -->
-                            </div>
-                            <!-- /.card-body -->
-                            <div class="card-footer text-center">
-                                <a href="javascript::">View Full List</a>
-                            </div>
-
-                            <!-- /.card-footer -->
-                        </div>
-                        <!-- /.card -->
-                    </div>
-                    <!-- /.col -->
+                  </div>
                 </div>
-                <!-- /.row -->
+                <!-- /.card-header -->
+                <div class="card-body table-responsive p-0">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>ReservationID</th>
+                        <th>Organization</th>
+                        <th>Check-in</th>
+                        <th>Check-out</th>
+                        <th>Nights</th>
+                        <th>Rooms</th>
+                        <th>Guests</th>
+                        <th>Status</th>
+                        <th>Comment</th>
+
+
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>20192509-1</td>
+                        <td>SARC</td>
+                        <td>11-7-2019</td>
+                        <td>13-7-2019</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>5</td>
+                        <td><span class="badge badge-info">Arrived</span></td>
+                        <td></td>
+                      </tr>
+
+                      <tr>
+                        <td>20192509-1</td>
+                        <td>SARC</td>
+                        <td>11-7-2019</td>
+                        <td>13-7-2019</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>5</td>
+                        <td><span class="badge badge-danger">Canceled</span></td>
+                        <td></td>
+                      </tr>
+
+                      
+                      <tr>
+                        <td>20192509-1</td>
+                        <td>SARC</td>
+                        <td>11-7-2019</td>
+                        <td>13-7-2019</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>5</td>
+                        <td><span class="badge badge-warning">Pending</span></td>
+                        <td></td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+                <!-- /.card-body -->
+              </div>
+              <!-- /.card -->
+            </div>
+          </div>
+          <!-- /.row -->
+
+
+
+
+
             </div>
             <!--/. container-fluid -->
         </section>
