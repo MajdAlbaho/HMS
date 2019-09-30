@@ -17,6 +17,7 @@ import { GuestsComponent } from './Reception/guests/guests.component';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { DashboardComponent } from './Management/dashboard/dashboard.component';
 
 export function createTranslateLoader(http: HttpClient) {
 	return new TranslateHttpLoader(http);
@@ -31,7 +32,8 @@ export function createTranslateLoader(http: HttpClient) {
     ForbiddenComponent,
     HomeComponent,
     GuestsComponent,
-    SidebarComponent
+    SidebarComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

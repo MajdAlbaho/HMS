@@ -7,6 +7,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { ForbiddenComponent } from './auth/forbidden/forbidden.component';
 import { HomeComponent } from './Reception/home/home.component';
 import {GuestsComponent} from './Reception/guests/guests.component';
+import {DashboardComponent} from './Management/dashboard/dashboard.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,8 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'guests', component: GuestsComponent },
   { path: 'forbidden', component: ForbiddenComponent },
+  { path: 'dashboard', component: DashboardComponent },
+
   //{ path: 'adminpanel', component: AdminPanelComponent, canActivate: [AuthGuard], data: { permittedRoles: ['Admin', 'Manager'] } }
 
   { path: '**', redirectTo: '/user/login', pathMatch: 'full' },

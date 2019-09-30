@@ -211,17 +211,40 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade bd-example-modal-xl" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">
+                  <i class="fa fa-plus" aria-hidden="true"></i>
+                  New Reservation</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
             </div>
             <div class="modal-body">
-                ...
+
+
+                    <div class="row">
+
+                        <div class="form-group col-xs-6 mr-2 ml-2">
+                            <label for="firstname" class="sr-only"></label>
+                            <input required id="firstname" class="form-control input-group-lg reg_name" type="text" name="firstname"
+                                   title="Enter first name" placeholder="First name"/>
+                        </div>
+
+
+                        <div class="form-group col-xs-6 mr-2 ml-2">
+                            <label for="lastname" class="sr-only"></label>
+                            <input required id="lastname" class="form-control input-group-lg reg_name" type="text" name="lastname"
+                                   title="Enter last name" placeholder="Last name"/>
+                        </div>
+
+                    </div>
+                          
+
+
+                
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
