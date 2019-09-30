@@ -14,8 +14,8 @@ namespace HMS.Api.Repositories.HMSDb
         public string ArName { get; set; }
         public string EnName { get; set; }
         public string FriName { get; set; }
-        public DateTime? LastModefiedDate { get; set; }
         public DateTime CreatedDate { get; set; }
+        public DateTime? LastModifiedDate { get; set; }
 
         public virtual ICollection<Guests> Guests { get; set; }
     }

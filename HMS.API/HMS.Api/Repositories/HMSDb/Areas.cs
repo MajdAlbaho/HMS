@@ -17,7 +17,7 @@ namespace HMS.Api.Repositories.HMSDb
         public string FriName { get; set; }
         public int CityId { get; set; }
         public DateTime CreatedDate { get; set; }
-        public DateTime? LastModefiedDate { get; set; }
+        public DateTime? LastModifiedDate { get; set; }
 
         public virtual Cities City { get; set; }
         public virtual ICollection<Companies> Companies { get; set; }

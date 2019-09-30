@@ -13,8 +13,6 @@ namespace HMS.Models
         public string EnName { get; set; }
         public string FriName { get; set; }
         public DateTime CreatedDate { get; set; }
-        public DateTime? LastModefiedDate { get; set; }
-
-        public virtual ICollection<City> Cities { get; set; }
+        public DateTime? LastModifiedDate { get; set; }
     }
 }

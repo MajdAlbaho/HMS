@@ -16,7 +16,7 @@ namespace HMS.Api.Repositories.HMSDb
         public string FriName { get; set; }
         public int CountryId { get; set; }
         public DateTime CreatedDate { get; set; }
-        public DateTime? LastModefiedDate { get; set; }
+        public DateTime? LastModifiedDate { get; set; }
 
         public virtual Countries Country { get; set; }
         public virtual ICollection<Areas> Areas { get; set; }

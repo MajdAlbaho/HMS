@@ -7,6 +7,7 @@ namespace HMS.Api.Repositories.HMSDb
     {
         public Rooms()
         {
+            ReservationRooms = new HashSet<ReservationRooms>();
             RoomNeeds = new HashSet<RoomNeeds>();
         }
 
@@ -16,10 +17,11 @@ namespace HMS.Api.Repositories.HMSDb
         public byte FloorNumber { get; set; }
         public byte TotalBeds { get; set; }
         public int Cost { get; set; }
-        public DateTime? LastModefiedDate { get; set; }
         public DateTime CreatedDate { get; set; }
+        public DateTime? LastModifiedDate { get; set; }
 
         public virtual Hotels Hotel { get; set; }
+        public virtual ICollection<ReservationRooms> ReservationRooms { get; set; }
         public virtual ICollection<RoomNeeds> RoomNeeds { get; set; }
     }
 }
