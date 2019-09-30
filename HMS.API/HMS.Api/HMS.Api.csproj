@@ -15,4 +15,8 @@
     <Folder Include="Models\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HMS.Models\HMS.Models.csproj" />
+  </ItemGroup>
+
 </Project>

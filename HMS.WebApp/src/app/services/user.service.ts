@@ -1,14 +1,14 @@
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from '@angular/core';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private fb: FormBuilder, private http: HttpClient) { }
-  readonly BaseURI = 'http://localhost:51071/api';
+  constructor(private fb: FormBuilder, private http: HttpClient, private apiService : ApiService) { }
 
   formModel = this.fb.group({
     UserName: ['', Validators.required],
@@ -40,15 +40,15 @@ export class UserService {
       FullName: this.formModel.value.FullName,
       Password: this.formModel.value.Passwords.Password
     };
-    return this.http.post(this.BaseURI + '/ApplicationUser/Register', body);
+    return this.http.post(this.apiService.getApiUrl + 'ApplicationUser/Register', body);
   }
 
   login(formData) {
-    return this.http.post(this.BaseURI + '/ApplicationUser/Login', formData);
+    return this.http.post(this.apiService.getApiUrl + 'ApplicationUser/Login', formData);
   }
 
   getUserProfile() {
-    return this.http.get(this.BaseURI + '/UserProfile');
+    return this.http.get(this.apiService.getApiUrl + 'UserProfile');
   }
 
   roleMatch(allowedRoles): boolean {
