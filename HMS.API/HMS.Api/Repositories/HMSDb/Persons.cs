@@ -25,9 +25,9 @@ namespace HMS.Api.Repositories.HMSDb
         public string MotherFriName { get; set; }
         public DateTime BirthDate { get; set; }
         public bool Gender { get; set; }
+        public byte[] CopyOfIdentity { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? LastModifiedDate { get; set; }
-        public DateTime? LastModefiedDate { get; set; }
 
         public virtual ICollection<GroupPersons> GroupPersons { get; set; }
     }

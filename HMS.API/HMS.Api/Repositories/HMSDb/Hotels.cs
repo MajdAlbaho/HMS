@@ -16,8 +16,9 @@ namespace HMS.Api.Repositories.HMSDb
         public string EnName { get; set; }
         public string FriName { get; set; }
         public int AreaId { get; set; }
+        public string Notes { get; set; }
         public byte Rate { get; set; }
-        public DateTime? LastModefiedDate { get; set; }
+        public DateTime? LastModifiedDate { get; set; }
         public DateTime CreatedDate { get; set; }
 
         public virtual Areas Area { get; set; }

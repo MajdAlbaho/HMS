@@ -19,8 +19,9 @@ namespace HMS.Api.Repositories.HMSDb
         public string ArAddress { get; set; }
         public string EnAddress { get; set; }
         public string FriAddress { get; set; }
+        public string Notes { get; set; }
         public DateTime CreatedDate { get; set; }
-        public DateTime? LastModefiedDate { get; set; }
+        public DateTime? LastModifiedDate { get; set; }
 
         public virtual Areas Area { get; set; }
         public virtual ICollection<CompanyPhones> CompanyPhones { get; set; }

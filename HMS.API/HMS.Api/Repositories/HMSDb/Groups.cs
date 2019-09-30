@@ -15,8 +15,8 @@ namespace HMS.Api.Repositories.HMSDb
         public string EnName { get; set; }
         public string FriName { get; set; }
         public Guid CompanyId { get; set; }
-        public DateTime? LastModefiedDate { get; set; }
         public DateTime CreatedDate { get; set; }
+        public DateTime? LastModifiedDate { get; set; }
 
         public virtual Companies Company { get; set; }
         public virtual ICollection<GroupPersons> GroupPersons { get; set; }

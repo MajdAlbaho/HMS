@@ -15,7 +15,7 @@ namespace HMS.Api.Repositories.HMSDb
         public string EnName { get; set; }
         public string FriName { get; set; }
         public DateTime CreatedDate { get; set; }
-        public DateTime? LastModefiedDate { get; set; }
+        public DateTime? LastModifiedDate { get; set; }
 
         public virtual ICollection<Cities> Cities { get; set; }
     }

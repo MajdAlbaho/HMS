@@ -7,8 +7,8 @@ namespace HMS.Api.Repositories.HMSDb
     {
         public Guid GroupId { get; set; }
         public Guid PersonId { get; set; }
-        public DateTime? LastModefiedDate { get; set; }
         public DateTime CreatedDate { get; set; }
+        public DateTime? LastModifiedDate { get; set; }
 
         public virtual Groups Group { get; set; }
         public virtual Persons Person { get; set; }

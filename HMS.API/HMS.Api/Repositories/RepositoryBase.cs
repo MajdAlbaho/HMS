@@ -16,32 +16,32 @@ namespace HMS.Api.Repositories
         int Count();
         Task<int> CountAsync();
         void Delete(TEntity entity);
-        Task<int> DeleteAsync(TEntity entity);
-        void Delete(TKey Id);
-        Task<int> DeleteAsync(TKey Id);
+        Task DeleteAsync(TEntity entity);
+        void Delete(TKey id);
+        Task DeleteAsync(TKey id);
         void Dispose();
         TEntity Find(Expression<Func<TEntity, bool>> match);
         ICollection<TEntity> FindAll(Expression<Func<TEntity, bool>> match);
         Task<ICollection<TEntity>> FindAllAsync(Expression<Func<TEntity, bool>> match);
         Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> match);
         IQueryable<TEntity> FindBy(Expression<Func<TEntity, bool>> predicate);
-        Task<ICollection<TEntity>> FindByAsyn(Expression<Func<TEntity, bool>> predicate);
+        Task<ICollection<TEntity>> FindByAsync(Expression<Func<TEntity, bool>> predicate);
         TEntity Get(TKey id);
         IQueryable<TEntity> GetAll();
         Task<ICollection<TEntity>> GetAllAsync();
         IQueryable<TEntity> GetAllIncluding(params Expression<Func<TEntity, object>>[] includeProperties);
         Task<TEntity> GetAsync(TKey id);
         void Save();
-        Task<int> SaveAsync();
+        Task SaveAsync();
         TEntity Update(TEntity item, TKey key);
-        Task<TEntity> UpdateAsyn(TEntity item, TKey key);
+        Task<TEntity> UpdateAsync(TEntity item, TKey key);
     }
 
     public class RepositoryBase<TEntity, TKey> : IRepositoryBase<TEntity, TKey> where TEntity : class
     {
-        protected HMSContext Context;
+        protected HMSDbContext Context;
 
-        public RepositoryBase(HMSContext context) {
+        public RepositoryBase(HMSDbContext context) {
             Context = context;
         }
 
@@ -50,6 +50,7 @@ namespace HMS.Api.Repositories
         }
 
         public virtual async Task<ICollection<TEntity>> GetAllAsync() {
+
             return await Context.Set<TEntity>().ToListAsync();
         }
 
@@ -62,26 +63,43 @@ namespace HMS.Api.Repositories
         }
 
         public virtual TEntity Add(TEntity item) {
-            var properyInfo = item.GetType().GetProperty("LastModifiedDate");
-            if (properyInfo != null) {
-                properyInfo.SetValue(item, DateTime.Now);
-            }
+            using (var transaction = Context.Database.BeginTransaction()) {
+                try {
+                    var propertyInfo = item.GetType().GetProperty("LastModifiedDate");
+                    if (propertyInfo != null) {
+                        propertyInfo.SetValue(item, DateTime.Now);
+                    }
 
-            Context.Set<TEntity>().Add(item);
-            Context.SaveChanges();
-            return item;
+                    Context.Set<TEntity>().Add(item);
+                    Context.SaveChanges();
+
+                    transaction.Commit();
+                    return item;
+                } catch (Exception ex) {
+                    transaction.Rollback();
+                    throw new Exception(ex.Message);
+                }
+            }
         }
 
         public virtual async Task<TEntity> AddAsync(TEntity item) {
-            var properyInfo = item.GetType().GetProperty("LastModifiedDate");
-            if (properyInfo != null) {
-                properyInfo.SetValue(item, DateTime.Now);
+            using (var transaction = Context.Database.BeginTransaction()) {
+                try {
+                    var propertyInfo = item.GetType().GetProperty("LastModifiedDate");
+                    if (propertyInfo != null) {
+                        propertyInfo.SetValue(item, DateTime.Now);
+                    }
+
+                    Context.Set<TEntity>().Add(item);
+                    await Context.SaveChangesAsync();
+
+                    transaction.Commit();
+                    return item;
+                } catch (Exception ex) {
+                    transaction.Rollback();
+                    throw new Exception(ex.Message);
+                }
             }
-
-            Context.Set<TEntity>().Add(item);
-            await Context.SaveChangesAsync();
-            return item;
-
         }
 
         public virtual TEntity Find(Expression<Func<TEntity, bool>> match) {
@@ -101,47 +119,101 @@ namespace HMS.Api.Repositories
         }
 
         public virtual void Delete(TEntity entity) {
-            Context.Set<TEntity>().Remove(entity);
-            Context.SaveChanges();
+            using (var transaction = Context.Database.BeginTransaction()) {
+                try {
+                    Context.Set<TEntity>().Remove(entity);
+                    Context.SaveChanges();
+
+                    transaction.Commit();
+                } catch (Exception ex) {
+                    transaction.Rollback();
+                    throw new Exception(ex.Message);
+                }
+            }
+
         }
 
-        public virtual void Delete(TKey Id) {
-            var item = Get(Id);
-            Context.Set<TEntity>().Remove(item);
-            Context.SaveChanges();
+        public virtual void Delete(TKey id) {
+            using (var transaction = Context.Database.BeginTransaction()) {
+                try {
+                    var item = Get(id);
+                    Context.Set<TEntity>().Remove(item);
+                    Context.SaveChanges();
+
+                    transaction.Commit();
+                } catch (Exception ex) {
+                    transaction.Rollback();
+                    throw new Exception(ex.Message);
+                }
+            }
         }
 
-        public virtual async Task<int> DeleteAsync(TEntity entity) {
-            Context.Set<TEntity>().Remove(entity);
-            return await Context.SaveChangesAsync();
+        public virtual async Task DeleteAsync(TEntity entity) {
+            using (var transaction = Context.Database.BeginTransaction()) {
+                try {
+                    Context.Set<TEntity>().Remove(entity);
+                    await Context.SaveChangesAsync();
+
+                    transaction.Commit();
+                } catch (Exception ex) {
+                    transaction.Rollback();
+                    throw new Exception(ex.Message);
+                }
+            }
         }
 
-        public virtual async Task<int> DeleteAsync(TKey Id) {
-            var item = await GetAsync(Id);
-            Context.Set<TEntity>().Remove(item);
-            return await Context.SaveChangesAsync();
+        public virtual async Task DeleteAsync(TKey id) {
+            using (var transaction = Context.Database.BeginTransaction()) {
+                try {
+                    var item = await GetAsync(id);
+                    Context.Set<TEntity>().Remove(item);
+                    await Context.SaveChangesAsync();
+
+                    transaction.Commit();
+                } catch (Exception ex) {
+                    transaction.Rollback();
+                    throw new Exception(ex.Message);
+                }
+            }
         }
 
         public virtual TEntity Update(TEntity item, TKey key) {
-            if (item == null)
-                return null;
-            TEntity exist = Context.Set<TEntity>().Find(key);
-            if (exist != null) {
-                Context.Entry(exist).CurrentValues.SetValues(item);
-                Context.SaveChanges();
+            using (var transaction = Context.Database.BeginTransaction()) {
+                try {
+                    if (item == null)
+                        return null;
+                    TEntity exist = Context.Set<TEntity>().Find(key);
+                    if (exist != null) {
+                        Context.Entry(exist).CurrentValues.SetValues(item);
+                        Context.SaveChanges();
+                        transaction.Commit();
+                    }
+                    return exist;
+                } catch (Exception ex) {
+                    transaction.Rollback();
+                    throw new Exception(ex.Message);
+                }
             }
-            return exist;
         }
 
-        public virtual async Task<TEntity> UpdateAsyn(TEntity item, TKey key) {
-            if (item == null)
-                return null;
-            TEntity exist = await Context.Set<TEntity>().FindAsync(key);
-            if (exist != null) {
-                Context.Entry(exist).CurrentValues.SetValues(item);
-                await Context.SaveChangesAsync();
+        public virtual async Task<TEntity> UpdateAsync(TEntity item, TKey key) {
+            using (var transaction = Context.Database.BeginTransaction()) {
+                try {
+
+                    if (item == null)
+                        return null;
+                    TEntity exist = await Context.Set<TEntity>().FindAsync(key);
+                    if (exist != null) {
+                        Context.Entry(exist).CurrentValues.SetValues(item);
+                        await Context.SaveChangesAsync();
+                        transaction.Commit();
+                    }
+                    return exist;
+                } catch (Exception ex) {
+                    transaction.Rollback();
+                    throw new Exception(ex.Message);
+                }
             }
-            return exist;
         }
 
         public int Count() {
@@ -153,12 +225,28 @@ namespace HMS.Api.Repositories
         }
 
         public virtual void Save() {
-
-            Context.SaveChanges();
+            using (var transaction = Context.Database.BeginTransaction()) {
+                try {
+                    Context.SaveChanges();
+                    transaction.Commit();
+                } catch (Exception ex) {
+                    transaction.Rollback();
+                    throw new Exception(ex.Message);
+                }
+            }
         }
 
-        public virtual async Task<int> SaveAsync() {
-            return await Context.SaveChangesAsync();
+        public virtual async Task SaveAsync() {
+            using (var transaction = Context.Database.BeginTransaction()) {
+                try {
+                    await Context.SaveChangesAsync();
+
+                    transaction.Commit();
+                } catch (Exception ex) {
+                    transaction.Rollback();
+                    throw new Exception(ex.Message);
+                }
+            }
         }
 
         public virtual IQueryable<TEntity> FindBy(Expression<Func<TEntity, bool>> predicate) {
@@ -166,7 +254,7 @@ namespace HMS.Api.Repositories
             return query;
         }
 
-        public virtual async Task<ICollection<TEntity>> FindByAsyn(Expression<Func<TEntity, bool>> predicate) {
+        public virtual async Task<ICollection<TEntity>> FindByAsync(Expression<Func<TEntity, bool>> predicate) {
             return await Context.Set<TEntity>().Where(predicate).ToListAsync();
         }
 
@@ -183,7 +271,7 @@ namespace HMS.Api.Repositories
 
         private bool disposed = false;
         protected virtual void Dispose(bool disposing) {
-            if (!this.disposed) {
+            if (!disposed) {
                 if (disposing) {
                     Context.Dispose();
                 }
