@@ -18,12 +18,6 @@
                 <a href="#" class="nav-link" data-toggle="modal" data-target="#CheckReservationModal">Booking Check</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="#" class="nav-link" data-toggle="modal" data-target="#NewReservationModal">Guests</a>
-            </li>
-            <li class="nav-item d-none d-sm-inline-block">
-                <a href="#" class="nav-link" data-toggle="modal" data-target="#NewReservationModal">Rooms</a>
-            </li>
-            <li class="nav-item d-none d-sm-inline-block">
                 <a href="#" class="nav-link text-primary"><i class="fa fa-check" aria-hidden="true"></i>
                     Check in</a>
             </li>
@@ -37,6 +31,13 @@
 
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
+
+            <!-- Notifications Dropdown Menu -->
+            <li class="">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <span>Ramez Bazna</span>
+                    </a>
+                </li>
 
             <!-- Notifications Dropdown Menu -->
             <li class="nav-item dropdown">
@@ -84,7 +85,11 @@
                     </a>
                     <div class="dropdown-divider"></div>
                     <a href="#" class="dropdown-item">
-                        <i class="fa fa-sign-out-alt mr-2"></i>
+                        <i class="fa fa-user mr-2"></i> User Settings
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <i class="fa fa-sign-out mr-2 text-danger"></i>
                         <span class="text-danger">Log out</span>
                     </a>
                 </div>
@@ -418,14 +423,13 @@
 <!-- //NewReservationModal -->
 
 
-
 <!-- CheckReservationModal -->
 <div class="modal fade bd-example-modal-xl" id="CheckReservationModal" tabindex="-1" role="dialog" aria-labelledby="CheckReservationModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="CheckReservationModalLabel">
-                    <i class="fa fa-plus" aria-hidden="true"></i> Chack Reservation</h5>
+                    <i class="fa fa-question" aria-hidden="true"></i> Chack Reservation</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>

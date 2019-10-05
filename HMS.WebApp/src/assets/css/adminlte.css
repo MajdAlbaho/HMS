@@ -61,7 +61,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 body {
   margin: 0;
   font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 400;
   line-height: 1.5;
   color: #212529;
@@ -1871,7 +1871,7 @@ pre code {
   width: 100%;
   height: calc(2.25rem + 2px);
   padding: 0.375rem 0.75rem;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 400;
   line-height: 1.5;
   color: #495057;
@@ -2401,7 +2401,7 @@ textarea.form-control {
   background-color: transparent;
   border: 1px solid transparent;
   padding: 0.375rem 0.75rem;
-  font-size: 1rem;
+  font-size: 0.9rem;
   line-height: 1.5;
   border-radius: 0.25rem;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -3090,7 +3090,7 @@ input[type="button"].btn-block {
   min-width: 10rem;
   padding: 0.5rem 0;
   margin: 0.125rem 0 0;
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: #212529;
   text-align: left;
   list-style: none;
@@ -3558,7 +3558,7 @@ input[type="button"].btn-block {
   align-items: center;
   padding: 0.375rem 0.75rem;
   margin-bottom: 0;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 400;
   line-height: 1.5;
   color: #495057;
@@ -3795,7 +3795,7 @@ input[type="button"].btn-block {
   width: 100%;
   height: calc(2.25rem + 2px);
   padding: 0.375rem 1.75rem 0.375rem 0.75rem;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 400;
   line-height: 1.5;
   color: #495057;
@@ -11217,7 +11217,7 @@ body,
 
 .brand-link {
   display: block;
-  font-size: 1.25rem;
+  font-size: 0.9rem;
   line-height: 1.5;
   padding: 0.8125rem 0.5rem;
   transition: width 0.3s ease-in-out;
@@ -12228,7 +12228,7 @@ html.control-sidebar-animate {
 }
 
 .dropdown-item-title {
-  font-size: 1rem;
+  font-size: 0.9rem;
   margin: 0;
 }
 
