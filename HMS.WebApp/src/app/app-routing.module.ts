@@ -8,6 +8,7 @@ import { ForbiddenComponent } from './auth/forbidden/forbidden.component';
 import { HomeComponent } from './Reception/home/home.component';
 import {GuestsComponent} from './Reception/guests/guests.component';
 import {DashboardComponent} from './Management/dashboard/dashboard.component';
+import {CalendarComponent} from './Reception/calendar/calendar.component';
 
 
 const routes: Routes = [
@@ -24,6 +25,8 @@ const routes: Routes = [
   { path: 'guests', component: GuestsComponent },
   { path: 'forbidden', component: ForbiddenComponent },
   { path: 'dashboard', component: DashboardComponent },
+  { path: 'calendar', component: CalendarComponent },
+
 
   //{ path: 'adminpanel', component: AdminPanelComponent, canActivate: [AuthGuard], data: { permittedRoles: ['Admin', 'Manager'] } }
 

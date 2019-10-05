@@ -18,6 +18,7 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { DashboardComponent } from './Management/dashboard/dashboard.component';
+import { CalendarComponent } from './Reception/calendar/calendar.component';
 
 export function createTranslateLoader(http: HttpClient) {
 	return new TranslateHttpLoader(http);
@@ -33,7 +34,8 @@ export function createTranslateLoader(http: HttpClient) {
     HomeComponent,
     GuestsComponent,
     SidebarComponent,
-    DashboardComponent
+    DashboardComponent,
+    CalendarComponent
   ],
   imports: [
     BrowserModule,
