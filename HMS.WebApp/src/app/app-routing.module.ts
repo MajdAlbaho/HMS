@@ -10,6 +10,7 @@ import {GuestsComponent} from './Reception/guests/guests.component';
 import {DashboardComponent} from './Management/dashboard/dashboard.component';
 import {CalendarComponent} from './Reception/calendar/calendar.component';
 import {RoomsComponent} from './Reception/rooms/rooms.component';
+import {GroupsComponent} from './Reception/groups/groups.component';
 
 
 const routes: Routes = [
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'calendar', component: CalendarComponent },
   { path: 'rooms', component: RoomsComponent },
+  { path: 'groups', component: GroupsComponent},
 
 
   //{ path: 'adminpanel', component: AdminPanelComponent, canActivate: [AuthGuard], data: { permittedRoles: ['Admin', 'Manager'] } }
