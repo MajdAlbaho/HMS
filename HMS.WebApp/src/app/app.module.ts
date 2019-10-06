@@ -21,6 +21,7 @@ import { DashboardComponent } from './Management/dashboard/dashboard.component';
 import { CalendarComponent } from './Reception/calendar/calendar.component';
 import { RoomsComponent } from './Reception/rooms/rooms.component';
 import { GroupsComponent } from './Reception/groups/groups.component';
+import { ContactUsComponent } from './Settings/contact-us/contact-us.component';
 
 export function createTranslateLoader(http: HttpClient) {
 	return new TranslateHttpLoader(http);
@@ -39,7 +40,8 @@ export function createTranslateLoader(http: HttpClient) {
     DashboardComponent,
     CalendarComponent,
     RoomsComponent,
-    GroupsComponent
+    GroupsComponent,
+    ContactUsComponent
   ],
   imports: [
     BrowserModule,
