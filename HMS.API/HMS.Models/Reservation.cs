@@ -22,6 +22,7 @@ namespace HMS.Models
 
         public Status Status { get; set; }
         public List<ReservationRoom> ReservationRooms { get; set; }
+        public List<ReservationGroup> ReservationGroups { get; set; }
 
     }
 }

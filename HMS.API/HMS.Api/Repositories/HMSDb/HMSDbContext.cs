@@ -33,6 +33,7 @@ namespace HMS.Api.Repositories.HMSDb
         public virtual DbSet<Needs> Needs { get; set; }
         public virtual DbSet<Persons> Persons { get; set; }
         public virtual DbSet<PhoneTypes> PhoneTypes { get; set; }
+        public virtual DbSet<ReservationGroups> ReservationGroups { get; set; }
         public virtual DbSet<ReservationRooms> ReservationRooms { get; set; }
         public virtual DbSet<Reservations> Reservations { get; set; }
         public virtual DbSet<RoomNeeds> RoomNeeds { get; set; }
@@ -488,6 +489,23 @@ namespace HMS.Api.Repositories.HMSDb
                 entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
             });
 
+            modelBuilder.Entity<ReservationGroups>(entity =>
+            {
+                entity.HasKey(e => new { e.ReservationId, e.GroupId })
+                    .HasName("PK_ReservationGroups_ReservationId_GroupId");
+
+                entity.ToTable("ReservationGroups", "Hotel");
+
+                entity.HasOne(d => d.Group)
+                    .WithMany(p => p.ReservationGroups)
+                    .HasForeignKey(d => d.GroupId)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
+
+                entity.HasOne(d => d.Reservation)
+                    .WithMany(p => p.ReservationGroups)
+                    .HasForeignKey(d => d.ReservationId);
+            });
+
             modelBuilder.Entity<ReservationRooms>(entity =>
             {
                 entity.ToTable("ReservationRooms", "Hotel");
@@ -503,10 +521,6 @@ namespace HMS.Api.Repositories.HMSDb
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
-
-                entity.HasOne(d => d.Group)
-                    .WithMany(p => p.ReservationRooms)
-                    .HasForeignKey(d => d.GroupId);
 
                 entity.HasOne(d => d.Person)
                     .WithMany(p => p.ReservationRooms)
