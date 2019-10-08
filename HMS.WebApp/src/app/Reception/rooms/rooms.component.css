@@ -1,0 +1,11 @@
+.users-list > li {
+    width: 8%;
+}
+
+.users-list-name {
+    font-size: 0.7rem;
+}
+
+.users-list-date {
+    font-size: 10px;
+}

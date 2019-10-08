@@ -19,11 +19,11 @@
             </li>
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="#" class="nav-link text-primary"><i class="fa fa-check" aria-hidden="true"></i>
-                    Check in</a>
+                Check in</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="#" class="nav-link text-danger"><i class="fa fa-sign-out" aria-hidden="true"></i>
-                        Check out</a>
+                Check out</a>
             </li>
         </ul>
 
@@ -192,17 +192,18 @@
 
 
 <!-- Modals -->
-<!-- NewReservationModal -->
-<div class="modal fade bd-example-modal-xl" id="NewReservationModal" tabindex="-1" role="dialog" aria-labelledby="NewReservationModalLabel" aria-hidden="true">
+        
+        <!-- NewReservationModal -->
+        <div class="modal fade bd-example-modal-xl" id="NewReservationModal" tabindex="-1" role="dialog" aria-labelledby="NewReservationModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
+
             <div class="modal-header">
                 <h5 class="modal-title" id="NewReservationModalLabel">
                     <i class="fa fa-plus" aria-hidden="true"></i> New Reservation</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
+
             <div class="modal-body">
 
 
@@ -276,24 +277,22 @@
                         </div>
                     </div>
 
+
                     <div class="col-auto">
-                        <label class="sr-only" for="Birthdate">ID Number</label>
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text"><i class="fa fa-id-card"></i></div>
+                            <label class="sr-only" for="Birthdate">ID Number</label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fa fa-id-card"></i></div>
+                                </div>
+                                <input type="number" class="form-control" id="Birthdate" placeholder="ID Number" title="ID Number">
                             </div>
+                    </div>
 
 
-                            <button type="button" class="btn">Attach file</button>
+                        <button type="button" class="btn">Attach file</button>
 
-
-                        </div>
-
-
-
-                        <!-- //Guest Information -->
-
-                        <!-- //Guest Information -->
+                    </div>
+                    <!-- //Guest Information -->
 
 
 
@@ -419,6 +418,8 @@
         <!-- //NewReservationModal -->
 
 
+
+
         <!-- CheckReservationModal -->
         <div class="modal fade bd-example-modal-xl" id="CheckReservationModal" tabindex="-1" role="dialog" aria-labelledby="CheckReservationModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
@@ -497,5 +498,6 @@
                 </div>
             </div>
         </div>
-
         <!-- //CheckReservationModal -->
+
+<!-- /Modals -->
