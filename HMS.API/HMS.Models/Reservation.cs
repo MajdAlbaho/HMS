@@ -6,20 +6,22 @@ using System.Threading.Tasks;
 
 namespace HMS.Models
 {
-    public class Reservation
+    public class Reservation : ModelBase<Guid>
     {
-        public Guid Id { get; set; }
         public string Code { get; set; }
         public Guid HotelId { get; set; }
-        public Guid GuestId { get; set; }
+        public int StatusId { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public string UserId { get; set; }
         public int TotalCost { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public DateTime? LastModifiedDate { get; set; }
 
-        public List<Person> Persons { get; set; }
+        public int Nights => (int)(EndDate - StartDate).TotalDays;
+        public int Rooms => ReservationRooms.Select(e => e.RoomId).Distinct().Count();
+        public int Guests => ReservationRooms.Select(e => e.PersonId).Distinct().Count();
+
+        public Status Status { get; set; }
+        public List<ReservationRoom> ReservationRooms { get; set; }
 
     }
 }

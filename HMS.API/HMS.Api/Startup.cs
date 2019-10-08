@@ -94,7 +94,7 @@ namespace HMS.Api
             services.AddSingleton(context);
 
             services.AddScoped<ICountryRepository, CountryRepository>();
-            services.AddScoped<IReservationRepository, MockReservationRepository>();
+            services.AddScoped<IReservationRepository, ReservationRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

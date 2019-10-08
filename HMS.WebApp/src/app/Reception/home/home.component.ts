@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
       this.reservations = response;
     }
     ,error => {
-      this.toastr.error(error);
+      this.toastr.error(error.message);
       console.log(error);
     });
   }

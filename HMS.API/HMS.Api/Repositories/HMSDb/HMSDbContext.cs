@@ -29,8 +29,6 @@ namespace HMS.Api.Repositories.HMSDb
         public virtual DbSet<Countries> Countries { get; set; }
         public virtual DbSet<GroupPersons> GroupPersons { get; set; }
         public virtual DbSet<Groups> Groups { get; set; }
-        public virtual DbSet<GuestTypes> GuestTypes { get; set; }
-        public virtual DbSet<Guests> Guests { get; set; }
         public virtual DbSet<Hotels> Hotels { get; set; }
         public virtual DbSet<Needs> Needs { get; set; }
         public virtual DbSet<Persons> Persons { get; set; }
@@ -39,6 +37,7 @@ namespace HMS.Api.Repositories.HMSDb
         public virtual DbSet<Reservations> Reservations { get; set; }
         public virtual DbSet<RoomNeeds> RoomNeeds { get; set; }
         public virtual DbSet<Rooms> Rooms { get; set; }
+        public virtual DbSet<Status> Status { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -243,9 +242,7 @@ namespace HMS.Api.Repositories.HMSDb
 
                 entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.Notes)
-                    .IsRequired()
-                    .HasMaxLength(1000);
+                entity.Property(e => e.Notes).HasMaxLength(1000);
 
                 entity.HasOne(d => d.Area)
                     .WithMany(p => p.Companies)
@@ -352,48 +349,6 @@ namespace HMS.Api.Repositories.HMSDb
                 entity.HasOne(d => d.Company)
                     .WithMany(p => p.Groups)
                     .HasForeignKey(d => d.CompanyId);
-            });
-
-            modelBuilder.Entity<GuestTypes>(entity =>
-            {
-                entity.ToTable("GuestTypes", "Common");
-
-                entity.Property(e => e.Id).ValueGeneratedOnAdd();
-
-                entity.Property(e => e.ArName)
-                    .IsRequired()
-                    .HasMaxLength(200);
-
-                entity.Property(e => e.CreatedDate)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.EnName)
-                    .IsRequired()
-                    .HasMaxLength(200);
-
-                entity.Property(e => e.FriName)
-                    .IsRequired()
-                    .HasMaxLength(200);
-
-                entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
-            });
-
-            modelBuilder.Entity<Guests>(entity =>
-            {
-                entity.ToTable("Guests", "HR");
-
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.CreatedDate)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
-
-                entity.HasOne(d => d.GuestType)
-                    .WithMany(p => p.Guests)
-                    .HasForeignKey(d => d.GuestTypeId);
             });
 
             modelBuilder.Entity<Hotels>(entity =>
@@ -535,16 +490,27 @@ namespace HMS.Api.Repositories.HMSDb
 
             modelBuilder.Entity<ReservationRooms>(entity =>
             {
-                entity.HasKey(e => new { e.ReservationId, e.RoomId })
-                    .HasName("PK_ReservationRooms_ReservationId_RoomId");
-
                 entity.ToTable("ReservationRooms", "Hotel");
+
+                entity.HasIndex(e => new { e.ReservationId, e.RoomId, e.PersonId })
+                    .HasName("UNIQUE_ReservationRooms_ReservationId_RoomId_PersonId")
+                    .IsUnique();
+
+                entity.Property(e => e.Id).HasDefaultValueSql("(newid())");
 
                 entity.Property(e => e.CreatedDate)
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
+
+                entity.HasOne(d => d.Group)
+                    .WithMany(p => p.ReservationRooms)
+                    .HasForeignKey(d => d.GroupId);
+
+                entity.HasOne(d => d.Person)
+                    .WithMany(p => p.ReservationRooms)
+                    .HasForeignKey(d => d.PersonId);
 
                 entity.HasOne(d => d.Reservation)
                     .WithMany(p => p.ReservationRooms)
@@ -580,14 +546,14 @@ namespace HMS.Api.Repositories.HMSDb
                     .IsRequired()
                     .HasMaxLength(450);
 
-                entity.HasOne(d => d.Guest)
-                    .WithMany(p => p.Reservations)
-                    .HasForeignKey(d => d.GuestId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
                 entity.HasOne(d => d.Hotel)
                     .WithMany(p => p.Reservations)
                     .HasForeignKey(d => d.HotelId);
+
+                entity.HasOne(d => d.Status)
+                    .WithMany(p => p.Reservations)
+                    .HasForeignKey(d => d.StatusId)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Reservations)
@@ -623,6 +589,10 @@ namespace HMS.Api.Repositories.HMSDb
             {
                 entity.ToTable("Rooms", "Hotel");
 
+                entity.HasIndex(e => e.RoomNumber)
+                    .HasName("Rooms_Unique_RoomNumber")
+                    .IsUnique();
+
                 entity.Property(e => e.Id).HasDefaultValueSql("(newid())");
 
                 entity.Property(e => e.CreatedDate)
@@ -634,6 +604,29 @@ namespace HMS.Api.Repositories.HMSDb
                 entity.HasOne(d => d.Hotel)
                     .WithMany(p => p.Rooms)
                     .HasForeignKey(d => d.HotelId);
+            });
+
+            modelBuilder.Entity<Status>(entity =>
+            {
+                entity.ToTable("Status", "Common");
+
+                entity.Property(e => e.ArName)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.CreatedDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.EnName)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.FriName)
+                    .IsRequired()
+                    .HasMaxLength(200);
+
+                entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
             });
         }
     }

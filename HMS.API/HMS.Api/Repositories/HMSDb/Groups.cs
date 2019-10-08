@@ -8,6 +8,7 @@ namespace HMS.Api.Repositories.HMSDb
         public Groups()
         {
             GroupPersons = new HashSet<GroupPersons>();
+            ReservationRooms = new HashSet<ReservationRooms>();
         }
 
         public Guid Id { get; set; }
@@ -20,5 +21,6 @@ namespace HMS.Api.Repositories.HMSDb
 
         public virtual Companies Company { get; set; }
         public virtual ICollection<GroupPersons> GroupPersons { get; set; }
+        public virtual ICollection<ReservationRooms> ReservationRooms { get; set; }
     }
 }

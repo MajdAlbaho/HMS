@@ -1,5 +1,6 @@
 ﻿using HMS.Api.Repositories.HMSDb;
 using HMS.Api.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,23 +15,21 @@ namespace HMS.Api.Repositories
         public ReservationRepository(HMSDbContext context)
             : base(context) {
         }
-    }
-
-    public class MockReservationRepository : RepositoryBase<Reservations, Guid>, IReservationRepository
-    {
-        public MockReservationRepository(HMSDbContext context)
-            : base(context) {
-        }
 
         public override async Task<ICollection<Reservations>> GetAllAsync() {
-            await base.GetAllAsync();
+            return await Context.Reservations
+                .Include(e => e.Status)
+                .Include(e => e.ReservationRooms)
+                .ToListAsync();
+        }
+    }
 
-            return new List<Reservations>()
-            {
-                new Reservations() { Id = Guid.NewGuid(), Code = "Sample", HotelId = Guid.NewGuid(),TotalCost = 98400},
-                new Reservations() { Id = Guid.NewGuid(), Code = "Data", HotelId = Guid.NewGuid(),TotalCost = 98400},
-                new Reservations() { Id = Guid.NewGuid(), Code = "Mock", HotelId = Guid.NewGuid(),TotalCost = 98400}
-            };
+    public class MockReservationRepository
+    {
+        private readonly HMSDbContext _context;
+
+        public MockReservationRepository(HMSDbContext context) {
+            _context = context;
         }
     }
 }

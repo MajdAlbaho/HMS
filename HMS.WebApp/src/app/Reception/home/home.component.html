@@ -34,10 +34,10 @@
 
             <!-- Notifications Dropdown Menu -->
             <li class="">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <span>Ramez Bazna</span>
-                    </a>
-                </li>
+                <a class="nav-link" data-toggle="dropdown" href="#">
+                    <span>Ramez Bazna</span>
+                </a>
+            </li>
 
             <!-- Notifications Dropdown Menu -->
             <li class="nav-item dropdown">
@@ -147,49 +147,25 @@
                                             <th>Guests</th>
                                             <th>Status</th>
                                             <th>Comment</th>
-
-
-
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr *ngFor="let reservation of reservations">
                                             <td>{{reservation.code}}</td>
                                             <td>SARC</td>
-                                            <td>11-7-2019</td>
-                                            <td>13-7-2019</td>
-                                            <td>2</td>
-                                            <td>3</td>
-                                            <td>5</td>
-                                            <td><span class="badge badge-info">Arrived</span></td>
+                                            <td>{{reservation.startDate | date:'yyyy-MM-dd'}}</td>
+                                            <td>{{reservation.endDate | date:'yyyy-MM-dd'}}</td>
+                                            <td>{{reservation.nights}}</td>
+                                            <td>{{reservation.rooms}}</td>
+                                            <td>{{reservation.guests}}</td>
+                                            <td>
+                                                <span [className]="reservation.statusId == 0 ? 'badge badge-info'
+                                                : reservation.statusId == 1 ? 'badge badge-warning' : 'badge badge-danger'">
+                                                    {{reservation.status.enName}}
+                                                </span>
+                                            </td>
                                             <td></td>
                                         </tr>
-
-                                        <tr>
-                                            <td>20192509-1</td>
-                                            <td>SARC</td>
-                                            <td>11-7-2019</td>
-                                            <td>13-7-2019</td>
-                                            <td>2</td>
-                                            <td>3</td>
-                                            <td>5</td>
-                                            <td><span class="badge badge-danger">Canceled</span></td>
-                                            <td></td>
-                                        </tr>
-
-
-                                        <tr>
-                                            <td>20192509-1</td>
-                                            <td>SARC</td>
-                                            <td>11-7-2019</td>
-                                            <td>13-7-2019</td>
-                                            <td>2</td>
-                                            <td>3</td>
-                                            <td>5</td>
-                                            <td><span class="badge badge-warning">Pending</span></td>
-                                            <td></td>
-                                        </tr>
-
                                     </tbody>
                                 </table>
                             </div>
@@ -286,138 +262,138 @@
 
 
 
-                        <div class="col-auto">
-                                <label class="sr-only" for="Birthdate">ID Number</label>
-                                <div class="input-group mb-2">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text"><i class="fa fa-id-card"></i></div>
-                                    </div>
-                                    <input type="number" class="form-control" id="Birthdate" placeholder="ID Number" title="ID Number">
-                                </div>
+                    <div class="col-auto">
+                        <label class="sr-only" for="Birthdate">ID Number</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fa fa-id-card"></i></div>
                             </div>
+                            <input type="number" class="form-control" id="Birthdate" placeholder="ID Number" title="ID Number">
                         </div>
-                        
-                        <!-- //Guest Information -->
+                    </div>
+                </div>
 
-
-                        
-                        <hr class="style1">
+                <!-- //Guest Information -->
 
 
 
-                        <!-- Reservation Details -->
-                        <label class="text-uppercase">Reservation Details</label>
+                <hr class="style1">
 
-                        <div class="row mt-2">
 
-                            <div class="col-auto">
-                                <label class="sr-only" for="inlineFormInputGroup">Check-in</label>
-                                <div class="input-group mb-2">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text"><i class="fa fa-check"></i></div>
-                                    </div>
-                                    <input type="date" class="form-control" id="inlineFormInputGroup" placeholder="Check-in" title="Check-in">
-                                </div>
+
+                <!-- Reservation Details -->
+                <label class="text-uppercase">Reservation Details</label>
+
+                <div class="row mt-2">
+
+                    <div class="col-auto">
+                        <label class="sr-only" for="inlineFormInputGroup">Check-in</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fa fa-check"></i></div>
                             </div>
-
-
-                            <div class="col-auto">
-                                <label class="sr-only" for="inlineFormInputGroup">Ckeck-out</label>
-                                <div class="input-group mb-2">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text"><i class="fa fa-sign-out"></i></div>
-                                    </div>
-                                    <input type="date" class="form-control" id="inlineFormInputGroup" placeholder="Ckeck-out" title="Ckeck-out">
-                                </div>
-                            </div>
-
-                            <div class="col-auto">
-                                <label class="sr-only" for="inlineFormInputGroup">Nights</label>
-                                <div class="input-group mb-2">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text"><i class="fa fa-moon-o"></i></div>
-                                    </div>
-                                    <input readonly type="text" class="form-control" id="inlineFormInputGroup" placeholder="Nights" title="Nights">
-                                </div>
-                            </div>
-
+                            <input type="date" class="form-control" id="inlineFormInputGroup" placeholder="Check-in" title="Check-in">
                         </div>
+                    </div>
 
 
-                        <div class="row mt-2">
+                    <div class="col-auto">
+                        <label class="sr-only" for="inlineFormInputGroup">Ckeck-out</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fa fa-sign-out"></i></div>
+                            </div>
+                            <input type="date" class="form-control" id="inlineFormInputGroup" placeholder="Ckeck-out" title="Ckeck-out">
+                        </div>
+                    </div>
 
-                            <div class="col-auto">
-                                <label class="sr-only" for="inlineFormInputGroup">Room Type</label>
-                                <div class="input-group mb-2">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text"><i class="fa fa-bed"></i></div>
-                                    </div>
-                                    <select class="browser-default custom-select">
+                    <div class="col-auto">
+                        <label class="sr-only" for="inlineFormInputGroup">Nights</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fa fa-moon-o"></i></div>
+                            </div>
+                            <input readonly type="text" class="form-control" id="inlineFormInputGroup" placeholder="Nights" title="Nights">
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="row mt-2">
+
+                    <div class="col-auto">
+                        <label class="sr-only" for="inlineFormInputGroup">Room Type</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fa fa-bed"></i></div>
+                            </div>
+                            <select class="browser-default custom-select">
                               <option selected>Room Type</option>
                               <option >Female</option>
                             </select>
                         </div>
-                        </div>
+                    </div>
 
 
-                            <div class="col-auto">
-                                <label class="sr-only" for="inlineFormInputGroup">Room Number</label>
-                                <div class="input-group mb-2">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text"><i class="fa fa-key"></i></div>
-                                    </div>
-                                    <select class="browser-default custom-select">
+                    <div class="col-auto">
+                        <label class="sr-only" for="inlineFormInputGroup">Room Number</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fa fa-key"></i></div>
+                            </div>
+                            <select class="browser-default custom-select">
                               <option selected>Room Number</option>
                               <option >Female</option>
                             </select>
 
-                                </div>
-                            </div>
-
-                        </div>
-                         <!-- // Reservation Details -->
-
-                         <hr class="style1">
-
-
-                         <!-- Financial Details -->
-                         <label class="text-uppercase text-danger">Financial Details</label>
-
-
-                         <div class="row mt-2">
-
-                             <div class="col-auto">
-                                 <label class="sr-only" for="inlineFormInputGroup">Discount</label>
-                                 <div class="input-group mb-2">
-                                     <div class="input-group-prepend">
-                                         <div class="input-group-text">%</div>
-                                     </div>
-                                     <input type="number" class="form-control" id="inlineFormInputGroup" placeholder="Discount" title="Discount">
-                                 </div>
-                             </div>
-
-                             <div class="col-auto">
-                                 <label class="sr-only" for="inlineFormInputGroup">Cost</label>
-                                 <div class="input-group mb-2">
-                                     <div class="input-group-prepend">
-                                         <div class="input-group-text">%</div>
-                                     </div>
-                                     <input readonly type="number" class="form-control" id="inlineFormInputGroup" placeholder="Cost" title="Cost">
-                                 </div>
-                             </div>
-
-
-                         </div>
-
-                         <!-- // Financial Details -->
-
-
-                        <div class="modal-footer mt-3">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
                         </div>
                     </div>
+
                 </div>
+                <!-- // Reservation Details -->
+
+                <hr class="style1">
+
+
+                <!-- Financial Details -->
+                <label class="text-uppercase text-danger">Financial Details</label>
+
+
+                <div class="row mt-2">
+
+                    <div class="col-auto">
+                        <label class="sr-only" for="inlineFormInputGroup">Discount</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">%</div>
+                            </div>
+                            <input type="number" class="form-control" id="inlineFormInputGroup" placeholder="Discount" title="Discount">
+                        </div>
+                    </div>
+
+                    <div class="col-auto">
+                        <label class="sr-only" for="inlineFormInputGroup">Cost</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">%</div>
+                            </div>
+                            <input readonly type="number" class="form-control" id="inlineFormInputGroup" placeholder="Cost" title="Cost">
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <!-- // Financial Details -->
+
+
+                <div class="modal-footer mt-3">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <!-- //NewReservationModal -->
@@ -437,70 +413,69 @@
             <div class="modal-body">
 
 
-                        <!-- Reservation Check -->
-                        <label class="text-uppercase text-danger">Reservation Check</label>
+                <!-- Reservation Check -->
+                <label class="text-uppercase text-danger">Reservation Check</label>
 
-                        <div class="row mt-2">
+                <div class="row mt-2">
 
-                            <div class="col-auto">
-                                <label class="sr-only" for="inlineFormInputGroup">Check-in</label>
-                                <div class="input-group mb-2">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text"><i class="fa fa-check"></i></div>
-                                    </div>
-                                    <input type="date" class="form-control" id="inlineFormInputGroup" placeholder="Check-in" title="Check-in">
-                                </div>
+                    <div class="col-auto">
+                        <label class="sr-only" for="inlineFormInputGroup">Check-in</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fa fa-check"></i></div>
                             </div>
-
-
-                            <div class="col-auto">
-                                <label class="sr-only" for="inlineFormInputGroup">Ckeck-out</label>
-                                <div class="input-group mb-2">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text"><i class="fa fa-sign-out"></i></div>
-                                    </div>
-                                    <input type="date" class="form-control" id="inlineFormInputGroup" placeholder="Ckeck-out" title="Ckeck-out">
-                                </div>
-                            </div>
-
-                            <div class="col-auto">
-                                <label class="sr-only" for="inlineFormInputGroup">Nights</label>
-                                <div class="input-group mb-2">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text"><i class="fa fa-moon-o"></i></div>
-                                    </div>
-                                    <input readonly type="text" class="form-control" id="inlineFormInputGroup" placeholder="Nights" title="Nights">
-                                </div>
-                            </div>
-
-                        </div>
-
-
-                        <div class="row mt-2">
-
-                            <div class="col-auto">
-                                <label class="sr-only" for="inlineFormInputGroup">Adults</label>
-                                <div class="input-group mb-2">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text"><i class="fa fa-users"></i></div>
-                                    </div>
-                                    <input type="number" class="form-control" id="inlineFormInputGroup" placeholder="Adults" title="Adults">
-                                </div>
-                            </div>
-
-
-                        </div>
-                         <!-- // Reservation Details -->
-
-
-                        <div class="modal-footer mt-3">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <input type="date" class="form-control" id="inlineFormInputGroup" placeholder="Check-in" title="Check-in">
                         </div>
                     </div>
+
+
+                    <div class="col-auto">
+                        <label class="sr-only" for="inlineFormInputGroup">Ckeck-out</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fa fa-sign-out"></i></div>
+                            </div>
+                            <input type="date" class="form-control" id="inlineFormInputGroup" placeholder="Ckeck-out" title="Ckeck-out">
+                        </div>
+                    </div>
+
+                    <div class="col-auto">
+                        <label class="sr-only" for="inlineFormInputGroup">Nights</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fa fa-moon-o"></i></div>
+                            </div>
+                            <input readonly type="text" class="form-control" id="inlineFormInputGroup" placeholder="Nights" title="Nights">
+                        </div>
+                    </div>
+
                 </div>
+
+
+                <div class="row mt-2">
+
+                    <div class="col-auto">
+                        <label class="sr-only" for="inlineFormInputGroup">Adults</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fa fa-users"></i></div>
+                            </div>
+                            <input type="number" class="form-control" id="inlineFormInputGroup" placeholder="Adults" title="Adults">
+                        </div>
+                    </div>
+
+
+                </div>
+                <!-- // Reservation Details -->
+
+
+                <div class="modal-footer mt-3">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
 <!-- //CheckReservationModal -->
-

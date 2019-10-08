@@ -3,20 +3,20 @@ using System.Collections.Generic;
 
 namespace HMS.Api.Repositories.HMSDb
 {
-    public partial class GuestTypes
+    public partial class Status
     {
-        public GuestTypes()
+        public Status()
         {
-            Guests = new HashSet<Guests>();
+            Reservations = new HashSet<Reservations>();
         }
 
-        public byte Id { get; set; }
+        public int Id { get; set; }
         public string ArName { get; set; }
         public string EnName { get; set; }
         public string FriName { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? LastModifiedDate { get; set; }
 
-        public virtual ICollection<Guests> Guests { get; set; }
+        public virtual ICollection<Reservations> Reservations { get; set; }
     }
 }

@@ -11,6 +11,6 @@ export class HomeService {
 
   getReservations(){
     return this.http.get(this.apiService.getApiUrl() +
-    'reservations');
+      'reservations');
   }
 }

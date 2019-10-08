@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Status = HMS.Api.Repositories.HMSDb.Status;
 
 namespace HMS.Api
 {
@@ -13,7 +14,10 @@ namespace HMS.Api
     {
         public MappingProfile() {
             CreateTwoWayMap<Reservations, Reservation>();
+            CreateTwoWayMap<ReservationRooms, ReservationRoom>();
             CreateTwoWayMap<Countries, Country>();
+            CreateTwoWayMap<Status, HMS.Models.Status>();
+            CreateTwoWayMap<Persons, Person>();
         }
 
         private void CreateTwoWayMap<T1, T2>() {
