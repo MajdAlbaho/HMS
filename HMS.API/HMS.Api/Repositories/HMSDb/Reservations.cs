@@ -7,6 +7,7 @@ namespace HMS.Api.Repositories.HMSDb
     {
         public Reservations()
         {
+            ReservationGroups = new HashSet<ReservationGroups>();
             ReservationRooms = new HashSet<ReservationRooms>();
         }
 
@@ -24,6 +25,7 @@ namespace HMS.Api.Repositories.HMSDb
         public virtual Hotels Hotel { get; set; }
         public virtual Status Status { get; set; }
         public virtual AspNetUsers User { get; set; }
+        public virtual ICollection<ReservationGroups> ReservationGroups { get; set; }
         public virtual ICollection<ReservationRooms> ReservationRooms { get; set; }
     }
 }

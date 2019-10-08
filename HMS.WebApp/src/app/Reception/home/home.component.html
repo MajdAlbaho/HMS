@@ -152,7 +152,7 @@
                                     <tbody>
                                         <tr *ngFor="let reservation of reservations">
                                             <td>{{reservation.code}}</td>
-                                            <td>SARC</td>
+                                            <td>{{reservation.reservationGroups[0]?.group?.enName}}</td>
                                             <td>{{reservation.startDate | date:'yyyy-MM-dd'}}</td>
                                             <td>{{reservation.endDate | date:'yyyy-MM-dd'}}</td>
                                             <td>{{reservation.nights}}</td>

@@ -18,6 +18,8 @@ namespace HMS.Api
             CreateTwoWayMap<Countries, Country>();
             CreateTwoWayMap<Status, HMS.Models.Status>();
             CreateTwoWayMap<Persons, Person>();
+            CreateTwoWayMap<Groups, Group>();
+            CreateTwoWayMap<ReservationGroups, ReservationGroup>();
         }
 
         private void CreateTwoWayMap<T1, T2>() {

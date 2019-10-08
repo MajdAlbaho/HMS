@@ -20,16 +20,9 @@ namespace HMS.Api.Repositories
             return await Context.Reservations
                 .Include(e => e.Status)
                 .Include(e => e.ReservationRooms)
+                .Include(e => e.ReservationGroups)
+                .ThenInclude(e => e.Group)
                 .ToListAsync();
-        }
-    }
-
-    public class MockReservationRepository
-    {
-        private readonly HMSDbContext _context;
-
-        public MockReservationRepository(HMSDbContext context) {
-            _context = context;
         }
     }
 }
