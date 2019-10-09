@@ -9,5 +9,10 @@ namespace HMS.Models
     public class Group : ModelBaseMultiLang<Guid>
     {
         public Guid CompanyId { get; set; }
+
+        public Company Company { get; set; }
+
+        public List<ReservationGroup> ReservationGroups { get; set; }
+
     }
 }

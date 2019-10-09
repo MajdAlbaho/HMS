@@ -20,6 +20,7 @@ namespace HMS.Api
             CreateTwoWayMap<Persons, Person>();
             CreateTwoWayMap<Groups, Group>();
             CreateTwoWayMap<ReservationGroups, ReservationGroup>();
+            CreateTwoWayMap<Companies, Company>();
         }
 
         private void CreateTwoWayMap<T1, T2>() {

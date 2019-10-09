@@ -11,7 +11,6 @@ namespace HMS.Models
         public Guid ReservationId { get; set; }
         public Guid RoomId { get; set; }
         public Guid PersonId { get; set; }
-        public Guid GroupId { get; set; }
 
         public Room Room { get; set; }
         public Person Person { get; set; }
