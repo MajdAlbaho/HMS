@@ -6,13 +6,8 @@ using System.Threading.Tasks;
 
 namespace HMS.Models
 {
-    public class Country
+    public class Country : ModelBaseMultiLang<int>
     {
-        public int Id { get; set; }
-        public string ArName { get; set; }
-        public string EnName { get; set; }
-        public string FriName { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public DateTime? LastModifiedDate { get; set; }
+
     }
 }

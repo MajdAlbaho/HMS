@@ -12,5 +12,6 @@ namespace HMS.Models
         public Guid GroupId { get; set; }
 
         public Group Group { get; set; }
+        public Reservation Reservation { get; set; }
     }
 }
