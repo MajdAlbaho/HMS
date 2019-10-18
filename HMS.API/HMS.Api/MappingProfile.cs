@@ -21,6 +21,7 @@ namespace HMS.Api
             CreateTwoWayMap<Groups, Group>();
             CreateTwoWayMap<ReservationGroups, ReservationGroup>();
             CreateTwoWayMap<Companies, Company>();
+            CreateTwoWayMap<Rooms, Room>();
         }
 
         private void CreateTwoWayMap<T1, T2>() {

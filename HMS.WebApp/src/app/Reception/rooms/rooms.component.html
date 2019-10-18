@@ -21,10 +21,10 @@
 
             <!-- Notifications Dropdown Menu -->
             <li class="">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <span>Ramez Bazna</span>
-                    </a>
-                </li>
+                <a class="nav-link" data-toggle="dropdown" href="#">
+                    <span>Ramez Bazna</span>
+                </a>
+            </li>
 
             <!-- Notifications Dropdown Menu -->
             <li class="nav-item dropdown">
@@ -98,158 +98,30 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-
-
-
-
-
                 <!-- /.row -->
                 <div class="row">
                     <div class="col-12">
-                        <div class="card">
+                        <div class="card" *ngFor="let hotelRoom of hotelRooms">
                             <div class="card-header">
-                                <h3 class="card-title">Floor | <b>1</b></h3>
-
+                                <h3 class="card-title">Floor | <b>{{hotelRoom.floorNumber}}</b></h3>
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                         <i class="fa fa-minus"></i>
-                                    </button>          
+                                    </button>
                                 </div>
                             </div>
                             <!-- /.card-header -->
-
-
                             <div class="card-body p-0">
-
-
-
-                                    <ul class="users-list clearfix">
-                                            <li>
-                                                    <h3 class="text-danger">101</h3>    
-                                                    <a class="users-list-name" href="#">Ramez Bazna</a>
-                                                    <span class="users-list-date">30-10-2019</span>
-                                            </li>
-                                            <li>
-                                                <h3 class="text-danger">102</h3>    
-                                                <a class="users-list-name" href="#">Majd Albaho</a>
-                                                    <span class="users-list-date">today 12 PM</span>
-                                            </li>
-                                            <li>
-                                                    <h3>103</h3>    
-                                                    <a class="users-list-name" href="#">--</a>
-                                                      <span class="users-list-date">Free</span>
-                                            </li>
-                                            <li>
-                                                    <h3>104</h3>    
-                                                    <a class="users-list-name" href="#">--</a>
-                                                      <span class="users-list-date">Free</span>
-                                            </li>
-                                            <li>
-                                                    <h3>105</h3>    
-                                                    <a class="users-list-name" href="#">--</a>
-                                                      <span class="users-list-date">Free</span>
-                                            </li>
-                                            <li>
-                                                    <h3 class="text-danger">106</h3>    
-                                                    <a class="users-list-name" href="#">Majd Albaho</a>
-                                                    <span class="users-list-date">30-10-2019</span>
-                                            </li>
-                                            <li>
-                                                    <h3 class="text-danger">107</h3>    
-                                                    <a class="users-list-name" href="#">Majd Albaho</a>
-                                                    <span class="users-list-date">30-10-2019</span>
-                                            </li>
-                                            <li>
-                                                    <h3 class="text-danger">108</h3>    
-                                                    <a class="users-list-name" href="#">Majd Albaho</a>
-                                                    <span class="users-list-date">30-10-2019</span>
-                                            </li>
-                                            <li>
-                                                <h3 class="text-danger">109</h3>    
-                                                <a class="users-list-name" href="#">Majd Albaho</a>
-                                                <span class="users-list-date">30-10-2019</span>
-                                            </li>
-                                            <li>
-                                                <h3 class="text-danger">110</h3>    
-                                                <a class="users-list-name" href="#">Majd Albaho</a>
-                                                <span class="users-list-date">30-10-2019</span>
-                                            </li>
-                                            <li>
-                                                <h3 class="text-danger">111</h3>    
-                                                <a class="users-list-name" href="#">Majd Albaho</a>
-                                                <span class="users-list-date">30-10-2019</span>
-                                            </li>
-                                            <li>
-                                                <h3 class="text-danger">112</h3>    
-                                                <a class="users-list-name" href="#">Majd Albaho</a>
-                                                <span class="users-list-date">30-10-2019</span>
-                                            </li>
-
-
-                                            <li>
-                                                <h3 class="text-danger">101</h3>    
-                                                <a class="users-list-name" href="#">Ramez Bazna</a>
-                                                <span class="users-list-date">30-10-2019</span>
-                                            </li>
-                                        <li>
-                                            <h3 class="text-danger">102</h3>    
-                                            <a class="users-list-name" href="#">Majd Albaho</a>
-                                            <span class="users-list-date">30-10-2019</span>
-                                        </li>
-                                        <li>
-                                                <h3>103</h3>    
-                                                <a class="users-list-name" href="#">--</a>
-                                                  <span class="users-list-date">Free</span>
-                                        </li>
-                                        <li>
-                                                <h3>104</h3>    
-                                                <a class="users-list-name" href="#">--</a>
-                                                  <span class="users-list-date">Free</span>
-                                        </li>
-                                        <li>
-                                                <h3>105</h3>    
-                                                <a class="users-list-name" href="#">--</a>
-                                                  <span class="users-list-date">Free</span>
-                                        </li>
-                                        <li>
-                                                <h3 class="text-danger">106</h3>    
-                                                <a class="users-list-name" href="#">Majd Albaho</a>
-                                                <span class="users-list-date">30-10-2019</span>
-                                        </li>
-                                        <li>
-                                                <h3 class="text-danger">107</h3>    
-                                                <a class="users-list-name" href="#">Majd Albaho</a>
-                                                <span class="users-list-date">30-10-2019</span>
-                                        </li>
-                                        <li>
-                                                <h3 class="text-danger">108</h3>    
-                                                <a class="users-list-name" href="#">Majd Albaho</a>
-                                                <span class="users-list-date">30-10-2019</span>
-                                        </li>
-                                        <li>
-                                            <h3 class="text-danger">109</h3>    
-                                            <a class="users-list-name" href="#">Majd Albaho</a>
-                                            <span class="users-list-date">30-10-2019</span>
-                                        </li>
-                                        <li>
-                                            <h3 class="text-danger">110</h3>    
-                                            <a class="users-list-name" href="#">Majd Albaho</a>
-                                            <span class="users-list-date">30-10-2019</span>
-                                        </li>
-                                        <li>
-                                            <h3 class="text-danger">111</h3>    
-                                            <a class="users-list-name" href="#">Majd Albaho</a>
-                                            <span class="users-list-date">30-10-2019</span>
-                                        </li>
-                                        <li>
-                                            <h3 class="text-danger">112</h3>    
-                                            <a class="users-list-name" href="#">Majd Albaho</a>
-                                            <span class="users-list-date">30-10-2019</span>
-                                        </li>
-
-                                        </ul>
-
-                                
+                                <ul class="users-list clearfix">
+                                    <li *ngFor="let room of hotelRoom.rooms">
+                                        <h3 class="text-danger">{{room.roomNumber}}</h3>
+                                        <a class="users-list-name">{{room.reservationRooms[0]?.reservation.endDate | date:'dd/MM/yyyy'}}</a>
+                                        <span class="users-list-date" *ngFor="let reservation of room.reservationRooms">
+                                                {{reservation.person?.firstArName}}
+                                                {{reservation.person?.lastArName}}
+                                            </span>
+                                    </li>
+                                </ul>
                             </div>
                             <!-- /.card-body -->
                         </div>
@@ -258,7 +130,7 @@
                 </div>
                 <!-- /.row -->
 
-                
+
 
 
 

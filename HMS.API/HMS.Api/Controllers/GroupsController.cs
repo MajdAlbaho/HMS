@@ -26,12 +26,16 @@ namespace HMS.Api.Controllers
 
         [HttpGet]
         public async Task<IActionResult> GetAll() {
-            return Ok(_mapper.Map<List<Group>>(await _groupRepository.GetAllAsync()));
+            try {
+                return Ok(_mapper.Map<List<Group>>(await _groupRepository.GetAllAsync()));
+            } catch (Exception e) {
+                return BadRequest(new { message = e.Message });
+            }
         }
 
         [HttpGet("{reservationStartDate}")]
         public async Task<IActionResult> GetGroupsByReservationStartDate(DateTime reservationStartDate) {
-            try{
+            try {
                 return Ok(_mapper.Map<List<Reservation>>(
                     await _groupRepository.GetGroupsByReservationStartDate(reservationStartDate)));
             } catch (Exception e) {

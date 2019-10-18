@@ -11,14 +11,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace HMS.Api
 {
@@ -37,14 +33,18 @@ namespace HMS.Api
                 mc.AddProfile(new MappingProfile());
             });
 
+
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
 
-            services.Configure<Models.ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
+            services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
 
             services.AddMvc()
                 .AddJsonOptions(
-                    options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                    options => {
+                        options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                        options.SerializerSettings.Formatting = Formatting.Indented;
+                    }
                 )
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
@@ -72,7 +72,7 @@ namespace HMS.Api
 
             //Jwt Authentication
 
-            var key = Encoding.UTF8.GetBytes(Configuration["ApplicationSettings:JWT_Secret"].ToString());
+            var key = Encoding.UTF8.GetBytes(Configuration["ApplicationSettings:JWT_Secret"]);
 
             services.AddAuthentication(x => {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -100,6 +100,7 @@ namespace HMS.Api
             services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<IReservationRepository, ReservationRepository>();
             services.AddScoped<IGroupRepository, GroupRepository>();
+            services.AddScoped<IRoomRepository, RoomRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

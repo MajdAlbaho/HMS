@@ -14,6 +14,5 @@ namespace HMS.Models
 
         public Room Room { get; set; }
         public Person Person { get; set; }
-        public Group Group { get; set; }
     }
 }

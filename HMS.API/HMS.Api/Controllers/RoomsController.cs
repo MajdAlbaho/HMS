@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using HMS.Api.Repositories.Interfaces;
-using HMS.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,20 +11,20 @@ namespace HMS.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CountriesController : ControllerBase
+    public class RoomsController : ControllerBase
     {
-        private readonly ICountryRepository _countryRepository;
         private readonly IMapper _mapper;
+        private readonly IRoomRepository _roomRepository;
 
-        public CountriesController(ICountryRepository countryRepository, IMapper mapper) {
-            _countryRepository = countryRepository;
+        public RoomsController(IMapper mapper, IRoomRepository roomRepository) {
             _mapper = mapper;
+            _roomRepository = roomRepository;
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get() {
+        public async Task<IActionResult> GetAll() {
             try {
-                return Ok(_mapper.Map<List<Country>>(await _countryRepository.GetAllAsync()));
+                return Ok(await _roomRepository.GetAllAsync());
             } catch (Exception e) {
                 return BadRequest(new { message = e.Message });
             }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { GroupService } from '../../services/group.service';
 import { ToastrService } from 'ngx-toastr';
+import { GroupService } from 'src/app/services/group.service';
 
 @Component({
   selector: 'app-groups',
