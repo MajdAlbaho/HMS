@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HMS.Api.Models.parameters;
 using HMS.Api.Repositories.Interfaces;
 using HMS.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -29,6 +30,20 @@ namespace HMS.Api.Controllers
                     await _reservationRepository.GetAllAsync()));
             } catch (Exception e) {
                 return BadRequest(e.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("CheckReservation")]
+        public async Task<IActionResult> CheckReservation(CheckReservation checkReservation) {
+            try {
+                // get any rooms available
+                var availableRooms =
+                    await _reservationRepository.CheckReservation(checkReservation);
+
+                return Ok(availableRooms);
+            } catch (Exception e) {
+                return BadRequest(new { message = e.Message });
             }
         }
     }

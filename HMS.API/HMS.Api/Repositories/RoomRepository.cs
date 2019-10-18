@@ -18,6 +18,7 @@ namespace HMS.Api.Repositories
         public override async Task<ICollection<Rooms>> GetAllAsync() {
             var rooms = await Context.Rooms
                 .ToListAsync();
+
             var reservations = await Context.ReservationRooms
                 .Include(e => e.Reservation)
                 .Include(e => e.Person)

@@ -636,67 +636,68 @@
             </div>
             <div class="modal-body">
 
-
                 <!-- Reservation Check -->
                 <label class="text-uppercase text-danger">Reservation Check</label>
 
-                <div class="row mt-2">
+                <form #checkReservationForm="ngForm" (ngSubmit)="checkReservation()">
+                    <div class="row mt-2">
 
-                    <div class="col-auto">
-                        <label class="sr-only" for="inlineFormInputGroup">Check-in</label>
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text"><i class="fa fa-check"></i></div>
+                        <div class="col-auto">
+                            <label class="sr-only" for="inlineFormInputGroup">Check-in</label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fa fa-check"></i></div>
+                                </div>
+                                <input type="date" required id="inlineFormInputGroup" placeholder="Check-in" title="Check-in" name="checkIn" [(ngModel)]="reservation.checkIn" #checkin="ngModel" [class.is-invalid]="checkin.invalid && checkin.touched" class="form-control">
                             </div>
-                            <input type="date" class="form-control" id="inlineFormInputGroup" placeholder="Check-in" title="Check-in">
                         </div>
+                        <div class="col-auto">
+                            <label class="sr-only" for="inlineFormInputGroup">Ckeck-out</label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fa fa-sign-out"></i></div>
+                                </div>
+                                <input type="date" required id="inlineFormInputGroup" placeholder="Ckeck-out" title="Ckeck-out" name="checkOut" [(ngModel)]="reservation.checkOut" #checkout="ngModel" [class.is-invalid]="checkout.invalid && checkout.touched" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="col-auto">
+                            <label class="sr-only" for="inlineFormInputGroup">Nights</label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fa fa-moon-o"></i></div>
+                                </div>
+                                <input readonly type="text" class="form-control" id="inlineFormInputGroup" placeholder="Nights" title="Nights">
+                            </div>
+                        </div>
+
                     </div>
 
 
-                    <div class="col-auto">
-                        <label class="sr-only" for="inlineFormInputGroup">Ckeck-out</label>
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text"><i class="fa fa-sign-out"></i></div>
+                    <div class="row mt-2">
+
+                        <div class="col-auto">
+                            <label class="sr-only" for="inlineFormInputGroup">Adults</label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="fa fa-users"></i></div>
+                                </div>
+                                <input type="number" required (change)="ValidateNumber(adults.value)" id="inlineFormInputGroup" placeholder="Adults" title="Adults" name="adults" [(ngModel)]="reservation.adults" #adults="ngModel" [class.is-invalid]="adultsHasError && adults.touched"
+                                    class="form-control">
                             </div>
-                            <input type="date" class="form-control" id="inlineFormInputGroup" placeholder="Ckeck-out" title="Ckeck-out">
                         </div>
+
+
                     </div>
+                    <!-- // Reservation Details -->
 
-                    <div class="col-auto">
-                        <label class="sr-only" for="inlineFormInputGroup">Nights</label>
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text"><i class="fa fa-moon-o"></i></div>
-                            </div>
-                            <input readonly type="text" class="form-control" id="inlineFormInputGroup" placeholder="Nights" title="Nights">
-                        </div>
+
+                    <div class="modal-footer mt-3">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" [disabled]="!checkReservationForm.valid || adultsHasError">Save changes</button>
                     </div>
+                </form>
 
-                </div>
-
-
-                <div class="row mt-2">
-
-                    <div class="col-auto">
-                        <label class="sr-only" for="inlineFormInputGroup">Adults</label>
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text"><i class="fa fa-users"></i></div>
-                            </div>
-                            <input type="number" class="form-control" id="inlineFormInputGroup" placeholder="Adults" title="Adults">
-                        </div>
-                    </div>
-
-
-                </div>
-                <!-- // Reservation Details -->
-
-
-                <div class="modal-footer mt-3">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
             </div>
         </div>
     </div>

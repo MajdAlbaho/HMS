@@ -1,4 +1,5 @@
-﻿using HMS.Api.Repositories.HMSDb;
+﻿using HMS.Api.Models.parameters;
+using HMS.Api.Repositories.HMSDb;
 using HMS.Api.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -22,6 +23,17 @@ namespace HMS.Api.Repositories
                 .Include(e => e.ReservationRooms)
                 .Include(e => e.ReservationGroups)
                 .ThenInclude(e => e.Group)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Rooms>> CheckReservation(CheckReservation checkReservation) {
+            var reservedRooms = await Context.ReservationRooms
+                .Include(e => e.Reservation)
+                .Select(e => e.Room)
+                .ToListAsync();
+
+            return await Context.Rooms
+                .Where(e => !reservedRooms.Contains(e))
                 .ToListAsync();
         }
     }
