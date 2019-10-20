@@ -1,11 +1,15 @@
 <div>
-    <button type="button" class="close" (click)="onNoClick()">
+    <button type="button" class="close" (click)="close()">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
 
-<label class="text-uppercase text-danger">Reservation Check</label>
+<h5 class="text-uppercase">Check Reservation</h5>
 
+<hr class="style1">
+
+
+<!-- Reservation Details -->
 <form #checkReservationForm="ngForm" (ngSubmit)="checkReservation()">
     <div class="row mt-2">
 
@@ -40,8 +44,11 @@
         </div>
     </div>
     <!-- // Reservation Details -->
-    <div mat-dialog-actions>
-        <button mat-button (click)="onNoClick()" type="button" class="btn btn-secondary">Cancel</button>
-        <button mat-button type="submit" class="btn btn-primary" [disabled]="!checkReservationForm.valid || adultsHasError">Save changes</button>
+
+    <div class="modal-footer mt-3">
+        <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
+        <button type="button" class="btn btn-primary">Check !</button>
     </div>
+
+
 </form>

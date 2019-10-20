@@ -1,0 +1,214 @@
+<div>
+    <button type="button" class="close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<h5 class="text-uppercase">New Reservation</h5>
+
+<hr class="style1">
+
+
+<!-- Guest Information -->
+                <label class="text-uppercase">Guest Information</label>
+
+                <div class="row mt-2">
+
+                    <div class="col-auto">
+                        <label class="sr-only" for="inlineFormInputGroup">First Name</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fa fa-user"></i></div>
+                            </div>
+                            <input cdkFocusInitial type="text" class="form-control" id="inlineFormInputGroup" placeholder="First Name" title="First name">
+                        </div>
+                    </div>
+
+
+                    <div class="col-auto">
+                        <label class="sr-only" for="inlineFormInputGroup">Last Name</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fa fa-user"></i></div>
+                            </div>
+                            <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Last Name" title="Last name">
+                        </div>
+                    </div>
+
+                    <div class="col-auto">
+                        <label class="sr-only" for="inlineFormInputGroup">Organization</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fa fa-building-o"></i></div>
+                            </div>
+                            <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Organization" title="Organization">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row mt-2">
+
+                    <div class="col-auto">
+                        <label class="sr-only" for="inlineFormInputGroup">Gender</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fa fa-venus-mars"></i></div>
+                            </div>
+                            <select class="browser-default custom-select">
+                                    <option selected>Male</option>
+                                    <option >Female</option>
+                                  </select>
+                        </div>
+                    </div>
+
+
+                    <div class="col-auto">
+                        <label class="sr-only" for="inlineFormInputGroup">Nationality</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fa fa-flag"></i></div>
+                            </div>
+                            <select class="browser-default custom-select">
+                                    <option selected>Syrian</option>
+                                    <option>Iraqi</option>
+                                    <option>Iran</option>
+
+                                  </select>
+                        </div>
+                    </div>
+
+
+                    <div class="col-auto">
+                        <label class="sr-only" for="Birthdate">ID Number</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fa fa-id-card"></i></div>
+                            </div>
+                            <input type="number" class="form-control" id="Birthdate" placeholder="ID Number" title="ID Number">
+                        </div>
+                    </div>
+
+
+                    <button type="button" class="btn">Attach file</button>
+
+                </div>
+                <!-- //Guest Information -->
+
+
+
+                <hr class="style1">
+
+
+
+                <!-- Reservation Details -->
+                <label class="text-uppercase">Reservation Details</label>
+
+                <div class="row mt-2">
+
+                    <div class="col-auto">
+                        <label class="sr-only" for="inlineFormInputGroup">Check-in</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fa fa-check"></i></div>
+                            </div>
+                            <input type="date" class="form-control" id="inlineFormInputGroup" placeholder="Check-in" title="Check-in">
+                        </div>
+                    </div>
+
+
+                    <div class="col-auto">
+                        <label class="sr-only" for="inlineFormInputGroup">Ckeck-out</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fa fa-sign-out"></i></div>
+                            </div>
+                            <input type="date" class="form-control" id="inlineFormInputGroup" placeholder="Ckeck-out" title="Ckeck-out">
+                        </div>
+                    </div>
+
+                    <div class="col-auto">
+                        <label class="sr-only" for="inlineFormInputGroup">Nights</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fa fa-moon-o"></i></div>
+                            </div>
+                            <input readonly type="text" class="form-control" id="inlineFormInputGroup" placeholder="Nights" title="Nights">
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="row mt-2">
+
+                    <div class="col-auto">
+                        <label class="sr-only" for="inlineFormInputGroup">Room Type</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fa fa-bed"></i></div>
+                            </div>
+                            <select class="browser-default custom-select">
+                              <option selected>Room Type</option>
+                              <option >Female</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="col-auto">
+                        <label class="sr-only" for="inlineFormInputGroup">Room Number</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fa fa-key"></i></div>
+                            </div>
+                            <select class="browser-default custom-select">
+                              <option selected>Room Number</option>
+                              <option >Female</option>
+                            </select>
+
+                        </div>
+                    </div>
+
+                </div>
+                <!-- // Reservation Details -->
+
+                <hr class="style1">
+
+
+                <!-- Financial Details -->
+                <label class="text-uppercase text-danger">Financial Details</label>
+
+
+                <div class="row mt-2">
+
+                    <div class="col-auto">
+                        <label class="sr-only" for="inlineFormInputGroup">Discount</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">%</div>
+                            </div>
+                            <input type="number" class="form-control" id="inlineFormInputGroup" placeholder="Discount" title="Discount">
+                        </div>
+                    </div>
+
+                    <div class="col-auto">
+                        <label class="sr-only" for="inlineFormInputGroup">Cost</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">%</div>
+                            </div>
+                            <input readonly type="number" class="form-control" id="inlineFormInputGroup" placeholder="Cost" title="Cost">
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <!-- // Financial Details -->
+
+
+                <div class="modal-footer mt-3">
+                    <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>

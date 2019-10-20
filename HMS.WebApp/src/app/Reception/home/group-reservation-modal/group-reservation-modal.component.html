@@ -1,0 +1,111 @@
+<div>
+    <button type="button" class="close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<h5 class="text-uppercase">Group Reservation</h5>
+
+<hr class="style1">
+
+
+    <!-- Group Information -->
+    <label class="text-uppercase">Group Information</label>
+
+    <div class="row mt-2">
+
+
+        <div class="col-auto">
+            <label class="sr-only" for="inlineFormInputGroup">Guest Number</label>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-user"></i></div>
+                </div>
+                <input cdkFocusInitial type="number" class="form-control" id="inlineFormInputGroup" placeholder="Guest Number" title="Guest Number">
+            </div>
+        </div>
+
+        <div class="col-auto">
+            <label class="sr-only" for="inlineFormInputGroup">Organization</label>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-building-o"></i></div>
+                </div>
+                <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Organization" title="Organization">
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row mt-2">
+
+        <div class="col-auto">
+            <label class="sr-only" for="inlineFormInputGroup">Nationality</label>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-flag"></i></div>
+                </div>
+                <select class="browser-default custom-select">
+                                        <option selected>Syrian</option>
+                                        <option>Iraqi</option>
+                                        <option>Iran</option>
+    
+                                      </select>
+            </div>
+        </div>
+
+        <button type="button" class="btn">Attach file</button>
+
+    </div>
+    <!-- //Guest Information -->
+
+
+
+    <hr class="style1">
+
+
+
+    <!-- Reservation Details -->
+    <label class="text-uppercase">Reservation Details</label>
+
+    <div class="row mt-2">
+
+        <div class="col-auto">
+            <label class="sr-only" for="inlineFormInputGroup">Check-in</label>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-check"></i></div>
+                </div>
+                <input type="date" class="form-control" id="inlineFormInputGroup" placeholder="Check-in" title="Check-in">
+            </div>
+        </div>
+
+
+        <div class="col-auto">
+            <label class="sr-only" for="inlineFormInputGroup">Ckeck-out</label>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-sign-out"></i></div>
+                </div>
+                <input type="date" class="form-control" id="inlineFormInputGroup" placeholder="Ckeck-out" title="Ckeck-out">
+            </div>
+        </div>
+
+        <div class="col-auto">
+            <label class="sr-only" for="inlineFormInputGroup">Nights</label>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-moon-o"></i></div>
+                </div>
+                <input readonly type="text" class="form-control" id="inlineFormInputGroup" placeholder="Nights" title="Nights">
+            </div>
+        </div>
+
+    </div>
+    <!-- // Reservation Details -->
+
+
+    <div class="modal-footer mt-3">
+        <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
+        <button type="button" class="btn btn-primary">Check Rooms</button>
+    </div>

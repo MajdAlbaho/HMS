@@ -5,6 +5,8 @@ import { HomeService } from 'src/app/services/home.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material';
 import { CheckReservationModalComponent } from './check-reservation-modal/check-reservation-modal.component';
+import { NewReservationModalComponent } from './new-reservation-modal/new-reservation-modal.component';
+import { GroupReservationModalComponent } from './group-reservation-modal/group-reservation-modal.component';
 
 @Component({
   selector: 'app-home',
@@ -38,6 +40,28 @@ export class HomeComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(CheckReservationModalComponent, {
+      width: '800px',
+      data: { }
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      
+    });
+  }
+
+  IndividualReservationModal(): void {
+    const dialogRef = this.dialog.open(NewReservationModalComponent, {
+      width: '800px',
+      data: { }
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      
+    });
+  }
+
+  GroupReservationModal(): void {
+    const dialogRef = this.dialog.open(GroupReservationModalComponent, {
       width: '800px',
       data: { }
     });

@@ -25,6 +25,8 @@ import { ContactUsComponent } from './Settings/contact-us/contact-us.component';
 import { AngularMaterialModule } from './modal/angular-material.module';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CheckReservationModalComponent } from './Reception/home/check-reservation-modal/check-reservation-modal.component';
+import { NewReservationModalComponent } from './Reception/home/new-reservation-modal/new-reservation-modal.component';
+import { GroupReservationModalComponent } from './Reception/home/group-reservation-modal/group-reservation-modal.component';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -46,7 +48,9 @@ export function createTranslateLoader(http: HttpClient) {
     RoomsComponent,
     GroupsComponent,
     ContactUsComponent,
-    CheckReservationModalComponent
+    CheckReservationModalComponent,
+    NewReservationModalComponent,
+    GroupReservationModalComponent
   ],
   imports: [
     BrowserModule,
@@ -74,6 +78,6 @@ export function createTranslateLoader(http: HttpClient) {
   }],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  entryComponents: [CheckReservationModalComponent]
+  entryComponents: [CheckReservationModalComponent, NewReservationModalComponent, GroupReservationModalComponent]
 })
 export class AppModule { }
