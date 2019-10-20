@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Reservation } from 'src/app/models/Reservation';
 
 @Component({
   selector: 'app-new-reservation-modal',
@@ -18,6 +19,8 @@ export class NewReservationModalComponent implements OnInit {
   close(): void {
     this.dialogRef.close();
   }
+
+  reservation = new Reservation();
 
   ngOnInit() {
   }

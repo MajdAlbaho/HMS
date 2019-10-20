@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Reservation } from '../models/Reversation';
+import { checkReservation } from '../models/CheckReservation';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class HomeService {
       'reservations');
   }
 
-  checkReservation(reservation : Reservation){
+  checkReservation(reservation : checkReservation){
     return this.http.post(this.apiService.getApiUrl() +
       'reservations/Check',JSON.stringify(reservation));
   }

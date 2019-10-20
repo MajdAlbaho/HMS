@@ -27,6 +27,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CheckReservationModalComponent } from './Reception/home/check-reservation-modal/check-reservation-modal.component';
 import { NewReservationModalComponent } from './Reception/home/new-reservation-modal/new-reservation-modal.component';
 import { GroupReservationModalComponent } from './Reception/home/group-reservation-modal/group-reservation-modal.component';
+import { AvailableRoomsModalComponent } from './Reception/home/available-rooms-modal/available-rooms-modal.component';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -50,7 +51,8 @@ export function createTranslateLoader(http: HttpClient) {
     ContactUsComponent,
     CheckReservationModalComponent,
     NewReservationModalComponent,
-    GroupReservationModalComponent
+    GroupReservationModalComponent,
+    AvailableRoomsModalComponent
   ],
   imports: [
     BrowserModule,
@@ -78,6 +80,7 @@ export function createTranslateLoader(http: HttpClient) {
   }],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  entryComponents: [CheckReservationModalComponent, NewReservationModalComponent, GroupReservationModalComponent]
+  entryComponents: [CheckReservationModalComponent, NewReservationModalComponent, GroupReservationModalComponent,
+  AvailableRoomsModalComponent]
 })
 export class AppModule { }

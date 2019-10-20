@@ -1,8 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog} from '@angular/material';
-import { Reservation } from 'src/app/models/reversation';
+import { checkReservation } from 'src/app/models/CheckReservation';
 import { HomeService } from 'src/app/services/home.service';
 import { ToastrService } from 'ngx-toastr';
+import { AvailableRoomsModalComponent } from '../available-rooms-modal/available-rooms-modal.component';
 
 @Component({
   selector: 'app-check-reservation-modal',
@@ -12,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 export class CheckReservationModalComponent implements OnInit {
 
   constructor(
-    private homeService: HomeService, private toastr: ToastrService,
+    private homeService: HomeService, private toastr: ToastrService,public dialog: MatDialog,
     public dialogRef: MatDialogRef<CheckReservationModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data) 
   { }
@@ -24,7 +25,7 @@ export class CheckReservationModalComponent implements OnInit {
   ngOnInit() {
   }
 
-  reservation = new Reservation();
+  reservation = new checkReservation();
   adultsHasError: boolean;
 
   ValidateNumber(num) {
@@ -36,8 +37,14 @@ export class CheckReservationModalComponent implements OnInit {
 
   checkReservation(){
     this.homeService.checkReservation(this.reservation).subscribe(response =>{      
-      
-      this.dialogRef.close();
+      var availableRoomsDialog = this.dialog.open(AvailableRoomsModalComponent, {
+        width : '800px',
+        data : { response }
+      });
+
+      availableRoomsDialog.afterClosed().subscribe(() => {
+        this.dialogRef.close()
+      });
     }, error => {
       this.toastr.error(error.error.message);
       this.toastr.error(error.message);
