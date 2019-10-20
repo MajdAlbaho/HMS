@@ -1,0 +1,47 @@
+<div>
+    <button type="button" class="close" (click)="onNoClick()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<label class="text-uppercase text-danger">Reservation Check</label>
+
+<form #checkReservationForm="ngForm" (ngSubmit)="checkReservation()">
+    <div class="row mt-2">
+
+        <div class="col-auto">
+            <label class="sr-only" for="inlineFormInputGroup">Check-in</label>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-check"></i></div>
+                </div>
+                <input type="date" required id="inlineFormInputGroup" placeholder="Check-in" title="Check-in" cdkFocusInitial name="checkIn" [(ngModel)]="reservation.CheckIn" #checkin="ngModel" [class.is-invalid]="checkin.invalid && checkin.touched" class="form-control">
+            </div>
+        </div>
+        <div class="col-auto">
+            <label class="sr-only" for="inlineFormInputGroup">Ckeck-out</label>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-sign-out"></i></div>
+                </div>
+                <input type="date" required id="inlineFormInputGroup" placeholder="Ckeck-out" title="Ckeck-out" name="checkOut" [(ngModel)]="reservation.CheckOut" #checkout="ngModel" [class.is-invalid]="checkout.invalid && checkout.touched" class="form-control">
+            </div>
+        </div>
+
+        <div class="col-auto">
+            <label class="sr-only" for="inlineFormInputGroup">Adults</label>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-users"></i></div>
+                </div>
+                <input type="number" required (change)="ValidateNumber(adults.value)" id="inlineFormInputGroup" placeholder="Adults" title="Adults" name="adults" [(ngModel)]="reservation.Adults" #adults="ngModel" [class.is-invalid]="adultsHasError && adults.touched"
+                    class="form-control">
+            </div>
+        </div>
+    </div>
+    <!-- // Reservation Details -->
+    <div mat-dialog-actions>
+        <button mat-button (click)="onNoClick()" type="button" class="btn btn-secondary">Cancel</button>
+        <button mat-button type="submit" class="btn btn-primary" [disabled]="!checkReservationForm.valid || adultsHasError">Save changes</button>
+    </div>
+</form>

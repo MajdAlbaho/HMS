@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { HomeService } from 'src/app/services/home.service';
 import { ToastrService } from 'ngx-toastr';
-import { checkReservation } from 'src/app/ViewModels/checkReservation';
+import { MatDialog } from '@angular/material';
+import { CheckReservationModalComponent } from './check-reservation-modal/check-reservation-modal.component';
 
 @Component({
   selector: 'app-home',
@@ -12,11 +13,10 @@ import { checkReservation } from 'src/app/ViewModels/checkReservation';
 })
 export class HomeComponent implements OnInit {
   constructor(private router: Router, translate: TranslateService, private homeService: HomeService,
-    private toastr: ToastrService) {
+    private toastr: ToastrService, public dialog: MatDialog) {
     translate.setDefaultLang('en');
     // the lang to use, if the lang isn't available, it will use the current loader to get them
     translate.use('en');
-
   }
 
   ngOnInit() {
@@ -30,23 +30,20 @@ export class HomeComponent implements OnInit {
   }
 
   reservations: any;
-  reservation = new checkReservation();
-  adultsHasError: boolean;
-
 
   onLogout() {
     localStorage.removeItem('token');
     this.router.navigate(['user/login']);
   }
 
-  checkReservation(){
-    
-  }
+  openDialog(): void {
+    const dialogRef = this.dialog.open(CheckReservationModalComponent, {
+      width: '800px',
+      data: { }
+    });
 
-  ValidateNumber(num) {
-    if (num === undefined || num <= 0)
-      this.adultsHasError = true;
-    else
-      this.adultsHasError = false;
+    dialogRef.afterClosed().subscribe(() => {
+      
+    });
   }
 }

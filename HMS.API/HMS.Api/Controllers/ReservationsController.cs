@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Reservation = HMS.Api.Models.parameters.Reservation;
 
 namespace HMS.Api.Controllers
 {
@@ -26,20 +27,26 @@ namespace HMS.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll() {
             try {
-                return Ok(_mapper.Map<List<Reservation>>(
+                return Ok(_mapper.Map<List<HMS.Models.Reservation>>(
                     await _reservationRepository.GetAllAsync()));
             } catch (Exception e) {
                 return BadRequest(e.Message);
             }
         }
 
-        [HttpGet]
-        [Route("CheckReservation")]
-        public async Task<IActionResult> CheckReservation(CheckReservation checkReservation) {
-            try {
+        [HttpPost]
+        [Route("Check")]
+        public async Task<IActionResult> Check([FromBody]Reservation reservation) {
+            try
+            {
+                if (reservation == null)
+                    return BadRequest(new {message = "Invalid arguments"});
+                if(reservation.CheckIn == DateTime.MinValue || reservation.CheckOut == DateTime.MinValue)
+                    return BadRequest(new { message = "Invalid start or end date" });
+
                 // get any rooms available
                 var availableRooms =
-                    await _reservationRepository.CheckReservation(checkReservation);
+                    await _reservationRepository.CheckReservation(reservation);
 
                 return Ok(availableRooms);
             } catch (Exception e) {

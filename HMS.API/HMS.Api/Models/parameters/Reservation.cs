@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace HMS.Api.Models.parameters
 {
-    public class CheckReservation
+    public class Reservation
     {
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public DateTime CheckIn { get; set; }
+        public DateTime CheckOut { get; set; }
         public int Adults { get; set; }
     }
 }

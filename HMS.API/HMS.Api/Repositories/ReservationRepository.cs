@@ -26,9 +26,13 @@ namespace HMS.Api.Repositories
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<Rooms>> CheckReservation(CheckReservation checkReservation) {
+        public async Task<IEnumerable<Rooms>> CheckReservation(Reservation reservation) {
             var reservedRooms = await Context.ReservationRooms
                 .Include(e => e.Reservation)
+                .Where(e => (reservation.CheckIn >= e.Reservation.StartDate &&
+                             reservation.CheckIn < e.Reservation.EndDate) ||
+                            (reservation.CheckOut >= e.Reservation.StartDate &&
+                             reservation.CheckOut < e.Reservation.EndDate))
                 .Select(e => e.Room)
                 .ToListAsync();
 

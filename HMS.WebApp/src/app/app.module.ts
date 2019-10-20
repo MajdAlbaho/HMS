@@ -22,6 +22,10 @@ import { CalendarComponent } from './Reception/calendar/calendar.component';
 import { RoomsComponent } from './Reception/rooms/rooms.component';
 import { GroupsComponent } from './Reception/groups/groups.component';
 import { ContactUsComponent } from './Settings/contact-us/contact-us.component';
+import { AngularMaterialModule } from './modal/angular-material.module';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CheckReservationModalComponent } from './Reception/home/check-reservation-modal/check-reservation-modal.component';
+
 
 export function createTranslateLoader(http: HttpClient) {
 	return new TranslateHttpLoader(http);
@@ -41,7 +45,8 @@ export function createTranslateLoader(http: HttpClient) {
     CalendarComponent,
     RoomsComponent,
     GroupsComponent,
-    ContactUsComponent
+    ContactUsComponent,
+    CheckReservationModalComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +54,7 @@ export function createTranslateLoader(http: HttpClient) {
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    AngularMaterialModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -66,6 +72,8 @@ export function createTranslateLoader(http: HttpClient) {
     useClass: AuthInterceptor,
     multi: true
   }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  entryComponents: [CheckReservationModalComponent]
 })
 export class AppModule { }

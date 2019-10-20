@@ -10,6 +10,6 @@ namespace HMS.Api.Repositories.Interfaces
 {
     public interface IReservationRepository : IRepositoryBase<Reservations, Guid>
     {
-        Task<IEnumerable<Rooms>> CheckReservation(CheckReservation checkReservation);
+        Task<IEnumerable<Rooms>> CheckReservation(Reservation reservation);
     }
 }
