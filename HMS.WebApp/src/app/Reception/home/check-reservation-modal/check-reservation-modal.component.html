@@ -19,7 +19,7 @@
                 <div class="input-group-prepend">
                     <div class="input-group-text"><i class="fa fa-check"></i></div>
                 </div>
-                <input type="date" required id="inlineFormInputGroup" placeholder="Check-in" title="Check-in" cdkFocusInitial name="checkIn" [(ngModel)]="reservation.CheckIn" #checkin="ngModel" [class.is-invalid]="checkin.invalid && checkin.touched" class="form-control">
+                <input type="date" required placeholder="Check-in" title="Check-in" cdkFocusInitial name="checkIn" [(ngModel)]="reservation.CheckIn" #checkin="ngModel" [class.is-invalid]="checkin.invalid && checkin.touched" class="form-control">
             </div>
         </div>
         <div class="col-auto">
@@ -28,7 +28,7 @@
                 <div class="input-group-prepend">
                     <div class="input-group-text"><i class="fa fa-sign-out"></i></div>
                 </div>
-                <input type="date" required id="inlineFormInputGroup" placeholder="Ckeck-out" title="Ckeck-out" name="checkOut" [(ngModel)]="reservation.CheckOut" #checkout="ngModel" [class.is-invalid]="checkout.invalid && checkout.touched" class="form-control">
+                <input type="date" required placeholder="Ckeck-out" title="Ckeck-out" name="checkOut" [(ngModel)]="reservation.CheckOut" #checkout="ngModel" [class.is-invalid]="checkout.invalid && checkout.touched" class="form-control">
             </div>
         </div>
 
@@ -42,10 +42,16 @@
                     class="form-control">
             </div>
         </div>
+        <div *ngIf="availableRooms">
+            You have {{availableRooms?.length}} for this reservation
+        </div>
     </div>
     <!-- // Reservation Details -->
 
     <div class="modal-footer mt-3">
+        <button type="button" *ngIf="availableRooms" class="btn btn-primary " (click)="IndividualReservationModal()">New reservation</button>
+        <button type="button" *ngIf="availableRooms" class="btn btn-primary" (click)="GroupReservationModal()">Group reservation</button>
+
         <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
         <button type="button" type="submit" class="btn btn-primary" [disabled]="!checkReservationForm.valid || adultsHasError">Check !</button>
     </div>

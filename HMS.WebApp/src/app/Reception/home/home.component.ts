@@ -44,15 +44,11 @@ export class HomeComponent implements OnInit {
       data: { }
     });
 
-    dialogRef.afterClosed().subscribe(() => {
-      
-    });
   }
 
   IndividualReservationModal(): void {
     const dialogRef = this.dialog.open(NewReservationModalComponent, {
-      width: '800px',
-      data: { }
+      width: '800px'
     });
 
     dialogRef.afterClosed().subscribe(() => {
@@ -62,8 +58,7 @@ export class HomeComponent implements OnInit {
 
   GroupReservationModal(): void {
     const dialogRef = this.dialog.open(GroupReservationModalComponent, {
-      width: '800px',
-      data: { }
+      width: '800px'
     });
 
     dialogRef.afterClosed().subscribe(() => {

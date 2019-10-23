@@ -1,9 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog} from '@angular/material';
-import { checkReservation } from 'src/app/models/CheckReservation';
+import { Reservation } from 'src/app/models/Reservation';
 import { HomeService } from 'src/app/services/home.service';
 import { ToastrService } from 'ngx-toastr';
-import { AvailableRoomsModalComponent } from '../available-rooms-modal/available-rooms-modal.component';
+import { NewReservationModalComponent } from '../new-reservation-modal/new-reservation-modal.component';
+import { GroupReservationModalComponent } from '../group-reservation-modal/group-reservation-modal.component';
 
 @Component({
   selector: 'app-check-reservation-modal',
@@ -25,8 +26,9 @@ export class CheckReservationModalComponent implements OnInit {
   ngOnInit() {
   }
 
-  reservation = new checkReservation();
+  reservation = new Reservation();
   adultsHasError: boolean;
+  availableRooms : any;
 
   ValidateNumber(num) {
     if (num === undefined || num <= 0)
@@ -37,19 +39,31 @@ export class CheckReservationModalComponent implements OnInit {
 
   checkReservation(){
     this.homeService.checkReservation(this.reservation).subscribe(response =>{      
-      var availableRoomsDialog = this.dialog.open(AvailableRoomsModalComponent, {
-        width : '800px',
-        data : { response }
-      });
-
-      availableRoomsDialog.afterClosed().subscribe(() => {
-        this.dialogRef.close()
-      });
+      this.availableRooms = response;      
     }, error => {
       this.toastr.error(error.error.message);
       this.toastr.error(error.message);
       console.log(error);
     });
+  }
+
+  IndividualReservationModal(): void {
+    var avail = this.availableRooms;
+    this.dialog.open(NewReservationModalComponent, {
+      width: '800px',
+      data: avail
+    });
+
+    this.dialogRef.close();
+  }
+
+  GroupReservationModal(): void {
+    this.dialog.open(GroupReservationModalComponent, {
+      width: '800px',
+      data: { }
+    });
+
+    this.dialogRef.close();
   }
   
 }

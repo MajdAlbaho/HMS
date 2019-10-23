@@ -2,3 +2,6 @@ npm install ngx-toastr --save
 npm install @angular/animations --save
 npm install bootstrap
 npm install ionicons
+
+
+npm install --save angular-archwizard

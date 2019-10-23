@@ -37,18 +37,17 @@ namespace HMS.Api.Controllers
         [HttpPost]
         [Route("Check")]
         public async Task<IActionResult> Check([FromBody]Reservation reservation) {
-            try
-            {
+            try {
                 if (reservation == null)
-                    return BadRequest(new {message = "Invalid arguments"});
-                if(reservation.CheckIn == DateTime.MinValue || reservation.CheckOut == DateTime.MinValue)
+                    return BadRequest(new { message = "Invalid arguments" });
+                if (reservation.CheckIn == DateTime.MinValue || reservation.CheckOut == DateTime.MinValue)
                     return BadRequest(new { message = "Invalid start or end date" });
 
                 // get any rooms available
                 var availableRooms =
                     await _reservationRepository.CheckReservation(reservation);
 
-                return Ok(availableRooms);
+                return Ok(availableRooms.Where(e => reservation.RoomType == 0 || e.TotalBeds == reservation.RoomType));
             } catch (Exception e) {
                 return BadRequest(new { message = e.Message });
             }

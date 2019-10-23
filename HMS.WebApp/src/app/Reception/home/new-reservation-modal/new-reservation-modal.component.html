@@ -1,216 +1,169 @@
-<div>
-    <button type="button" class="close" (click)="close()">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-
 <h5 class="text-uppercase">New Reservation</h5>
 
-<hr class="style1">
 
 
-<!-- Guest Information -->
-<label class="text-uppercase">Guest Information</label>
-
-<form #newReservation="ngForm" (ngSubmit)="Reserve()">
-    <div class="row mt-2">
-        {{newReservation.value | json}}
-        <div class="col-auto">
-            <label class="sr-only" for="inlineFormInputGroup">First Name</label>
-            <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                    <div class="input-group-text"><i class="fa fa-user"></i></div>
+<aw-wizard>
+    <aw-wizard-step stepTitle="Reservation details">
+        <form #checkReservationForm="ngForm" (ngSubmit)="checkAvailableRooms()">
+            <div class="row mt-2">
+                <div class="col-auto">
+                    <label class="sr-only" for="inlineFormInputGroup">Check-in</label>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fa fa-check"></i></div>
+                        </div>
+                        <input type="date" required placeholder="Check-in" title="Check-in" cdkFocusInitial name="checkIn" [(ngModel)]="reservation.CheckIn" #checkin="ngModel" [class.is-invalid]="checkin.invalid && checkin.touched" class="form-control">
+                    </div>
                 </div>
-                <input cdkFocusInitial type="text" id="inlineFormInputGroup" placeholder="First Name" title="First name" name="firstName" [(ngModel)]="reservation.firstName" #firstname="ngModel" [class.is-invalid]="firstname.invalid && firstname.touched" class="form-control">
+                <div class="col-auto">
+                    <label class="sr-only" for="inlineFormInputGroup">Ckeck-out</label>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fa fa-sign-out"></i></div>
+                        </div>
+                        <input type="date" required placeholder="Ckeck-out" title="Ckeck-out" name="checkOut" [(ngModel)]="reservation.CheckOut" #checkout="ngModel" [class.is-invalid]="checkout.invalid && checkout.touched" class="form-control">
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <label class="sr-only" for="inlineFormInputGroup">Room Type</label>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fa fa-bed"></i></div>
+                        </div>
+                        <select class="browser-default custom-select" name="roomType" [(ngModel)]="reservation.RoomType">
+                                                            <option value="1">Single room</option>
+                                                            <option value="2">Double room</option>
+                                                        </select>
+                    </div>
+                </div>
             </div>
-        </div>
 
-
-        <div class="col-auto">
-            <label class="sr-only" for="inlineFormInputGroup">Last Name</label>
-            <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                    <div class="input-group-text"><i class="fa fa-user"></i></div>
-                </div>
-                <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Last Name" title="Last name">
+            <div class="row">
+                <button type="submit" class="btn btn-primary" [disabled]="!checkReservationForm.valid">
+                            checkAvailableRooms
+                    </button>
             </div>
-        </div>
-
-        <div class="col-auto">
-            <label class="sr-only" for="inlineFormInputGroup">Organization</label>
-            <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                    <div class="input-group-text"><i class="fa fa-building-o"></i></div>
+            <div class="row mt-2">
+                <label class="sr-only" for="inlineFormInputGroup">Room Number</label>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-key"></i></div>
+                    </div>
+                    <select class="browser-default custom-select" name="roomNumber" [(ngModel)]="reservation.RoomNumber">
+                                                        <option *ngFor="let availableRoom of availableRooms" value="availableRoom.id">
+                                                            {{availableRoom.roomNumber}}
+                                                        </option>
+                                                    </select>
                 </div>
-                <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Organization" title="Organization">
             </div>
-        </div>
 
-    </div>
-
-    <div class="row mt-2">
-
-        <div class="col-auto">
-            <label class="sr-only" for="inlineFormInputGroup">Gender</label>
-            <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                    <div class="input-group-text"><i class="fa fa-venus-mars"></i></div>
-                </div>
-                <select class="browser-default custom-select">
-                                                <option selected>Male</option>
-                                                <option >Female</option>
-                                              </select>
+            <div class="modal-footer mt-3">
+                <button type="button" class="btn btn-primary" [disabled]="!checkReservationForm.valid" awNextStep>Next Step</button>
             </div>
-        </div>
+        </form>
+    </aw-wizard-step>
 
+    <aw-wizard-step stepTitle="Reservation details" awOptionalStep>
+        <form #reservationDetailForm="ngForm" (ngSubmit)="SaveReservation()">
 
-        <div class="col-auto">
-            <label class="sr-only" for="inlineFormInputGroup">Nationality</label>
-            <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                    <div class="input-group-text"><i class="fa fa-flag"></i></div>
+            <div class="row mt-2">
+                <div class="col-auto">
+                    <label class="sr-only" for="inlineFormInputGroup">First Name</label>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fa fa-user"></i></div>
+                        </div>
+                        <input cdkFocusInitial required type="text" placeholder="First Name" title="First name" name="firstName" [(ngModel)]="personInfo.FirstName" #firstname="ngModel" [class.is-invalid]="firstname.invalid && firstname.touched" class="form-control">
+                    </div>
                 </div>
-                <select class="browser-default custom-select">
-                                                <option selected>Syrian</option>
-                                                <option>Iraqi</option>
-                                                <option>Iran</option>
-            
-                                              </select>
-            </div>
-        </div>
 
-
-        <div class="col-auto">
-            <label class="sr-only" for="Birthdate">ID Number</label>
-            <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                    <div class="input-group-text"><i class="fa fa-id-card"></i></div>
+                <div class="col-auto">
+                    <label class="sr-only" for="inlineFormInputGroup">Last Name</label>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fa fa-user"></i></div>
+                        </div>
+                        <input type="text" required placeholder="Last Name" title="Last name" name="lastName" [(ngModel)]="personInfo.LastName" #lastName="ngModel" [class.is-invalid]="lastName.invalid && lastName.touched" class="form-control">
+                    </div>
                 </div>
-                <input type="number" class="form-control" id="Birthdate" placeholder="ID Number" title="ID Number">
-            </div>
-        </div>
 
-
-        <button type="button" class="btn">Attach file</button>
-
-    </div>
-    <!-- //Guest Information -->
-
-
-
-    <hr class="style1">
-
-
-
-    <!-- Reservation Details -->
-    <label class="text-uppercase">Reservation Details</label>
-
-    <div class="row mt-2">
-
-        <div class="col-auto">
-            <label class="sr-only" for="inlineFormInputGroup">Check-in</label>
-            <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                    <div class="input-group-text"><i class="fa fa-check"></i></div>
+                <div class="col-auto">
+                    <label class="sr-only" for="inlineFormInputGroup">Organization</label>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fa fa-building-o"></i></div>
+                        </div>
+                        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Organization" title="Organization">
+                    </div>
                 </div>
-                <input type="date" class="form-control" id="inlineFormInputGroup" placeholder="Check-in" title="Check-in">
-            </div>
-        </div>
-
-
-        <div class="col-auto">
-            <label class="sr-only" for="inlineFormInputGroup">Ckeck-out</label>
-            <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                    <div class="input-group-text"><i class="fa fa-sign-out"></i></div>
-                </div>
-                <input type="date" class="form-control" id="inlineFormInputGroup" placeholder="Ckeck-out" title="Ckeck-out">
-            </div>
-        </div>
-
-        <div class="col-auto">
-            <label class="sr-only" for="inlineFormInputGroup">Nights</label>
-            <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                    <div class="input-group-text"><i class="fa fa-moon-o"></i></div>
-                </div>
-                <input readonly type="text" class="form-control" id="inlineFormInputGroup" placeholder="Nights" title="Nights">
-            </div>
-        </div>
-
-    </div>
-
-
-    <div class="row mt-2">
-
-        <div class="col-auto">
-            <label class="sr-only" for="inlineFormInputGroup">Room Type</label>
-            <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                    <div class="input-group-text"><i class="fa fa-bed"></i></div>
-                </div>
-                <select class="browser-default custom-select">
-                                          <option selected>Room Type</option>
-                                          <option >Female</option>
-                                        </select>
-            </div>
-        </div>
-
-
-        <div class="col-auto">
-            <label class="sr-only" for="inlineFormInputGroup">Room Number</label>
-            <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                    <div class="input-group-text"><i class="fa fa-key"></i></div>
-                </div>
-                <select class="browser-default custom-select">
-                                          <option selected>Room Number</option>
-                                          <option >Female</option>
-                                        </select>
 
             </div>
-        </div>
-
-    </div>
-    <!-- // Reservation Details -->
-
-    <hr class="style1">
-
-
-    <!-- Financial Details -->
-    <label class="text-uppercase text-danger">Financial Details</label>
-
-
-    <div class="row mt-2">
-
-        <div class="col-auto">
-            <label class="sr-only" for="inlineFormInputGroup">Discount</label>
-            <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">%</div>
+            <div class="row mt-2">
+                <div class="col-auto">
+                    <label class="sr-only" for="inlineFormInputGroup">Gender</label>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fa fa-venus-mars"></i></div>
+                        </div>
+                        <select name="gender" class="browser-default custom-select" [(ngModel)]="personInfo.Gender" [value]="1">
+                                                                        <option value="1" selected>Male</option>
+                                                                        <option value="0">Female</option>
+                                                                    </select>
+                    </div>
                 </div>
-                <input type="number" class="form-control" id="inlineFormInputGroup" placeholder="Discount" title="Discount">
-            </div>
-        </div>
-
-        <div class="col-auto">
-            <label class="sr-only" for="inlineFormInputGroup">Cost</label>
-            <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">%</div>
+                <div class="col-auto">
+                    <label class="sr-only" for="inlineFormInputGroup">Nationality</label>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fa fa-flag"></i></div>
+                        </div>
+                        <select class="browser-default custom-select" name="nationality" [(ngModel)]="personInfo.Nationality">
+                                                                        <option value="0">Syrian</option>            
+                                                                    </select>
+                    </div>
                 </div>
-                <input readonly type="number" class="form-control" id="inlineFormInputGroup" placeholder="Cost" title="Cost">
+
+
+                <div class="col-auto">
+                    <label class="sr-only" for="Birthdate">ID Number</label>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fa fa-id-card"></i></div>
+                        </div>
+                        <input type="number" required class="form-control" placeholder="ID Number" title="ID Number" name="idNumber" [(ngModel)]="personInfo.IdNumber" #idNumber="ngModel" [class.is-invalid]="idNumber.invalid && idNumber.touched">
+                    </div>
+                </div>
             </div>
-        </div>
+
+            <div class="row mt-2">
+
+                <div class="col-auto">
+                    <label class="sr-only" for="inlineFormInputGroup">Discount</label>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">%</div>
+                        </div>
+                        <input type="number" class="form-control" id="inlineFormInputGroup" placeholder="Discount" title="Discount">
+                    </div>
+                </div>
+
+                <div class="col-auto">
+                    <label class="sr-only" for="inlineFormInputGroup">Cost</label>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">%</div>
+                        </div>
+                        <input readonly type="number" class="form-control" id="inlineFormInputGroup" placeholder="Cost" title="Cost">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer mt-3">
+                <button type="button" class="btn btn-primary" awPreviousStep>Previous Step</button>
+                <button type="submit" class="btn btn-primary" [disabled]="!reservationDetailForm.valid">Finish</button>
+            </div>
+        </form>
+
+    </aw-wizard-step>
 
 
-    </div>
-
-    <!-- // Financial Details -->
-
-
-    <div class="modal-footer mt-3">
-        <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-    </div>
-</form>
+</aw-wizard>

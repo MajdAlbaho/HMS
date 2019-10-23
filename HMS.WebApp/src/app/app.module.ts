@@ -27,7 +27,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CheckReservationModalComponent } from './Reception/home/check-reservation-modal/check-reservation-modal.component';
 import { NewReservationModalComponent } from './Reception/home/new-reservation-modal/new-reservation-modal.component';
 import { GroupReservationModalComponent } from './Reception/home/group-reservation-modal/group-reservation-modal.component';
-import { AvailableRoomsModalComponent } from './Reception/home/available-rooms-modal/available-rooms-modal.component';
+import { ArchwizardModule } from 'angular-archwizard';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -52,7 +52,6 @@ export function createTranslateLoader(http: HttpClient) {
     CheckReservationModalComponent,
     NewReservationModalComponent,
     GroupReservationModalComponent,
-    AvailableRoomsModalComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +60,7 @@ export function createTranslateLoader(http: HttpClient) {
     HttpClientModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
+    ArchwizardModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -80,7 +80,6 @@ export function createTranslateLoader(http: HttpClient) {
   }],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  entryComponents: [CheckReservationModalComponent, NewReservationModalComponent, GroupReservationModalComponent,
-  AvailableRoomsModalComponent]
+  entryComponents: [CheckReservationModalComponent, NewReservationModalComponent, GroupReservationModalComponent]
 })
 export class AppModule { }

@@ -30,6 +30,7 @@ namespace HMS.Api.Repositories.HMSDb
         public virtual DbSet<GroupPersons> GroupPersons { get; set; }
         public virtual DbSet<Groups> Groups { get; set; }
         public virtual DbSet<Hotels> Hotels { get; set; }
+        public virtual DbSet<Nationalities> Nationalities { get; set; }
         public virtual DbSet<Needs> Needs { get; set; }
         public virtual DbSet<Persons> Persons { get; set; }
         public virtual DbSet<PhoneTypes> PhoneTypes { get; set; }
@@ -386,6 +387,29 @@ namespace HMS.Api.Repositories.HMSDb
                     .HasConstraintName("FK_Hotels_AreaId");
             });
 
+            modelBuilder.Entity<Nationalities>(entity =>
+            {
+                entity.ToTable("Nationalities", "HR");
+
+                entity.Property(e => e.ArName)
+                    .IsRequired()
+                    .HasMaxLength(200);
+
+                entity.Property(e => e.CreatedDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.EnName)
+                    .IsRequired()
+                    .HasMaxLength(200);
+
+                entity.Property(e => e.FriName)
+                    .IsRequired()
+                    .HasMaxLength(200);
+
+                entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
+            });
+
             modelBuilder.Entity<Needs>(entity =>
             {
                 entity.ToTable("Needs", "Common");
@@ -443,6 +467,8 @@ namespace HMS.Api.Repositories.HMSDb
                     .IsRequired()
                     .HasMaxLength(200);
 
+                entity.Property(e => e.IdNumber).HasMaxLength(100);
+
                 entity.Property(e => e.LastArName)
                     .IsRequired()
                     .HasMaxLength(200);
@@ -462,6 +488,11 @@ namespace HMS.Api.Repositories.HMSDb
                 entity.Property(e => e.MotherEnName).HasMaxLength(200);
 
                 entity.Property(e => e.MotherFriName).HasMaxLength(200);
+
+                entity.HasOne(d => d.Nationality)
+                    .WithMany(p => p.Persons)
+                    .HasForeignKey(d => d.NationalityId)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
             modelBuilder.Entity<PhoneTypes>(entity =>

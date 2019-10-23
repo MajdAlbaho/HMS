@@ -26,10 +26,13 @@ namespace HMS.Api.Repositories.HMSDb
         public string MotherFriName { get; set; }
         public DateTime BirthDate { get; set; }
         public bool Gender { get; set; }
+        public int NationalityId { get; set; }
+        public string IdNumber { get; set; }
         public byte[] CopyOfIdentity { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? LastModifiedDate { get; set; }
 
+        public virtual Nationalities Nationality { get; set; }
         public virtual ICollection<GroupPersons> GroupPersons { get; set; }
         public virtual ICollection<ReservationRooms> ReservationRooms { get; set; }
     }

@@ -1,3 +1,7 @@
 export class Reservation{
-    FirstName : string
+    StartDate : Date;
+    EndDate : Date;
+    Adults : number
+
+    RoomType : number;
 }
