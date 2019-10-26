@@ -1,11 +1,6 @@
 ﻿using AutoMapper;
 using HMS.Api.Repositories.HMSDb;
 using HMS.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Status = HMS.Api.Repositories.HMSDb.Status;
 
 namespace HMS.Api
@@ -13,7 +8,12 @@ namespace HMS.Api
     public class MappingProfile : Profile
     {
         public MappingProfile() {
-            CreateTwoWayMap<Reservations, Reservation>();
+            CreateMap<Reservation, Reservations>()
+                .ReverseMap()
+                .ForMember(e => e.Nights, e => e.Ignore())
+                .ForMember(e => e.Rooms, e => e.Ignore())
+                .ForMember(e => e.Guests, e => e.Ignore());
+
             CreateTwoWayMap<ReservationRooms, ReservationRoom>();
             CreateTwoWayMap<Countries, Country>();
             CreateTwoWayMap<Status, HMS.Models.Status>();

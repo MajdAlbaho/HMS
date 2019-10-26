@@ -225,27 +225,18 @@ namespace HMS.Api.Repositories
         }
 
         public virtual void Save() {
-            using (var transaction = Context.Database.BeginTransaction()) {
-                try {
-                    Context.SaveChanges();
-                    transaction.Commit();
-                } catch (Exception ex) {
-                    transaction.Rollback();
-                    throw new Exception(ex.Message);
-                }
+            try {
+                Context.SaveChanges();
+            } catch (Exception ex) {
+                throw new Exception(ex.Message);
             }
         }
 
         public virtual async Task SaveAsync() {
-            using (var transaction = Context.Database.BeginTransaction()) {
-                try {
-                    await Context.SaveChangesAsync();
-
-                    transaction.Commit();
-                } catch (Exception ex) {
-                    transaction.Rollback();
-                    throw new Exception(ex.Message);
-                }
+            try {
+                await Context.SaveChangesAsync();
+            } catch (Exception ex) {
+                throw new Exception(ex.Message);
             }
         }
 

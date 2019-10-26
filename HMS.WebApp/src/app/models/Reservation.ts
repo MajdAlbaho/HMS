@@ -1,7 +1,13 @@
 export class Reservation{
+    Code: string;
+    HotelId : string;
     StartDate : Date;
     EndDate : Date;
-    Adults : number
+    UserId : string;
+    TotalCost: number;
 
+    Adults : number
     RoomType : number;
+    RoomId : string;
+
 }

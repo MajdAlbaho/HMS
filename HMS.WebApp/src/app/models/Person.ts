@@ -1,11 +1,12 @@
 export class Person{
-    FirstName : string;
-    LastName : string;
+    FirstEnName : string;
+    LastEnName : string;
     Nationality : number;
-    Gender : number;
+    Gender : boolean;
     IdNumber : number;
 
     SetDefaultValue(){
-        this.Nationality = this.Gender = 0;
+        this.Nationality = 0;
+        this.Gender = true;
     }
 }

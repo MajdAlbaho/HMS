@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HMS.Api.Models.parameters;
+using HMS.Api.Repositories.HMSDb;
 using HMS.Api.Repositories.Interfaces;
 using HMS.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +9,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Reservation = HMS.Api.Models.parameters.Reservation;
 
 namespace HMS.Api.Controllers
 {
@@ -40,14 +40,27 @@ namespace HMS.Api.Controllers
             try {
                 if (reservation == null)
                     return BadRequest(new { message = "Invalid arguments" });
-                if (reservation.CheckIn == DateTime.MinValue || reservation.CheckOut == DateTime.MinValue)
+                if (reservation.StartDate == DateTime.MinValue || reservation.EndDate == DateTime.MinValue)
                     return BadRequest(new { message = "Invalid start or end date" });
 
                 // get any rooms available
                 var availableRooms =
-                    await _reservationRepository.CheckReservation(reservation);
+                    _mapper.Map<List<Room>>(await _reservationRepository.CheckReservation(reservation));
 
                 return Ok(availableRooms.Where(e => reservation.RoomType == 0 || e.TotalBeds == reservation.RoomType));
+            } catch (Exception e) {
+                return BadRequest(new { message = e.Message });
+            }
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> SaveReservation(SingleReservationParam param) {
+            try {
+                await _reservationRepository.SaveReservation(_mapper.Map<Reservations>(param.Reservation),
+                    _mapper.Map<List<Persons>>(param.Person), param.Reservation.RoomId);
+
+                return Ok();
             } catch (Exception e) {
                 return BadRequest(new { message = e.Message });
             }

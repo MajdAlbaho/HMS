@@ -19,7 +19,7 @@
                 <div class="input-group-prepend">
                     <div class="input-group-text"><i class="fa fa-check"></i></div>
                 </div>
-                <input type="date" required placeholder="Check-in" title="Check-in" cdkFocusInitial name="checkIn" [(ngModel)]="reservation.CheckIn" #checkin="ngModel" [class.is-invalid]="checkin.invalid && checkin.touched" class="form-control">
+                <input type="date" required placeholder="Check-in" title="Check-in" cdkFocusInitial name="checkIn" [(ngModel)]="reservation.StartDate" #checkin="ngModel" [class.is-invalid]="checkin.invalid && checkin.touched" class="form-control">
             </div>
         </div>
         <div class="col-auto">
@@ -28,7 +28,7 @@
                 <div class="input-group-prepend">
                     <div class="input-group-text"><i class="fa fa-sign-out"></i></div>
                 </div>
-                <input type="date" required placeholder="Ckeck-out" title="Ckeck-out" name="checkOut" [(ngModel)]="reservation.CheckOut" #checkout="ngModel" [class.is-invalid]="checkout.invalid && checkout.touched" class="form-control">
+                <input type="date" required placeholder="Ckeck-out" title="Ckeck-out" name="checkOut" [(ngModel)]="reservation.EndDate" #checkout="ngModel" [class.is-invalid]="checkout.invalid && checkout.touched" class="form-control">
             </div>
         </div>
 

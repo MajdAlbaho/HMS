@@ -455,31 +455,23 @@ namespace HMS.Api.Repositories.HMSDb
 
                 entity.Property(e => e.FatherFriName).HasMaxLength(200);
 
-                entity.Property(e => e.FirstArName)
-                    .IsRequired()
-                    .HasMaxLength(200);
+                entity.Property(e => e.FirstArName).HasMaxLength(200);
 
                 entity.Property(e => e.FirstEnName)
                     .IsRequired()
                     .HasMaxLength(200);
 
-                entity.Property(e => e.FirstFriName)
-                    .IsRequired()
-                    .HasMaxLength(200);
+                entity.Property(e => e.FirstFriName).HasMaxLength(200);
 
                 entity.Property(e => e.IdNumber).HasMaxLength(100);
 
-                entity.Property(e => e.LastArName)
-                    .IsRequired()
-                    .HasMaxLength(200);
+                entity.Property(e => e.LastArName).HasMaxLength(200);
 
                 entity.Property(e => e.LastEnName)
                     .IsRequired()
                     .HasMaxLength(200);
 
-                entity.Property(e => e.LastFriName)
-                    .IsRequired()
-                    .HasMaxLength(200);
+                entity.Property(e => e.LastFriName).HasMaxLength(200);
 
                 entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
 

@@ -12,7 +12,7 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fa fa-check"></i></div>
                         </div>
-                        <input type="date" required placeholder="Check-in" title="Check-in" cdkFocusInitial name="checkIn" [(ngModel)]="reservation.CheckIn" #checkin="ngModel" [class.is-invalid]="checkin.invalid && checkin.touched" class="form-control">
+                        <input (change)="resetRooms()" type="date" required placeholder="Check-in" title="Check-in" cdkFocusInitial name="checkIn" [(ngModel)]="reservation.StartDate" #checkin="ngModel" [class.is-invalid]="checkin.invalid && checkin.touched" class="form-control">
                     </div>
                 </div>
                 <div class="col-auto">
@@ -21,7 +21,7 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fa fa-sign-out"></i></div>
                         </div>
-                        <input type="date" required placeholder="Ckeck-out" title="Ckeck-out" name="checkOut" [(ngModel)]="reservation.CheckOut" #checkout="ngModel" [class.is-invalid]="checkout.invalid && checkout.touched" class="form-control">
+                        <input (change)="resetRooms()" type="date" required placeholder="Ckeck-out" title="Ckeck-out" name="checkOut" [(ngModel)]="reservation.EndDate" #checkout="ngModel" [class.is-invalid]="checkout.invalid && checkout.touched" class="form-control">
                     </div>
                 </div>
                 <div class="col-auto">
@@ -30,7 +30,7 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fa fa-bed"></i></div>
                         </div>
-                        <select class="browser-default custom-select" name="roomType" [(ngModel)]="reservation.RoomType">
+                        <select (change)="resetRooms()" class="browser-default custom-select" name="roomType" [(ngModel)]="reservation.RoomType">
                                                             <option value="1">Single room</option>
                                                             <option value="2">Double room</option>
                                                         </select>
@@ -49,8 +49,8 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fa fa-key"></i></div>
                     </div>
-                    <select class="browser-default custom-select" name="roomNumber" [(ngModel)]="reservation.RoomNumber">
-                                                        <option *ngFor="let availableRoom of availableRooms" value="availableRoom.id">
+                    <select class="browser-default custom-select" (change)="enableNextStep = true" name="roomNumber" [(ngModel)]="reservation.RoomId">
+                                                        <option *ngFor="let availableRoom of availableRooms" value="{{availableRoom.id}}">
                                                             {{availableRoom.roomNumber}}
                                                         </option>
                                                     </select>
@@ -58,12 +58,12 @@
             </div>
 
             <div class="modal-footer mt-3">
-                <button type="button" class="btn btn-primary" [disabled]="!checkReservationForm.valid" awNextStep>Next Step</button>
+                <button type="button" (click)="onClick()" class="btn btn-primary" [disabled]="!enableNextStep" awNextStep>Next Step</button>
             </div>
         </form>
     </aw-wizard-step>
 
-    <aw-wizard-step stepTitle="Reservation details" awOptionalStep>
+    <aw-wizard-step stepTitle="Guest details" awOptionalStep>
         <form #reservationDetailForm="ngForm" (ngSubmit)="SaveReservation()">
 
             <div class="row mt-2">
@@ -73,7 +73,7 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fa fa-user"></i></div>
                         </div>
-                        <input cdkFocusInitial required type="text" placeholder="First Name" title="First name" name="firstName" [(ngModel)]="personInfo.FirstName" #firstname="ngModel" [class.is-invalid]="firstname.invalid && firstname.touched" class="form-control">
+                        <input cdkFocusInitial required type="text" placeholder="First Name" title="First name" name="firstName" [(ngModel)]="personInfo.FirstEnName" #firstname="ngModel" [class.is-invalid]="firstname.invalid && firstname.touched" class="form-control">
                     </div>
                 </div>
 
@@ -83,7 +83,7 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fa fa-user"></i></div>
                         </div>
-                        <input type="text" required placeholder="Last Name" title="Last name" name="lastName" [(ngModel)]="personInfo.LastName" #lastName="ngModel" [class.is-invalid]="lastName.invalid && lastName.touched" class="form-control">
+                        <input type="text" required placeholder="Last Name" title="Last name" name="lastName" [(ngModel)]="personInfo.LastEnName" #lastName="ngModel" [class.is-invalid]="lastName.invalid && lastName.touched" class="form-control">
                     </div>
                 </div>
 
@@ -106,8 +106,8 @@
                             <div class="input-group-text"><i class="fa fa-venus-mars"></i></div>
                         </div>
                         <select name="gender" class="browser-default custom-select" [(ngModel)]="personInfo.Gender" [value]="1">
-                                                                        <option value="1" selected>Male</option>
-                                                                        <option value="0">Female</option>
+                                                                        <option value="true" selected>Male</option>
+                                                                        <option value="false">Female</option>
                                                                     </select>
                     </div>
                 </div>
@@ -121,6 +121,7 @@
                                                                         <option value="0">Syrian</option>            
                                                                     </select>
                     </div>
+                    <button type="button" class="btn btn-primary" (click)="AddGuest()" [disabled]="!reservationDetailForm.valid">AddGuest</button>
                 </div>
 
 
@@ -134,6 +135,30 @@
                     </div>
                 </div>
             </div>
+            <div class="row mt-2">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>First name</th>
+                            <th>Last name</th>
+                            <th>Organization</th>
+                            <th>Gender</th>
+                            <th>Nationality</th>
+                            <th>IdNumber</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let person of persons">
+                            <td>{{person.FirstEnName}}</td>
+                            <td>{{person.LastEnName}}</td>
+                            <td>Organization</td>
+                            <td>{{person.Gender}}</td>
+                            <td>{{person.Nationality}}</td>
+                            <td>{{person.IdNumber}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
             <div class="row mt-2">
 
@@ -143,7 +168,7 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text">%</div>
                         </div>
-                        <input type="number" class="form-control" id="inlineFormInputGroup" placeholder="Discount" title="Discount">
+                        <input (change)="Discount($event.target.value)" type="number" class="form-control" placeholder="Discount" title="Discount">
                     </div>
                 </div>
 
@@ -153,13 +178,13 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text">%</div>
                         </div>
-                        <input readonly type="number" class="form-control" id="inlineFormInputGroup" placeholder="Cost" title="Cost">
+                        <input readonly type="text" class="form-control" placeholder="Cost" name="cost" title="Cost" [(ngModel)]="TotalCost">
                     </div>
                 </div>
             </div>
             <div class="modal-footer mt-3">
                 <button type="button" class="btn btn-primary" awPreviousStep>Previous Step</button>
-                <button type="submit" class="btn btn-primary" [disabled]="!reservationDetailForm.valid">Finish</button>
+                <button type="submit" class="btn btn-primary" [disabled]="this.persons.length == 0">Finish</button>
             </div>
         </form>
 
