@@ -10,6 +10,7 @@ namespace HMS.Api.Models.parameters
     public class SingleReservationParam
     {
         public List<Person> Person { get; set; }
-        public HMS.Models.Reservation Reservation { get; set; }
+        public Reservation Reservation { get; set; }
+        public Group Group { get; set; }
     }
 }

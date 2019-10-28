@@ -9,5 +9,5 @@ export class Reservation{
     Adults : number
     RoomType : number;
     RoomId : string;
-
+    GroupName : string;
 }

@@ -14,8 +14,11 @@ namespace HMS.Api.Repositories
 {
     public class ReservationRepository : RepositoryBase<Reservations, Guid>, IReservationRepository
     {
-        public ReservationRepository(HMSDbContext context)
+        private readonly IMapper _mapper;
+
+        public ReservationRepository(HMSDbContext context, IMapper mapper)
             : base(context) {
+            _mapper = mapper;
         }
 
         public override async Task<ICollection<Reservations>> GetAllAsync() {
@@ -42,22 +45,34 @@ namespace HMS.Api.Repositories
                 .ToListAsync();
         }
 
-        public async Task SaveReservation(Reservations reservation, List<Persons> persons, Guid roomId) {
+        public async Task SaveReservation(Reservation reservation, List<Person> persons, Group group = null) {
             using (var transaction = Context.Database.BeginTransaction()) {
                 try {
-                    await Context.Reservations.AddAsync(reservation);
-                    foreach (var person in persons) {
-                        await Context.Persons.AddAsync(person);
-                        await Context.SaveChangesAsync();
+                    var dbReservation = _mapper.Map<Reservations>(reservation);
+                    await Context.Reservations.AddAsync(dbReservation);
+                    await Context.Persons.AddRangeAsync(_mapper.Map<List<Persons>>(persons));
 
-                        await Context.ReservationRooms.AddAsync(new ReservationRooms() {
-                            ReservationId = reservation.Id,
-                            RoomId = roomId,
-                            PersonId = person.Id
+                    await Context.SaveChangesAsync();
+
+                    if (group != null) {
+                        if (group.Id == Guid.Empty) {
+                            await Context.Groups.AddAsync(_mapper.Map<Groups>(group));
+                            await Context.SaveChangesAsync();
+                        }
+
+                        await Context.ReservationGroups.AddAsync(new ReservationGroups() {
+                            GroupId = group.Id,
+                            ReservationId = reservation.Id
                         });
-
                         await Context.SaveChangesAsync();
                     }
+
+                    await Context.ReservationRooms.AddRangeAsync(persons.Select(e => new ReservationRooms() {
+                        ReservationId = reservation.Id,
+                        PersonId = e.Id,
+                        RoomId = e.RoomId
+                    }));
+                    await Context.SaveChangesAsync();
 
                     transaction.Commit();
                 } catch (Exception ex) {

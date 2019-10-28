@@ -12,6 +12,6 @@ namespace HMS.Api.Repositories.Interfaces
     public interface IReservationRepository : IRepositoryBase<Reservations, Guid>
     {
         Task<IEnumerable<Rooms>> CheckReservation(Reservation reservation);
-        Task SaveReservation(Reservations reservation, List<Persons> persons, Guid roomId);
+        Task SaveReservation(Reservation reservation, List<Person> persons, Group group = null);
     }
 }

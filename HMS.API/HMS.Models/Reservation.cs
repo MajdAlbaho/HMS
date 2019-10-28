@@ -21,7 +21,7 @@ namespace HMS.Models
         public int Guests => ReservationRooms.Select(e => e.PersonId).Distinct().Count();
         public int Adults { get; set; }
         public int RoomType { get; set; }
-        public Guid RoomId { get; set; }
+        public Guid? RoomId { get; set; }
 
         public Status Status { get; set; }
         public List<ReservationRoom> ReservationRooms { get; set; }

@@ -57,8 +57,8 @@ namespace HMS.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> SaveReservation(SingleReservationParam param) {
             try {
-                await _reservationRepository.SaveReservation(_mapper.Map<Reservations>(param.Reservation),
-                    _mapper.Map<List<Persons>>(param.Person), param.Reservation.RoomId);
+                await _reservationRepository.SaveReservation(param.Reservation,
+                    param.Person, param.Group);
 
                 return Ok();
             } catch (Exception e) {

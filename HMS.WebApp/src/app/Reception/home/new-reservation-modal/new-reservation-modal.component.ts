@@ -56,7 +56,7 @@ export class NewReservationModalComponent implements OnInit {
     this.reservation.UserId = "1DC97D96-BB38-4D7C-BCA3-111BADE204CB";
     this.reservation.TotalCost = this.TotalCost;
 
-    this.homeService.saveReservation(this.reservation, this.persons).subscribe(response => {
+    this.homeService.saveReservation(this.reservation, this.persons, null).subscribe(response => {
       this.availableRooms = response;
     }, error => {
       this.toastr.error(error.error.message);
@@ -68,7 +68,7 @@ export class NewReservationModalComponent implements OnInit {
   AddGuest() {
     var room = this.availableRooms.find(e => e.id == this.reservation.RoomId);
     if (this.persons.length < room.totalBeds)
-      this.persons.push(this.personInfo);
+      this.persons.push(Object.assign({}, this.personInfo));
   }
 
   onClick() {

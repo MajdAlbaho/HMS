@@ -25,5 +25,8 @@ namespace HMS.Models
         public int NationalityId { get; set; }
         public string IdNumber { get; set; }
         public byte[] CopyOfIdentity { get; set; }
+
+
+        public Guid RoomId { get; set; }
     }
 }

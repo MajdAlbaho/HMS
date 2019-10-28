@@ -3,6 +3,7 @@ import { ApiService } from './api.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Reservation } from '../models/Reservation';
 import { Person } from '../models/Person';
+import { Group } from '../models/Group';
 
 @Injectable({
   providedIn: 'root'
@@ -21,14 +22,12 @@ export class HomeService {
       'reservations/Check', JSON.stringify(reservation));
   }
 
-  saveReservation(reservation: Reservation, personInfo: Person) {
+  saveReservation(reservation: Reservation, personInfo: Person, group : Group) {
     var param = {
       "Reservation": reservation,
-      "Person": personInfo
-    }
-
-    console.log(param);
-    
+      "Person": personInfo,
+      "Group" : group
+    }   
 
     return this.http.post(this.apiService.getApiUrl() +
       'reservations', JSON.stringify(param));

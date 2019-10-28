@@ -5,6 +5,8 @@ export class Person{
     Gender : boolean;
     IdNumber : number;
 
+    RoomId : string;
+
     SetDefaultValue(){
         this.Nationality = 0;
         this.Gender = true;
