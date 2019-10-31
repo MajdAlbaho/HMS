@@ -1,11 +1,17 @@
-<h5 class="text-uppercase">New Reservation</h5>
+<div>
+        <button type="button" class="close" (click)="close()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    
+    <h5 class="text-uppercase">New Reservation</h5>
+    
+    <hr class="style1">
 
-
-
-<aw-wizard>
+<aw-wizard class="mt-4">
     <aw-wizard-step stepTitle="Reservation details">
         <form #checkReservationForm="ngForm" (ngSubmit)="checkAvailableRooms()">
-            <div class="row mt-2">
+            <div class="row mt-5">
                 <div class="col-auto">
                     <label class="sr-only" for="inlineFormInputGroup">Check-in</label>
                     <div class="input-group mb-2">
@@ -31,33 +37,40 @@
                             <div class="input-group-text"><i class="fa fa-bed"></i></div>
                         </div>
                         <select (change)="resetRooms()" class="browser-default custom-select" name="roomType" [(ngModel)]="reservation.RoomType">
-                                                            <option value="1">Single room</option>
+                                                            <option selected value="1">Single room</option>
                                                             <option value="2">Double room</option>
                                                         </select>
                     </div>
                 </div>
             </div>
-
+<!-- 
             <div class="row">
                 <button type="submit" class="btn btn-primary" [disabled]="!checkReservationForm.valid">
-                            checkAvailableRooms
+                            check Available Rooms
                     </button>
-            </div>
-            <div class="row mt-2">
-                <label class="sr-only" for="inlineFormInputGroup">Room Number</label>
-                <div class="input-group mb-2">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text"><i class="fa fa-key"></i></div>
-                    </div>
-                    <select class="browser-default custom-select" (change)="enableNextStep = true" name="roomNumber" [(ngModel)]="reservation.RoomId">
-                                                        <option *ngFor="let availableRoom of availableRooms" value="{{availableRoom.id}}">
-                                                            {{availableRoom.roomNumber}}
-                                                        </option>
-                                                    </select>
+            </div> -->
+
+
+            <div class="row mt-4">
+
+                    <div class="col-5">
+                        <label class="sr-only" for="inlineFormInputGroup">Room Number</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fa fa-key"></i></div>
+                            </div>
+                            <select class="browser-default custom-select" (change)="enableNextStep = true" name="roomNumber" [(ngModel)]="reservation.RoomId">
+                                    <option *ngFor="let availableRoom of availableRooms" value="{{availableRoom.id}}">
+                                        {{availableRoom.roomNumber}}
+                                    </option>
+                                </select>                        
+                        </div>
+                    </div>   
                 </div>
-            </div>
+
 
             <div class="modal-footer mt-3">
+                <button type="submit" class="btn btn-primary" [disabled]="!checkReservationForm.valid">Check Available Rooms</button>
                 <button type="button" (click)="onClick()" class="btn btn-primary" [disabled]="!enableNextStep" awNextStep>Next Step</button>
             </div>
         </form>
