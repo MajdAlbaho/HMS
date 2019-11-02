@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Reservation } from 'src/app/models/Reservation';
-import { HomeService } from 'src/app/services/home.service';
+import { ReservationService } from 'src/app/services/Reservation.service';
 import { Person } from 'src/app/models/Person';
 import { LoginComponent } from '../../../auth/user/login/login.component';
 
@@ -15,7 +15,7 @@ export class NewReservationModalComponent implements OnInit {
 
   constructor(
     private toastr: ToastrService,
-    public homeService: HomeService,
+    public reservationService: ReservationService,
     public dialogRef: MatDialogRef<NewReservationModalComponent>,
     @Inject(MAT_DIALOG_DATA) public availableRooms) { }
 
@@ -41,7 +41,7 @@ export class NewReservationModalComponent implements OnInit {
       return;
     }
 
-    this.homeService.checkReservation(this.reservation).subscribe(response => {
+    this.reservationService.Check(this.reservation).subscribe(response => {
       this.availableRooms = response;
     }, error => {
       this.toastr.error(error.error.message);
@@ -56,7 +56,7 @@ export class NewReservationModalComponent implements OnInit {
     this.reservation.UserId = "1DC97D96-BB38-4D7C-BCA3-111BADE204CB";
     this.reservation.TotalCost = this.TotalCost;
 
-    this.homeService.saveReservation(this.reservation, this.persons, null).subscribe(response => {
+    this.reservationService.Save(this.reservation, this.persons, null).subscribe(response => {
       this.availableRooms = response;
     }, error => {
       this.toastr.error(error.error.message);
@@ -68,10 +68,14 @@ export class NewReservationModalComponent implements OnInit {
   AddGuest() {
     var room = this.availableRooms.find(e => e.id == this.reservation.RoomId);
     if (this.persons.length < room.totalBeds)
-      this.persons.push(Object.assign({}, this.personInfo));
+      {
+        var person = Object.assign({}, this.personInfo);
+        person.RoomId = room.id;
+        this.persons.push(person);
+      }
   }
 
-  onClick() {
+  Next() {
     var cost = this.availableRooms.find(e => e.id == this.reservation.RoomId).cost;
     var days = this.date_diff_indays(this.reservation.StartDate, this.reservation.EndDate);
     this.TotalCost = days * cost;

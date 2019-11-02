@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog} from '@angular/material';
 import { Reservation } from 'src/app/models/Reservation';
-import { HomeService } from 'src/app/services/home.service';
+import { ReservationService } from 'src/app/services/Reservation.service';
 import { ToastrService } from 'ngx-toastr';
 import { NewReservationModalComponent } from '../new-reservation-modal/new-reservation-modal.component';
 import { GroupReservationModalComponent } from '../group-reservation-modal/group-reservation-modal.component';
@@ -14,7 +14,7 @@ import { GroupReservationModalComponent } from '../group-reservation-modal/group
 export class CheckReservationModalComponent implements OnInit {
 
   constructor(
-    private homeService: HomeService, private toastr: ToastrService,public dialog: MatDialog,
+    private reservationService: ReservationService, private toastr: ToastrService,public dialog: MatDialog,
     public dialogRef: MatDialogRef<CheckReservationModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data) 
   { }
@@ -38,7 +38,7 @@ export class CheckReservationModalComponent implements OnInit {
   }
 
   checkReservation(){
-    this.homeService.checkReservation(this.reservation).subscribe(response =>{      
+    this.reservationService.Check(this.reservation).subscribe(response =>{      
       this.availableRooms = response;      
     }, error => {
       this.toastr.error(error.error.message);

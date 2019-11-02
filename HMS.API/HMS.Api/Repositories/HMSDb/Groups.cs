@@ -7,7 +7,6 @@ namespace HMS.Api.Repositories.HMSDb
     {
         public Groups()
         {
-            GroupPersons = new HashSet<GroupPersons>();
             ReservationGroups = new HashSet<ReservationGroups>();
         }
 
@@ -20,7 +19,6 @@ namespace HMS.Api.Repositories.HMSDb
         public DateTime? LastModifiedDate { get; set; }
 
         public virtual Companies Company { get; set; }
-        public virtual ICollection<GroupPersons> GroupPersons { get; set; }
         public virtual ICollection<ReservationGroups> ReservationGroups { get; set; }
     }
 }

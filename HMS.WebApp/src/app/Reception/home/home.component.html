@@ -164,7 +164,11 @@
                                                     {{reservation.status.enName}}
                                                 </span>
                                             </td>
-                                            <td></td>
+                                            <td>
+                                                <button class="btn btn-danger" (click)="deleteItem(reservation)">
+                                                    Delete
+                                                </button>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>

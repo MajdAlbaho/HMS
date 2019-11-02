@@ -27,7 +27,6 @@ namespace HMS.Api.Repositories.HMSDb
         public virtual DbSet<Companies> Companies { get; set; }
         public virtual DbSet<CompanyPhones> CompanyPhones { get; set; }
         public virtual DbSet<Countries> Countries { get; set; }
-        public virtual DbSet<GroupPersons> GroupPersons { get; set; }
         public virtual DbSet<Groups> Groups { get; set; }
         public virtual DbSet<Hotels> Hotels { get; set; }
         public virtual DbSet<Nationalities> Nationalities { get; set; }
@@ -299,40 +298,13 @@ namespace HMS.Api.Repositories.HMSDb
                 entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
             });
 
-            modelBuilder.Entity<GroupPersons>(entity =>
-            {
-                entity.HasKey(e => new { e.GroupId, e.PersonId })
-                    .HasName("PK_GroupPersons_GroupId_PersonId");
-
-                entity.ToTable("GroupPersons", "HR");
-
-                entity.Property(e => e.CreatedDate)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
-
-                entity.HasOne(d => d.Group)
-                    .WithMany(p => p.GroupPersons)
-                    .HasForeignKey(d => d.GroupId)
-                    .HasConstraintName("FK_GroupPersons_GroupId");
-
-                entity.HasOne(d => d.Person)
-                    .WithMany(p => p.GroupPersons)
-                    .HasForeignKey(d => d.PersonId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_GroupPersons_PersonId");
-            });
-
             modelBuilder.Entity<Groups>(entity =>
             {
                 entity.ToTable("Groups", "HR");
 
                 entity.Property(e => e.Id).HasDefaultValueSql("(newid())");
 
-                entity.Property(e => e.ArName)
-                    .IsRequired()
-                    .HasMaxLength(200);
+                entity.Property(e => e.ArName).HasMaxLength(200);
 
                 entity.Property(e => e.CreatedDate)
                     .HasColumnType("datetime")
@@ -342,9 +314,7 @@ namespace HMS.Api.Repositories.HMSDb
                     .IsRequired()
                     .HasMaxLength(200);
 
-                entity.Property(e => e.FriName)
-                    .IsRequired()
-                    .HasMaxLength(200);
+                entity.Property(e => e.FriName).HasMaxLength(200);
 
                 entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
 

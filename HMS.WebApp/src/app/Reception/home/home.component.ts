@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { HomeService } from 'src/app/services/home.service';
+import { ReservationService } from 'src/app/services/Reservation.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material';
 import { CheckReservationModalComponent } from './check-reservation-modal/check-reservation-modal.component';
 import { NewReservationModalComponent } from './new-reservation-modal/new-reservation-modal.component';
 import { GroupReservationModalComponent } from './group-reservation-modal/group-reservation-modal.component';
+import { Reservation } from '../../models/Reservation';
+import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +16,7 @@ import { GroupReservationModalComponent } from './group-reservation-modal/group-
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  constructor(private router: Router, translate: TranslateService, private homeService: HomeService,
+  constructor(private router: Router, translate: TranslateService, private reservationService: ReservationService,
     private toastr: ToastrService, public dialog: MatDialog) {
     translate.setDefaultLang('en');
     // the lang to use, if the lang isn't available, it will use the current loader to get them
@@ -22,7 +24,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.homeService.getReservations().subscribe(response => {
+    this.reservationService.Get().subscribe(response => {
       this.reservations = response;
     }
       , error => {
@@ -39,30 +41,34 @@ export class HomeComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(CheckReservationModalComponent, {
-      width: '800px',
-      data: { }
+    this.dialog.open(CheckReservationModalComponent, {
+      width: '800px'
     });
 
   }
 
   IndividualReservationModal(): void {
-    const dialogRef = this.dialog.open(NewReservationModalComponent, {
+    this.dialog.open(NewReservationModalComponent, {
       width: '800px'
-    });
-
-    dialogRef.afterClosed().subscribe(() => {
-      
     });
   }
 
   GroupReservationModal(): void {
-    const dialogRef = this.dialog.open(GroupReservationModalComponent, {
+    this.dialog.open(GroupReservationModalComponent, {
       width: '800px'
     });
+  }
 
-    dialogRef.afterClosed().subscribe(() => {
-      
+  deleteItem(reservation : Reservation){
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: "Are you sure you want to delete " + reservation.Code + " ?"
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        this.reservationService.Delete(reservation.Id);
+      }
     });
   }
 }

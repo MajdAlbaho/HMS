@@ -8,21 +8,21 @@ import { Group } from '../models/Group';
 @Injectable({
   providedIn: 'root'
 })
-export class HomeService {
+export class ReservationService {
 
   constructor(private apiService: ApiService, private http: HttpClient) { }
 
-  getReservations() {
+  Get() {
     return this.http.get(this.apiService.getApiUrl() +
       'reservations');
   }
 
-  checkReservation(reservation: Reservation) {
+  Check(reservation: Reservation) {
     return this.http.post(this.apiService.getApiUrl() +
       'reservations/Check', JSON.stringify(reservation));
   }
 
-  saveReservation(reservation: Reservation, personInfo: Person, group : Group) {
+  Save(reservation: Reservation, personInfo: Person, group : Group) {
     var param = {
       "Reservation": reservation,
       "Person": personInfo,
@@ -31,5 +31,9 @@ export class HomeService {
 
     return this.http.post(this.apiService.getApiUrl() +
       'reservations', JSON.stringify(param));
+  }
+
+  Delete(Id){
+    console.log(Id);
   }
 }

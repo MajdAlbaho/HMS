@@ -1,4 +1,5 @@
 export class Reservation{
+    Id : string;
     Code: string;
     HotelId : string;
     StartDate : Date;

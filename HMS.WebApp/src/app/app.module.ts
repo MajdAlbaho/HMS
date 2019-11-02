@@ -28,6 +28,7 @@ import { CheckReservationModalComponent } from './Reception/home/check-reservati
 import { NewReservationModalComponent } from './Reception/home/new-reservation-modal/new-reservation-modal.component';
 import { GroupReservationModalComponent } from './Reception/home/group-reservation-modal/group-reservation-modal.component';
 import { ArchwizardModule } from 'angular-archwizard';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -52,6 +53,7 @@ export function createTranslateLoader(http: HttpClient) {
     CheckReservationModalComponent,
     NewReservationModalComponent,
     GroupReservationModalComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -80,6 +82,7 @@ export function createTranslateLoader(http: HttpClient) {
   }],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  entryComponents: [CheckReservationModalComponent, NewReservationModalComponent, GroupReservationModalComponent]
+  entryComponents: [CheckReservationModalComponent, NewReservationModalComponent, GroupReservationModalComponent,
+    ConfirmDialogComponent]
 })
 export class AppModule { }

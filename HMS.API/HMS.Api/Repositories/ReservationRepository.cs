@@ -48,27 +48,37 @@ namespace HMS.Api.Repositories
         public async Task SaveReservation(Reservation reservation, List<Person> persons, Group group = null) {
             using (var transaction = Context.Database.BeginTransaction()) {
                 try {
+                    foreach (var person in persons) {
+                        person.Id = Guid.NewGuid();
+                    }
+
                     var dbReservation = _mapper.Map<Reservations>(reservation);
+                    var dbPersons = _mapper.Map<List<Persons>>(persons);
+
                     await Context.Reservations.AddAsync(dbReservation);
-                    await Context.Persons.AddRangeAsync(_mapper.Map<List<Persons>>(persons));
+                    await Context.Persons.AddRangeAsync(dbPersons);
 
                     await Context.SaveChangesAsync();
 
-                    if (group != null) {
+                    if (group != null && !string.IsNullOrEmpty(group.EnName)) {
                         if (group.Id == Guid.Empty) {
-                            await Context.Groups.AddAsync(_mapper.Map<Groups>(group));
+                            group.CompanyId = Guid.Parse("D78AEBF1-AA9A-472D-B0CC-3BD52917CB05");
+                            var dbGroup = _mapper.Map<Groups>(group);
+                            await Context.Groups.AddAsync(dbGroup);
                             await Context.SaveChangesAsync();
+
+                            group.Id = dbGroup.Id;
                         }
 
                         await Context.ReservationGroups.AddAsync(new ReservationGroups() {
                             GroupId = group.Id,
-                            ReservationId = reservation.Id
+                            ReservationId = dbReservation.Id
                         });
                         await Context.SaveChangesAsync();
                     }
 
                     await Context.ReservationRooms.AddRangeAsync(persons.Select(e => new ReservationRooms() {
-                        ReservationId = reservation.Id,
+                        ReservationId = dbReservation.Id,
                         PersonId = e.Id,
                         RoomId = e.RoomId
                     }));

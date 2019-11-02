@@ -51,7 +51,7 @@
 
         </form>
         <div class="modal-footer mt-3">
-            <button type="button" class="btn btn-primary" [disabled]="availableRooms == undefined || availableRooms?.length === 0" awNextStep>Next Step</button>
+            <button type="button" class="btn btn-primary" (click)="Next()" [disabled]="availableRooms == undefined || availableRooms?.length === 0" awNextStep>Next Step</button>
         </div>
     </aw-wizard-step>
 
@@ -171,7 +171,7 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text">%</div>
                         </div>
-                        <input (change)="Discount($event.target.value)" type="number" class="form-control" placeholder="Discount" title="Discount">
+                        <input (change)="Discount($event.target.value)" name="discount" type="number" class="form-control" placeholder="Discount" title="Discount" [(ngModel)]="DiscountValue">
                     </div>
                 </div>
 
