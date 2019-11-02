@@ -65,5 +65,16 @@ namespace HMS.Api.Controllers
                 return BadRequest(new { message = e.Message });
             }
         }
+
+        [HttpDelete("{Id}")]
+        public async Task<IActionResult> Delete(Guid id) {
+            try {
+                await _reservationRepository.DeleteAsync(id);
+                return Ok();
+            } catch (Exception e) {
+                return BadRequest(new { message = e.Message });
+            }
+        }
+
     }
 }

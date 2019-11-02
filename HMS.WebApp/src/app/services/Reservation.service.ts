@@ -34,6 +34,7 @@ export class ReservationService {
   }
 
   Delete(Id){
-    console.log(Id);
+    return this.http.delete(this.apiService.getApiUrl() +
+      'reservations/' + Id);
   }
 }

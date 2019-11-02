@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['user/login']);
   }
 
-  openDialog(): void {
+  BookingCheck(): void {
     this.dialog.open(CheckReservationModalComponent, {
       width: '800px'
     });
@@ -67,7 +67,16 @@ export class HomeComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result) {
-        this.reservationService.Delete(reservation.Id);
+        this.reservationService.Delete(reservation.id).subscribe(() => {
+          var index = this.reservations.indexOf(reservation, 0);
+          if (index > -1) {
+            this.reservations.splice(index, 1);
+          }
+        }, error => {
+          this.toastr.error(error.error.message);
+          this.toastr.error(error.message);
+          console.log(error);
+        });
       }
     });
   }
