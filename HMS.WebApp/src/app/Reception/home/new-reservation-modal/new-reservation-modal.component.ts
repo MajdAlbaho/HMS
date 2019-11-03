@@ -17,7 +17,7 @@ export class NewReservationModalComponent implements OnInit {
     private toastr: ToastrService,
     public reservationService: ReservationService,
     public dialogRef: MatDialogRef<NewReservationModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public availableRooms) { }
+    @Inject(MAT_DIALOG_DATA) public data) { }
 
   close(): void {
     this.dialogRef.close();
@@ -29,10 +29,16 @@ export class NewReservationModalComponent implements OnInit {
   TotalCost: number;
   BaseTotalCost: number;
   enableNextStep: boolean;
+  availableRooms : any;
 
   ngOnInit() {
     this.personInfo.SetDefaultValue();
     this.persons = new Array();
+
+    if(this.data !== null){      
+      this.reservation.StartDate = this.data.StartDate;
+      this.reservation.EndDate = this.data.EndDate;
+    }
   }
 
   checkAvailableRooms() {

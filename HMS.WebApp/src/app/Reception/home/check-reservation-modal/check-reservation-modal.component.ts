@@ -48,19 +48,20 @@ export class CheckReservationModalComponent implements OnInit {
   }
 
   IndividualReservationModal(): void {
-    var avail = this.availableRooms;
+    var reservation = this.reservation;
     this.dialog.open(NewReservationModalComponent, {
       width: '800px',
-      data: avail
+      data: reservation
     });
 
     this.dialogRef.close();
   }
 
   GroupReservationModal(): void {
+    var reservation = this.reservation;
     this.dialog.open(GroupReservationModalComponent, {
       width: '800px',
-      data: { }
+      data: reservation
     });
 
     this.dialogRef.close();

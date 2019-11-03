@@ -34,9 +34,9 @@ namespace HMS.Api.Repositories
             var reservedRooms = await Context.ReservationRooms
                 .Include(e => e.Reservation)
                 .Where(e => (reservation.StartDate >= e.Reservation.StartDate &&
-                             reservation.StartDate < e.Reservation.EndDate) ||
+                             reservation.StartDate <= e.Reservation.EndDate) ||
                             (reservation.EndDate >= e.Reservation.StartDate &&
-                             reservation.EndDate < e.Reservation.EndDate))
+                             reservation.EndDate <= e.Reservation.EndDate))
                 .Select(e => e.Room)
                 .ToListAsync();
 
@@ -48,9 +48,7 @@ namespace HMS.Api.Repositories
         public async Task SaveReservation(Reservation reservation, List<Person> persons, Group group = null) {
             using (var transaction = Context.Database.BeginTransaction()) {
                 try {
-                    foreach (var person in persons) {
-                        person.Id = Guid.NewGuid();
-                    }
+                    persons.ForEach(e => e.Id = Guid.NewGuid());
 
                     var dbReservation = _mapper.Map<Reservations>(reservation);
                     var dbPersons = _mapper.Map<List<Persons>>(persons);

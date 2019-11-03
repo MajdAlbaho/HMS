@@ -26,6 +26,12 @@ export class GroupReservationModalComponent implements OnInit {
     this.personInfo.SetDefaultValue();
     this.persons = new Array();
     this.reservation.TotalCost = 0;
+
+    if(this.data !== null){      
+      this.reservation.StartDate = this.data.StartDate;
+      this.reservation.EndDate = this.data.EndDate;
+      this.reservation.Adults = this.data.Adults;
+    }
   }
 
   reservation = new Reservation();
