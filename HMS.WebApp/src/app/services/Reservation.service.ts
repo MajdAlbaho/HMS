@@ -30,11 +30,17 @@ export class ReservationService {
     }   
 
     return this.http.post(this.apiService.getApiUrl() +
-      'reservations', JSON.stringify(param));
+      'reservations/SaveReservation', JSON.stringify(param));
   }
 
   Delete(Id){
     return this.http.delete(this.apiService.getApiUrl() +
       'reservations/' + Id);
+  }
+
+  CheckIn(Id){
+    console.log(Id);
+    return this.http.put(this.apiService.getApiUrl() +
+      'reservations/CheckIn', JSON.stringify(Id));
   }
 }

@@ -15,9 +15,10 @@ namespace HMS.Models
         public DateTime EndDate { get; set; }
         public string UserId { get; set; }
         public int TotalCost { get; set; }
-        
+
         public int Nights => (int)(EndDate - StartDate).TotalDays;
-        public int Rooms => ReservationRooms.Select(e => e.RoomId).Distinct().Count();
+        public string[] Rooms => ReservationRooms.Select(e => e.Room.RoomNumber.ToString())
+            .Distinct().ToArray();
         public int Guests => ReservationRooms.Select(e => e.PersonId).Distinct().Count();
         public int Adults { get; set; }
         public int RoomType { get; set; }

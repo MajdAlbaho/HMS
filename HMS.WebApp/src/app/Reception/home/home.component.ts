@@ -35,6 +35,8 @@ export class HomeComponent implements OnInit {
   }
 
   reservations: Reservation[];
+  selectedReservation: Reservation;
+  activeState : string;
 
   onLogout() {
     localStorage.removeItem('token');
@@ -51,29 +53,59 @@ export class HomeComponent implements OnInit {
     this.dialog.open(NewReservationModalComponent, {
       width: '800px'
     }).afterClosed().subscribe(result => {
-      this.reservations.push(result);
+      if (typeof result !== 'undefined')
+        this.reservations.push(result);
     });
   }
 
   GroupReservationModal(): void {
     this.dialog.open(GroupReservationModalComponent, {
       width: '800px'
+    }).afterClosed().subscribe(result => {
+      if (typeof result !== 'undefined')
+        this.reservations.push(result);
     });
   }
 
-  deleteItem(reservation : Reservation){
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+  deleteItem(reservation: Reservation) {
+    this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: "Are you sure you want to delete " + reservation.Code + " ?"
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if(result) {
+    }).afterClosed().subscribe(result => {
+      if (result) {
         this.reservationService.Delete(reservation.id).subscribe(() => {
           var index = this.reservations.indexOf(reservation, 0);
           if (index > -1) {
             this.reservations.splice(index, 1);
           }
+        }, error => {
+          this.toastr.error(error.error.message);
+          this.toastr.error(error.message);
+          console.log(error);
+        });
+      }
+    });
+  }
+
+  setSelectedReservation(reservation: Reservation) {
+    this.selectedReservation = reservation;
+    this.activeState = reservation.id;    
+  }
+
+  CheckIn() {
+    if (typeof this.selectedReservation === 'undefined')
+      return;
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: "Are you sure you want to Check in " + this.selectedReservation.Code + " ?"
+    }).afterClosed().subscribe(result => {
+      if (result) {
+        console.log(this.selectedReservation.id);
+        
+        this.reservationService.CheckIn(this.selectedReservation.id).subscribe((result: Boolean) => {
+          if (result)
+            return;
         }, error => {
           this.toastr.error(error.error.message);
           this.toastr.error(error.message);

@@ -111,8 +111,9 @@ export class GroupReservationModalComponent implements OnInit {
     this.reservation.UserId = "47009186-d2a8-426d-8ad7-af784ee8bb5d";
     this.reservation.TotalCost = this.TotalCost;
 
-    this.reservationService.Save(this.reservation, this.persons, this.group).subscribe(response => {
-      
+    this.reservationService.Save(this.reservation, this.persons, this.group)
+    .subscribe(response => {
+      this.dialogRef.close(response);
     }, error => {
       this.toastr.error(error.error.message);
       this.toastr.error(error.message);

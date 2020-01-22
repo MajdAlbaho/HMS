@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Status = HMS.Api.Repositories.HMSDb.Status;
 
 namespace HMS.Api.Repositories
 {
@@ -25,6 +26,7 @@ namespace HMS.Api.Repositories
             return await Context.Reservations
                 .Include(e => e.Status)
                 .Include(e => e.ReservationRooms)
+                .ThenInclude(e => e.Room)
                 .Include(e => e.ReservationGroups)
                 .ThenInclude(e => e.Group)
                 .ToListAsync();
@@ -88,10 +90,27 @@ namespace HMS.Api.Repositories
                     return await Context.Reservations
                         .Include(e => e.Status)
                         .Include(e => e.ReservationRooms)
+                        .ThenInclude(e => e.Room)
                         .Include(e => e.ReservationGroups)
                         .ThenInclude(e => e.Group)
                         .FirstOrDefaultAsync(e => e.Id == dbReservation.Id);
 
+                } catch (Exception ex) {
+                    transaction.Rollback();
+                    throw new Exception(ex.Message);
+                }
+            }
+        }
+
+        public async Task CheckIn(Guid id) {
+            using (var transaction = Context.Database.BeginTransaction()) {
+                try {
+                    var reservation =
+                        await Context.Reservations.FirstOrDefaultAsync(e => e.Id == id);
+                    reservation.StatusId = 1;
+                    await Context.SaveChangesAsync();
+
+                    transaction.Commit();
                 } catch (Exception ex) {
                     transaction.Rollback();
                     throw new Exception(ex.Message);

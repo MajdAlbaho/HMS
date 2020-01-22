@@ -13,5 +13,6 @@ namespace HMS.Api.Repositories.Interfaces
     {
         Task<IEnumerable<Rooms>> CheckReservation(Reservation reservation);
         Task<Reservations> SaveReservation(Reservation reservation, List<Person> persons, Group group = null);
+        Task CheckIn(Guid id);
     }
 }
