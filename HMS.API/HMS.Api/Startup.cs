@@ -51,6 +51,9 @@ namespace HMS.Api
             services.AddDbContext<AuthenticationContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection")));
 
+            services.AddDbContext<HMSDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection")));
+
             services.AddDefaultIdentity<ApplicationUser>()
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<AuthenticationContext>();
@@ -94,9 +97,6 @@ namespace HMS.Api
         }
 
         private void RegisterRepositories(IServiceCollection services) {
-            HMSDbContext context = new HMSDbContext();
-            services.AddSingleton(context);
-
             services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<IReservationRepository, ReservationRepository>();
             services.AddScoped<IGroupRepository, GroupRepository>();

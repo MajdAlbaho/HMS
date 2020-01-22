@@ -45,7 +45,7 @@ namespace HMS.Api.Repositories
                 .ToListAsync();
         }
 
-        public async Task SaveReservation(Reservation reservation, List<Person> persons, Group group = null) {
+        public async Task<Reservations> SaveReservation(Reservation reservation, List<Person> persons, Group group = null) {
             using (var transaction = Context.Database.BeginTransaction()) {
                 try {
                     persons.ForEach(e => e.Id = Guid.NewGuid());
@@ -84,6 +84,14 @@ namespace HMS.Api.Repositories
                     await Context.SaveChangesAsync();
 
                     transaction.Commit();
+
+                    return await Context.Reservations
+                        .Include(e => e.Status)
+                        .Include(e => e.ReservationRooms)
+                        .Include(e => e.ReservationGroups)
+                        .ThenInclude(e => e.Group)
+                        .FirstOrDefaultAsync(e => e.Id == dbReservation.Id);
+
                 } catch (Exception ex) {
                     transaction.Rollback();
                     throw new Exception(ex.Message);

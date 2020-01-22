@@ -9,6 +9,7 @@ import { NewReservationModalComponent } from './new-reservation-modal/new-reserv
 import { GroupReservationModalComponent } from './group-reservation-modal/group-reservation-modal.component';
 import { Reservation } from '../../models/Reservation';
 import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
+import { Observable, observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -24,7 +25,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.reservationService.Get().subscribe(response => {
+    this.reservationService.Get().subscribe((response: Reservation[]) => {
       this.reservations = response;
     }
       , error => {
@@ -33,7 +34,7 @@ export class HomeComponent implements OnInit {
       });
   }
 
-  reservations: any;
+  reservations: Reservation[];
 
   onLogout() {
     localStorage.removeItem('token');
@@ -44,12 +45,13 @@ export class HomeComponent implements OnInit {
     this.dialog.open(CheckReservationModalComponent, {
       width: '800px'
     });
-
   }
 
   IndividualReservationModal(): void {
     this.dialog.open(NewReservationModalComponent, {
       width: '800px'
+    }).afterClosed().subscribe(result => {
+      this.reservations.push(result);
     });
   }
 
