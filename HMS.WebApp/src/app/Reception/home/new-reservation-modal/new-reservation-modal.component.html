@@ -8,10 +8,10 @@
 
 <hr class="style1">
 
-<aw-wizard class="mt-4">
-    <aw-wizard-step stepTitle="Reservation details">
+<aw-wizard>
+    <aw-wizard-step>
         <form #checkReservationForm="ngForm" (ngSubmit)="checkAvailableRooms()">
-            <div class="row mt-5">
+            <div class="row">
                 <div class="col-auto">
                     <label class="sr-only" for="inlineFormInputGroup">Check-in</label>
                     <div class="input-group mb-2">
@@ -30,13 +30,14 @@
                         <input (change)="resetRooms()" type="date" required placeholder="Ckeck-out" title="Ckeck-out" name="checkOut" [(ngModel)]="reservation.EndDate" #checkout="ngModel" [class.is-invalid]="checkout.invalid && checkout.touched" class="form-control">
                     </div>
                 </div>
+                
                 <div class="col-auto">
                     <label class="sr-only" for="inlineFormInputGroup">Room Type</label>
                     <div class="input-group mb-2">
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fa fa-bed"></i></div>
                         </div>
-                        <select (change)="resetRooms()" class="browser-default custom-select" name="roomType" [(ngModel)]="reservation.RoomType">
+                        <select required title="Room Type" (change)="resetRooms()" class="browser-default custom-select" name="roomType" [(ngModel)]="reservation.RoomType">
                                                             <option selected value="1">Single room</option>
                                                             <option value="2">Double room</option>
                                                         </select>
@@ -59,24 +60,28 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fa fa-key"></i></div>
                         </div>
-                        <select class="browser-default custom-select" (change)="enableNextStep = true" name="roomNumber" [(ngModel)]="reservation.RoomId">
+                        <select title="Room Number" class="browser-default custom-select" (change)="enableNextStep = true" name="roomNumber" [(ngModel)]="reservation.RoomId">
                                     <option *ngFor="let availableRoom of availableRooms" value="{{availableRoom.id}}">
                                         {{availableRoom.roomNumber}}
                                     </option>
-                                </select>
+                        </select>
                     </div>
                 </div>
+
+                <button type="submit" class="btn btn-secondary  mb-2 ml-2" [disabled]="!checkReservationForm.valid">Check Available Rooms</button>
+
+
             </div>
 
 
             <div class="modal-footer mt-3">
-                <button type="submit" class="btn btn-primary" [disabled]="!checkReservationForm.valid">Check Available Rooms</button>
+                <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
                 <button type="button" (click)="Next()" class="btn btn-primary" [disabled]="!enableNextStep" awNextStep>Next Step</button>
             </div>
         </form>
     </aw-wizard-step>
 
-    <aw-wizard-step stepTitle="Guest details" awOptionalStep>
+    <aw-wizard-step awOptionalStep>
         <form #reservationDetailForm="ngForm" (ngSubmit)="SaveReservation()">
 
             <div class="row mt-2">
@@ -196,6 +201,7 @@
                 </div>
             </div>
             <div class="modal-footer mt-3">
+                <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
                 <button type="button" class="btn btn-primary" awPreviousStep>Previous Step</button>
                 <button type="submit" class="btn btn-primary" [disabled]="this.persons.length == 0">Finish</button>
             </div>

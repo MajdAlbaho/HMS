@@ -4633,6 +4633,8 @@ input[type="button"].btn-block {
 
 .card-title {
   margin-bottom: 0.75rem;
+  vertical-align:middle; /* By Ramez */
+  line-height: inherit; /* By Ramez */
 }
 
 .card-subtitle {
@@ -11117,8 +11119,8 @@ body,
   font-weight: 300;
   padding: 2px 4px;
   position: absolute;
-  right: 5px;
-  top: 9px;
+  right: 1px;
+  top: 7px;
 }
 
 .btn-navbar {
@@ -15250,6 +15252,7 @@ html.maximized-card {
 .card-danger:not(.card-outline) > .card-header {
   background-color: #dc3545;
   border-bottom: 0;
+  
 }
 
 .card-danger:not(.card-outline) > .card-header,
@@ -24122,5 +24125,12 @@ a.text-muted:hover {
 
 .link-black:hover, .link-black:focus {
   color: #e6e8ea;
+}
+
+.HMS_name  /* By Ramez */
+{
+  padding: 10px;
+  line-height: 30px;
+  vertical-align: middle;
 }
 /*# sourceMappingURL=adminlte.css.map */
