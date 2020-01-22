@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { GuestService } from 'src/app/services/guest.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-guests',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GuestsComponent implements OnInit {
 
-  constructor() { }
+  guests : any;
+
+
+  constructor(private guestService : GuestService, private toastr: ToastrService) { }
 
   ngOnInit() {
+    this.guestService.getGuests().subscribe(response => {
+      this.guests = response
+    }, error => {
+      this.toastr.error(error.error.message);
+      this.toastr.error(error.message);
+      console.log(error);
+    });
   }
 
 }

@@ -55,6 +55,7 @@ namespace HMS.Api.Repositories
 
                     await Context.Reservations.AddAsync(dbReservation);
                     await Context.Persons.AddRangeAsync(dbPersons);
+                    dbReservation.UserId = "47009186-d2a8-426d-8ad7-af784ee8bb5d";
 
                     await Context.SaveChangesAsync();
 
