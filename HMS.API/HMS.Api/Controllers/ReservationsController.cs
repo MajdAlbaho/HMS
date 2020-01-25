@@ -27,7 +27,7 @@ namespace HMS.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll() {
             try {
-                return Ok(_mapper.Map<List<HMS.Models.Reservation>>(
+                return Ok(_mapper.Map<List<Reservation>>(
                     await _reservationRepository.GetAllAsync()));
             } catch (Exception e) {
                 return BadRequest(e.Message);
@@ -55,18 +55,34 @@ namespace HMS.Api.Controllers
 
 
         [HttpPost]
+        [Route("SaveReservation")]
         public async Task<IActionResult> SaveReservation(SingleReservationParam param) {
             try {
-                await _reservationRepository.SaveReservation(param.Reservation,
+                var result = await _reservationRepository.SaveReservation(param.Reservation,
                     param.Person, param.Group);
 
+                return Ok(_mapper.Map<Reservation>(result));
+            } catch (Exception e) {
+                return BadRequest(new { message = e.Message });
+            }
+        }
+
+        [HttpPost]
+        [Route("CheckIn/{id}")]
+        public async Task<IActionResult> CheckIn(Guid id) {
+            if (id == Guid.Empty)
+                return BadRequest();
+
+            try {
+                await _reservationRepository.CheckIn(id);
                 return Ok();
             } catch (Exception e) {
                 return BadRequest(new { message = e.Message });
             }
         }
 
-        [HttpDelete("{Id}")]
+        [HttpDelete]
+        [Route("Delete/{id}")]
         public async Task<IActionResult> Delete(Guid id) {
             try {
                 await _reservationRepository.DeleteAsync(id);

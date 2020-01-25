@@ -78,76 +78,76 @@
 
 
     <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
 
-    </section>
+        </section>
 
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
 
-          <div class="col-8">
-            <div class="card">
-              <div class="card-header">
+                    <div class="col-8">
+                        <div class="card">
+                            <div class="card-header">
 
-                  <div class="card-tools float-right">
-                      <ul class="pagination pagination-sm m-0 float-right">
-                        <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-                      </ul>
-                    </div>
+                                <div class="card-tools float-right">
+                                    <ul class="pagination pagination-sm m-0 float-right">
+                                        <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+                                    </ul>
+                                </div>
 
-                
-                  <div class="card-tools float-left">
-                      <div class="input-group input-group-sm">
-                        <input type="text" name="table_search" class="form-control float-left" placeholder="Search">
-    
-                        <div class="input-group-append">
-                          <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+
+                                <div class="card-tools float-left">
+                                    <div class="input-group input-group-sm">
+                                        <input type="text" name="table_search" class="form-control float-left" placeholder="Search">
+
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.card-header -->
+
+
+                            <div class="card-body table-responsive p-0">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Guest Name</th>
+                                            <th>Room</th>
+                                            <th>Companions</th>
+                                            <th>ReservationID</th>
+                                            <th>Reservation Date</th>
+                                            <th>Status</th>
+                                            <th>Comment</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let guest of guests">
+                                            <td>{{guest.firstEnName}}</td>
+                                            <td>919</td>
+                                            <td>2</td>
+                                            <td>20192509-1</td>
+                                            <td>11-7-2019</td>
+                                            <td><span class="badge badge-info">Arrived</span></td>
+                                            <th></th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
                         </div>
-                      </div>
+                        <!-- /.card -->
                     </div>
-              </div>
-              <!-- /.card-header -->
-
-
-              <div class="card-body table-responsive p-0">
-                  <table class="table table-hover">
-                    <thead>
-                    <tr>
-                      <th>Guest Name</th>
-                      <th>Room</th>
-                      <th>Companions</th>
-                      <th>ReservationID</th>
-                      <th>Reservation Date</th>
-                      <th>Status</th>
-                      <th>Comment</th>
-
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Ramez Bazna</td>
-                      <td>919</td>
-                      <td>2</td>
-                      <td>20192509-1</td>
-                      <td>11-7-2019</td>
-                      <td><span class="badge badge-info">Arrived</span></td>
-                      <th></th>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-          </div>
-          <!-- /.col -->
+                    <!-- /.col -->
 
 
 
@@ -155,78 +155,79 @@
 
 
 
-          
+
                     <!-- Guests -->
                     <div class="col-md-4">
-                      <div class="card">
-                          <div class="card-header border-transparent">
-                              <h3 class="card-title">Guests Arrival Today</h3>
+                        <div class="card">
+                            <div class="card-header border-transparent">
+                                <h3 class="card-title">Guests Arrival Today</h3>
 
-                              <div class="card-tools">
-                              <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
                               <i class="fa fa-minus"></i>
                               </button>
-                              </div>
-                          </div>
-                          <!-- /.card-header -->
-                          <div class="card-body p-0">
-                              <div class="table-responsive">
-                                  <table class="table m-0">
-                                      <thead>
-                                          <tr>
-                                              <th>Room</th>
-                                              <th>Guest Name</th>
-                                              <th>Status</th>
-                                          </tr>
-                                      </thead>
-                                      <tbody>
-                                          <tr>
-                                              <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                                              <td>Ramez Bazna</td>
-                                              <td><span class="badge badge-warning">Pending</span></td>
-                                          </tr>
-                                          <tr>
-                                              <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                              <td>Majd Albaho</td>
-                                              <td><span class="badge badge-danger">Canceled</span></td>
-                                          </tr>
-                                          <tr>
-                                              <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                              <td>User User</td>
-                                              <td><span class="badge badge-info">Arrived</span></td>
-                                          </tr>
-                                          <tr>
-                                              <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                                              <td>Guest Guest</td>
-                                              <td><span class="badge badge-warning">Pending</span></td>
-                                          </tr>
-                                      </tbody>
-                                  </table>
-                              </div>
-                              <!-- /.table-responsive -->
-                          </div>
-                          <!-- /.card-body -->
-                          <div class="card-footer text-center">
-                              <a href="javascript::">View Full List</a>
-                          </div>
+                                </div>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table m-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Room</th>
+                                                <th>Guest Name</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><a href="pages/examples/invoice.html">OR1848</a></td>
+                                                <td>Ramez Bazna</td>
+                                                <td><span class="badge badge-warning">Pending</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="pages/examples/invoice.html">OR7429</a></td>
+                                                <td>Majd Albaho</td>
+                                                <td><span class="badge badge-danger">Canceled</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="pages/examples/invoice.html">OR7429</a></td>
+                                                <td>User User</td>
+                                                <td><span class="badge badge-info">Arrived</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="pages/examples/invoice.html">OR1848</a></td>
+                                                <td>Guest Guest</td>
+                                                <td><span class="badge badge-warning">Pending</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.table-responsive -->
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer text-center">
+                                <a href="javascript::">View Full List</a>
+                            </div>
 
-                          <!-- /.card-footer -->
-                      </div>
-                      <!-- /.card -->
-                  </div>
-
-
+                            <!-- /.card-footer -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
 
 
 
 
 
-        </div>
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-  </div>
+
+
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
 </div>
 <!-- ./wrapper -->
 

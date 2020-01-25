@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Status = HMS.Api.Repositories.HMSDb.Status;
 
 namespace HMS.Api.Repositories
 {
@@ -25,6 +26,7 @@ namespace HMS.Api.Repositories
             return await Context.Reservations
                 .Include(e => e.Status)
                 .Include(e => e.ReservationRooms)
+                .ThenInclude(e => e.Room)
                 .Include(e => e.ReservationGroups)
                 .ThenInclude(e => e.Group)
                 .ToListAsync();
@@ -45,7 +47,7 @@ namespace HMS.Api.Repositories
                 .ToListAsync();
         }
 
-        public async Task SaveReservation(Reservation reservation, List<Person> persons, Group group = null) {
+        public async Task<Reservations> SaveReservation(Reservation reservation, List<Person> persons, Group group = null) {
             using (var transaction = Context.Database.BeginTransaction()) {
                 try {
                     persons.ForEach(e => e.Id = Guid.NewGuid());
@@ -55,6 +57,7 @@ namespace HMS.Api.Repositories
 
                     await Context.Reservations.AddAsync(dbReservation);
                     await Context.Persons.AddRangeAsync(dbPersons);
+                    dbReservation.UserId = "47009186-d2a8-426d-8ad7-af784ee8bb5d";
 
                     await Context.SaveChangesAsync();
 
@@ -80,6 +83,31 @@ namespace HMS.Api.Repositories
                         PersonId = e.Id,
                         RoomId = e.RoomId
                     }));
+                    await Context.SaveChangesAsync();
+
+                    transaction.Commit();
+
+                    return await Context.Reservations
+                        .Include(e => e.Status)
+                        .Include(e => e.ReservationRooms)
+                        .ThenInclude(e => e.Room)
+                        .Include(e => e.ReservationGroups)
+                        .ThenInclude(e => e.Group)
+                        .FirstOrDefaultAsync(e => e.Id == dbReservation.Id);
+
+                } catch (Exception ex) {
+                    transaction.Rollback();
+                    throw new Exception(ex.Message);
+                }
+            }
+        }
+
+        public async Task CheckIn(Guid id) {
+            using (var transaction = Context.Database.BeginTransaction()) {
+                try {
+                    var reservation =
+                        await Context.Reservations.FirstOrDefaultAsync(e => e.Id == id);
+                    reservation.StatusId = 1;
                     await Context.SaveChangesAsync();
 
                     transaction.Commit();
