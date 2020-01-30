@@ -53,7 +53,7 @@ export function createTranslateLoader(http: HttpClient) {
     CheckReservationModalComponent,
     NewReservationModalComponent,
     GroupReservationModalComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,

@@ -80,7 +80,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-secondary  mb-2 ml-2" [disabled]="!checkReservationForm.valid">Check Available Rooms</button>
+                <button type="submit" class="btn btn-outline-secondary  mb-2 ml-2" [disabled]="!checkReservationForm.valid">Check Available Rooms</button>
 
 
             </div>
@@ -95,6 +95,8 @@
 
     <aw-wizard-step stepTitle="Guest details" awOptionalStep>
         <form #groupReservationForm="ngForm" (ngSubmit)="SaveReservation()">
+            
+        <div class="mb-6">
             <div class="row mt-2">
                 <div class="col-auto">
                     <label class="sr-only" for="inlineFormInputGroup">First Name</label>
@@ -127,6 +129,7 @@
                 </div>
 
             </div>
+
             <div class="row mt-2">
                 <div class="col-auto">
                     <label class="sr-only" for="inlineFormInputGroup">Gender</label>
@@ -150,7 +153,6 @@
                                                                         <option value="0">Syrian</option>            
                                                                     </select>
                     </div>
-                    <button type="button" class="btn btn-primary" (click)="AddGuest()" [disabled]="!groupReservationForm.valid">AddGuest</button>
                 </div>
 
 
@@ -163,21 +165,27 @@
                         <input type="number" required class="form-control" placeholder="ID Number" title="ID Number" name="idNumber" [(ngModel)]="personInfo.IdNumber" #idNumber="ngModel" [class.is-invalid]="idNumber.invalid && idNumber.touched">
                     </div>
                 </div>
-                <div class="row mt-2">
+
+                <div class="col-auto">
                     <label class="sr-only" for="inlineFormInputGroup">Room Number</label>
                     <div class="input-group mb-2">
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fa fa-key"></i></div>
                         </div>
-                        <select required class="browser-default custom-select" name="roomNumber" [(ngModel)]="reservation.RoomId">
-                                                            <option *ngFor="let availableRoom of availableRooms" value="{{availableRoom.id}}">
-                                                                {{availableRoom.roomNumber}}
-                                                            </option>
-                                                        </select>
+                        <select title="Room Number" class="browser-default custom-select" (change)="enableNextStep = true" name="roomNumber" [(ngModel)]="reservation.RoomId">
+                            <option *ngFor="let availableRoom of availableRooms" value="{{availableRoom.id}}">
+                                 {{availableRoom.roomNumber}}
+                           </option>
+                        </select>
                     </div>
                 </div>
+                <button type="button" class="btn btn-outline-secondary  mb-2 ml-2" (click)="AddGuest()" [disabled]="!groupReservationForm.valid">AddGuest</button>
+
             </div>
-            <div class="row mt-2" style="height:250px;overflow:auto;">
+
+        </div>
+
+            <div class="row mt-2">
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -201,6 +209,7 @@
                     </tbody>
                 </table>
             </div>
+            
             <div class="row mt-2">
 
                 <div class="col-auto">

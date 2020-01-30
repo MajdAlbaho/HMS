@@ -38,18 +38,13 @@
                             <div class="input-group-text"><i class="fa fa-bed"></i></div>
                         </div>
                         <select required title="Room Type" (change)="resetRooms()" class="browser-default custom-select" name="roomType" [(ngModel)]="reservation.RoomType">
-                                                            <option selected value="1">Single room</option>
-                                                            <option value="2">Double room</option>
-                                                        </select>
+                        <option selected value="1">Single room</option>
+                        <option value="2">Double room</option>
+                        </select>
                     </div>
                 </div>
             </div>
-            <!-- 
-            <div class="row">
-                <button type="submit" class="btn btn-primary" [disabled]="!checkReservationForm.valid">
-                            check Available Rooms
-                    </button>
-            </div> -->
+
 
 
             <div class="row mt-4">
@@ -68,7 +63,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-secondary  mb-2 ml-2" [disabled]="!checkReservationForm.valid">Check Available Rooms</button>
+                <button type="submit" class="btn btn-outline-secondary  mb-2 ml-2" [disabled]="!checkReservationForm.valid">Check Available Rooms</button>
 
 
             </div>
@@ -129,6 +124,7 @@
                                                                     </select>
                     </div>
                 </div>
+
                 <div class="col-auto">
                     <label class="sr-only" for="inlineFormInputGroup">Nationality</label>
                     <div class="input-group mb-2">
@@ -136,10 +132,9 @@
                             <div class="input-group-text"><i class="fa fa-flag"></i></div>
                         </div>
                         <select class="browser-default custom-select" name="nationality" [(ngModel)]="personInfo.Nationality">
-                                                                        <option value="0">Syrian</option>            
-                                                                    </select>
+                        <option value="0">Syrian</option>            
+                        </select>
                     </div>
-                    <button type="button" class="btn btn-primary" (click)="AddGuest()" [disabled]="!reservationDetailForm.valid">AddGuest</button>
                 </div>
 
 
@@ -152,7 +147,11 @@
                         <input type="number" required class="form-control" placeholder="ID Number" title="ID Number" name="idNumber" [(ngModel)]="personInfo.IdNumber" #idNumber="ngModel" [class.is-invalid]="idNumber.invalid && idNumber.touched">
                     </div>
                 </div>
+                <button type="button" class="btn btn-outline-secondary mb-2 ml-2" (click)="AddGuest()" [disabled]="!reservationDetailForm.valid">AddGuest</button>
+
             </div>
+
+
             <div class="row mt-2">
                 <table class="table table-hover">
                     <thead>
