@@ -1,7 +1,7 @@
 <div>
     <button type="button" class="close" (click)="close()">
-            <span aria-hidden="true">&times;</span>
-        </button>
+        <span aria-hidden="true">&times;</span>
+    </button>
 </div>
 
 <h5 class="text-uppercase">New Reservation</h5>
@@ -30,7 +30,7 @@
                         <input (change)="resetRooms()" type="date" required placeholder="Ckeck-out" title="Ckeck-out" name="checkOut" [(ngModel)]="reservation.EndDate" #checkout="ngModel" [class.is-invalid]="checkout.invalid && checkout.touched" class="form-control">
                     </div>
                 </div>
-                
+
                 <div class="col-auto">
                     <label class="sr-only" for="inlineFormInputGroup">Room Type</label>
                     <div class="input-group mb-2">
@@ -38,8 +38,8 @@
                             <div class="input-group-text"><i class="fa fa-bed"></i></div>
                         </div>
                         <select required title="Room Type" (change)="resetRooms()" class="browser-default custom-select" name="roomType" [(ngModel)]="reservation.RoomType">
-                        <option selected value="1">Single room</option>
-                        <option value="2">Double room</option>
+                            <option selected value="1">Single room</option>
+                            <option value="2">Double room</option>
                         </select>
                     </div>
                 </div>
@@ -56,9 +56,9 @@
                             <div class="input-group-text"><i class="fa fa-key"></i></div>
                         </div>
                         <select title="Room Number" class="browser-default custom-select" (change)="enableNextStep = true" name="roomNumber" [(ngModel)]="reservation.RoomId">
-                                    <option *ngFor="let availableRoom of availableRooms" value="{{availableRoom.id}}">
-                                        {{availableRoom.roomNumber}}
-                                    </option>
+                            <option *ngFor="let availableRoom of availableRooms" value="{{availableRoom.id}}">
+                                {{availableRoom.roomNumber}}
+                            </option>
                         </select>
                     </div>
                 </div>
@@ -86,7 +86,7 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fa fa-user"></i></div>
                         </div>
-                        <input cdkFocusInitial required type="text" placeholder="First Name" title="First name" name="firstName" [(ngModel)]="personInfo.FirstEnName" #firstname="ngModel" [class.is-invalid]="firstname.invalid && firstname.touched" class="form-control">
+                        <input cdkFocusInitial required type="text" placeholder="First Name" title="First name" name="firstName" [(ngModel)]="personInfo.FirstName" #firstname="ngModel" [class.is-invalid]="firstname.invalid && firstname.touched" class="form-control">
                     </div>
                 </div>
 
@@ -96,7 +96,7 @@
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fa fa-user"></i></div>
                         </div>
-                        <input type="text" required placeholder="Last Name" title="Last name" name="lastName" [(ngModel)]="personInfo.LastEnName" #lastName="ngModel" [class.is-invalid]="lastName.invalid && lastName.touched" class="form-control">
+                        <input type="text" required placeholder="Last Name" title="Last name" name="lastName" [(ngModel)]="personInfo.LastName" #lastName="ngModel" [class.is-invalid]="lastName.invalid && lastName.touched" class="form-control">
                     </div>
                 </div>
 
@@ -119,9 +119,9 @@
                             <div class="input-group-text"><i class="fa fa-venus-mars"></i></div>
                         </div>
                         <select name="gender" class="browser-default custom-select" [(ngModel)]="personInfo.Gender" [value]="1">
-                                                                        <option value="true" selected>Male</option>
-                                                                        <option value="false">Female</option>
-                                                                    </select>
+                            <option value="true" selected>Male</option>
+                            <option value="false">Female</option>
+                        </select>
                     </div>
                 </div>
 
@@ -132,7 +132,7 @@
                             <div class="input-group-text"><i class="fa fa-flag"></i></div>
                         </div>
                         <select class="browser-default custom-select" name="nationality" [(ngModel)]="personInfo.Nationality">
-                        <option value="0">Syrian</option>            
+                            <option value="0">Syrian</option>
                         </select>
                     </div>
                 </div>
@@ -166,8 +166,8 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let person of persons">
-                            <td>{{person.FirstEnName}}</td>
-                            <td>{{person.LastEnName}}</td>
+                            <td>{{person.FirstName}}</td>
+                            <td>{{person.LastName}}</td>
                             <td>Organization</td>
                             <td>{{person.Gender}}</td>
                             <td>{{person.Nationality}}</td>

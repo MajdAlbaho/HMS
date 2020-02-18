@@ -1,10 +1,12 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ReservationService } from 'src/app/services/Reservation.service';
 import { ToastrService } from 'ngx-toastr';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { Reservation } from 'src/app/models/Reservation';
 import { Person } from 'src/app/models/Person';
 import { Group } from '../../../models/Group';
+import { AddGroupModalComponent } from '../../groups/add-group-modal/add-group-modal.component';
+import { GroupService } from '../../../services/group.service';
 
 @Component({
   selector: 'app-group-reservation-modal',
@@ -14,10 +16,9 @@ import { Group } from '../../../models/Group';
 export class GroupReservationModalComponent implements OnInit {
 
   constructor(
-    private reservationService: ReservationService, private toastr: ToastrService,
-    public dialogRef: MatDialogRef<GroupReservationModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data) 
-  { }
+    private reservationService: ReservationService, private toastr: ToastrService, private groupService: GroupService,
+    public dialogRef: MatDialogRef<GroupReservationModalComponent>, public dialog: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public data) { }
 
   close(): void {
     this.dialogRef.close();
@@ -27,7 +28,15 @@ export class GroupReservationModalComponent implements OnInit {
     this.persons = new Array();
     this.reservation.TotalCost = 0;
 
-    if(this.data !== null){      
+    this.groupService.getGroups().subscribe((response: Group[]) => {
+      this.groups = response
+    }, error => {
+      this.toastr.error(error.error.message);
+      this.toastr.error(error.message);
+      console.log(error);
+    });
+
+    if (this.data !== null) {
       this.reservation.StartDate = this.data.StartDate;
       this.reservation.EndDate = this.data.EndDate;
       this.reservation.Adults = this.data.Adults;
@@ -40,59 +49,64 @@ export class GroupReservationModalComponent implements OnInit {
 
   persons: any;
   adultsHasError: boolean;
-  availableRooms : any;
+  availableRooms: any;
   TotalCost: number = 0;
   BaseTotalCost: number;
-  Days : number;
-  DiscountValue : number = 0;
+  Days: number;
+  DiscountValue: number = 0;
+
+  groups: Group[];
 
   ValidateNumber(num) {
-    if (num === undefined || num <= 0)
-      this.adultsHasError = true;
-    else
-      this.adultsHasError = false;
+    this.adultsHasError = num === undefined || num <= 0;
   }
 
-  checkReservation(){
-    this.reservationService.Check(this.reservation).subscribe(response =>{      
-      this.availableRooms = response;      
+  checkReservation() {
+    this.reservationService.Check(this.reservation).subscribe(response => {
+      this.availableRooms = response;
     }, error => {
       this.toastr.error(error.error.message);
-      this.toastr.error(error.message);
       console.log(error);
     });
   }
 
-  AddGuest(){
+  AddGuest() {
     this.personInfo.RoomId = this.reservation.RoomId;
-    this.persons.push(Object.assign({} , this.personInfo));
+    this.persons.push(Object.assign({}, this.personInfo));
 
     var room = this.availableRooms.find(e => e.id == this.reservation.RoomId);
-    if(room == undefined)
+    if (room == undefined)
       return;
 
     room.totalBeds = room.totalBeds - 1;
 
-    if(this.TotalCost > 0)
+    if (this.TotalCost > 0)
       this.Discount(0);
     this.TotalCost = this.TotalCost + (room.cost * this.Days);
     this.BaseTotalCost = this.TotalCost;
     this.Discount(this.DiscountValue);
 
-    if(room.totalBeds == 0)
-      {        
-        let index = this.availableRooms.indexOf(room, 0);
-        this.availableRooms.splice(index, 1);
-        this.reservation.RoomId = null;
-      }
+    if (room.totalBeds == 0) {
+      let index = this.availableRooms.indexOf(room, 0);
+      this.availableRooms.splice(index, 1);
+      this.reservation.RoomId = null;
+    }
   }
 
-  Discount(value){
+  AddNewGroup() {
+    this.dialog.open(AddGroupModalComponent, {
+      width: '350px'
+    }).afterClosed().subscribe(result => {
+
+    });
+  }
+
+  Discount(value) {
     var discount = (this.BaseTotalCost * value) / 100;
     this.TotalCost = this.BaseTotalCost - discount;
   }
 
-  Next(){
+  Next() {
     this.Days = this.date_diff_indays(this.reservation.StartDate, this.reservation.EndDate);
   }
 
@@ -105,19 +119,19 @@ export class GroupReservationModalComponent implements OnInit {
   SaveReservation() {
     console.log(this.reservation);
     this.reservation.RoomId = "";
-    
+
     this.reservation.HotelId = "3AB92D5C-33D1-4D17-83F3-A1CC5E00C4CD";
     this.reservation.Code = "RSV1098";
     this.reservation.UserId = "47009186-d2a8-426d-8ad7-af784ee8bb5d";
     this.reservation.TotalCost = this.TotalCost;
 
     this.reservationService.Save(this.reservation, this.persons, this.group)
-    .subscribe(response => {
-      this.dialogRef.close(response);
-    }, error => {
-      this.toastr.error(error.error.message);
-      this.toastr.error(error.message);
-      console.log(error);
-    });
+      .subscribe(response => {
+        this.dialogRef.close(response);
+      }, error => {
+        this.toastr.error(error.error.message);
+        this.toastr.error(error.message);
+        console.log(error);
+      });
   }
 }

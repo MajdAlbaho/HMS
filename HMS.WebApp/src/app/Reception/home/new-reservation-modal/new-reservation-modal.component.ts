@@ -29,13 +29,13 @@ export class NewReservationModalComponent implements OnInit {
   TotalCost: number;
   BaseTotalCost: number;
   enableNextStep: boolean;
-  availableRooms : any;
+  availableRooms: any;
 
   ngOnInit() {
     this.personInfo.SetDefaultValue();
     this.persons = new Array();
 
-    if(this.data !== null){      
+    if (this.data !== null) {
       this.reservation.StartDate = this.data.StartDate;
       this.reservation.EndDate = this.data.EndDate;
     }
@@ -62,6 +62,7 @@ export class NewReservationModalComponent implements OnInit {
     this.reservation.UserId = "1DC97D96-BB38-4D7C-BCA3-111BADE204CB";
     this.reservation.TotalCost = this.TotalCost;
 
+
     this.reservationService.Save(this.reservation, this.persons, null).subscribe(response => {
       this.dialogRef.close(response);
     }, error => {
@@ -73,12 +74,11 @@ export class NewReservationModalComponent implements OnInit {
 
   AddGuest() {
     var room = this.availableRooms.find(e => e.id == this.reservation.RoomId);
-    if (this.persons.length < room.totalBeds)
-      {
-        var person = Object.assign({}, this.personInfo);
-        person.RoomId = room.id;
-        this.persons.push(person);
-      }
+    if (this.persons.length < room.totalBeds) {
+      var person = Object.assign({}, this.personInfo);
+      person.RoomId = room.id;
+      this.persons.push(person);
+    }
   }
 
   Next() {
@@ -94,13 +94,13 @@ export class NewReservationModalComponent implements OnInit {
     return Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate())) / (1000 * 60 * 60 * 24));
   }
 
-  resetRooms(){
+  resetRooms() {
     this.availableRooms = [];
     console.log("Reset rooms");
-    
+
   }
 
-  Discount(value){
+  Discount(value) {
     var discount = (this.BaseTotalCost * value) / 100;
     this.TotalCost = this.BaseTotalCost - discount;
   }

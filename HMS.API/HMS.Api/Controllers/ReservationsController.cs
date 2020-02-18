@@ -68,7 +68,7 @@ namespace HMS.Api.Controllers
         }
 
         [HttpPost]
-        [Route("CheckIn/{id}")]
+        [Route("CheckIn/{id?}")]
         public async Task<IActionResult> CheckIn(Guid id) {
             if (id == Guid.Empty)
                 return BadRequest();

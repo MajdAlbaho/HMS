@@ -102,6 +102,7 @@ namespace HMS.Api
             services.AddScoped<IGroupRepository, GroupRepository>();
             services.AddScoped<IRoomRepository, RoomRepository>();
             services.AddScoped<IPersonRepository, PersonRepository>();
+            services.AddScoped<ICompanyRepository, CompanyRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

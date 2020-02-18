@@ -61,7 +61,7 @@ namespace HMS.Api.Repositories
 
                     await Context.SaveChangesAsync();
 
-                    if (group != null && !string.IsNullOrEmpty(group.EnName)) {
+                    if (group != null && !string.IsNullOrEmpty(group.Name)) {
                         if (group.Id == Guid.Empty) {
                             group.CompanyId = Guid.Parse("D78AEBF1-AA9A-472D-B0CC-3BD52917CB05");
                             var dbGroup = _mapper.Map<Groups>(group);

@@ -1,0 +1,32 @@
+<div>
+    <button type="button" class="close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<h5 class="text-uppercase">Group Reservation</h5>
+<hr class="style1">
+<form #addGroup="ngForm" (ngSubmit)="AddGroup()">
+    <div class="row mt-2">
+        <div class="col-auto">
+            <label class="sr-only">Group name</label>
+            <div class="input-group mb-2">
+                <input type="text" required cdkFocusInitial name="groupName" [(ngModel)]="group.name" #groupName="ngModel" [class.is-invalid]="groupName.invalid && groupName.touched" class="form-control">
+            </div>
+        </div>
+        <div class="col-auto">
+            <label class="sr-only">Company name</label>
+            <div class="input-group mb-2">
+                <select class="browser-default custom-select" [(ngModel)]="group.company" name="companies">
+                    <option *ngFor="let company of companies" value="{{company.id}}">
+                        {{company?.enName}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="col-auto">
+            <button type="button" class="btn btn-primary" (click)="AddNewCompany()">Add Company</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+
+    </div>
+</form>

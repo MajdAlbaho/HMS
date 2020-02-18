@@ -1,4 +1,6 @@
-export class Group{
-    Id : string;
-    EnName : string;
+export class Group {
+  Id: string;
+  Name: string;
+
+  CompanyId: string;
 }

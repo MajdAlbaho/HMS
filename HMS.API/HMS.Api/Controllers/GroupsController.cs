@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HMS.Api.Repositories.HMSDb;
 
 namespace HMS.Api.Controllers
 {
@@ -42,5 +43,16 @@ namespace HMS.Api.Controllers
                 return BadRequest(new { message = e.Message });
             }
         }
+
+        [HttpPost]
+        [Route("SaveGroup")]
+        public async Task<IActionResult> SaveGroup([FromBody]Group group) {
+            try {
+                return Ok(await _groupRepository.AddAsync(_mapper.Map<Groups>(group)));
+            } catch (Exception e) {
+                return BadRequest(e.Message);
+            }
+        }
+
     }
 }

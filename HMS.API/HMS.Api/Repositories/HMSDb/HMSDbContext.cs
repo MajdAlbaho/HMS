@@ -6,11 +6,13 @@ namespace HMS.Api.Repositories.HMSDb
 {
     public partial class HMSDbContext : DbContext
     {
-        public HMSDbContext() {
+        public HMSDbContext()
+        {
         }
 
         public HMSDbContext(DbContextOptions<HMSDbContext> options)
-            : base(options) {
+            : base(options)
+        {
         }
 
         public virtual DbSet<Areas> Areas { get; set; }
@@ -37,11 +39,15 @@ namespace HMS.Api.Repositories.HMSDb
         public virtual DbSet<RoomNeeds> RoomNeeds { get; set; }
         public virtual DbSet<Rooms> Rooms { get; set; }
         public virtual DbSet<Status> Status { get; set; }
+        public virtual DbSet<UsersHotels> UsersHotels { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder) {
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
             modelBuilder.HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
 
-            modelBuilder.Entity<Areas>(entity => {
+            modelBuilder.Entity<Areas>(entity =>
+            {
                 entity.ToTable("Areas", "Location");
 
                 entity.Property(e => e.ArName)
@@ -67,7 +73,8 @@ namespace HMS.Api.Repositories.HMSDb
                     .HasForeignKey(d => d.CityId);
             });
 
-            modelBuilder.Entity<AspNetRoleClaims>(entity => {
+            modelBuilder.Entity<AspNetRoleClaims>(entity =>
+            {
                 entity.HasIndex(e => e.RoleId);
 
                 entity.Property(e => e.RoleId).IsRequired();
@@ -77,7 +84,8 @@ namespace HMS.Api.Repositories.HMSDb
                     .HasForeignKey(d => d.RoleId);
             });
 
-            modelBuilder.Entity<AspNetRoles>(entity => {
+            modelBuilder.Entity<AspNetRoles>(entity =>
+            {
                 entity.HasIndex(e => e.NormalizedName)
                     .HasName("RoleNameIndex")
                     .IsUnique()
@@ -90,7 +98,8 @@ namespace HMS.Api.Repositories.HMSDb
                 entity.Property(e => e.NormalizedName).HasMaxLength(256);
             });
 
-            modelBuilder.Entity<AspNetUserClaims>(entity => {
+            modelBuilder.Entity<AspNetUserClaims>(entity =>
+            {
                 entity.HasIndex(e => e.UserId);
 
                 entity.Property(e => e.UserId).IsRequired();
@@ -100,7 +109,8 @@ namespace HMS.Api.Repositories.HMSDb
                     .HasForeignKey(d => d.UserId);
             });
 
-            modelBuilder.Entity<AspNetUserLogins>(entity => {
+            modelBuilder.Entity<AspNetUserLogins>(entity =>
+            {
                 entity.HasKey(e => new { e.LoginProvider, e.ProviderKey });
 
                 entity.HasIndex(e => e.UserId);
@@ -116,7 +126,8 @@ namespace HMS.Api.Repositories.HMSDb
                     .HasForeignKey(d => d.UserId);
             });
 
-            modelBuilder.Entity<AspNetUserRoles>(entity => {
+            modelBuilder.Entity<AspNetUserRoles>(entity =>
+            {
                 entity.HasKey(e => new { e.UserId, e.RoleId });
 
                 entity.HasIndex(e => e.RoleId);
@@ -130,7 +141,8 @@ namespace HMS.Api.Repositories.HMSDb
                     .HasForeignKey(d => d.UserId);
             });
 
-            modelBuilder.Entity<AspNetUserTokens>(entity => {
+            modelBuilder.Entity<AspNetUserTokens>(entity =>
+            {
                 entity.HasKey(e => new { e.UserId, e.LoginProvider, e.Name });
 
                 entity.Property(e => e.LoginProvider).HasMaxLength(128);
@@ -142,7 +154,8 @@ namespace HMS.Api.Repositories.HMSDb
                     .HasForeignKey(d => d.UserId);
             });
 
-            modelBuilder.Entity<AspNetUsers>(entity => {
+            modelBuilder.Entity<AspNetUsers>(entity =>
+            {
                 entity.HasIndex(e => e.NormalizedEmail)
                     .HasName("EmailIndex");
 
@@ -166,7 +179,8 @@ namespace HMS.Api.Repositories.HMSDb
                 entity.Property(e => e.UserName).HasMaxLength(256);
             });
 
-            modelBuilder.Entity<Cities>(entity => {
+            modelBuilder.Entity<Cities>(entity =>
+            {
                 entity.ToTable("Cities", "Location");
 
                 entity.Property(e => e.ArName)
@@ -192,7 +206,8 @@ namespace HMS.Api.Repositories.HMSDb
                     .HasForeignKey(d => d.CountryId);
             });
 
-            modelBuilder.Entity<Companies>(entity => {
+            modelBuilder.Entity<Companies>(entity =>
+            {
                 entity.ToTable("Companies", "HR");
 
                 entity.Property(e => e.Id).HasDefaultValueSql("(newid())");
@@ -228,7 +243,8 @@ namespace HMS.Api.Repositories.HMSDb
                     .HasForeignKey(d => d.AreaId);
             });
 
-            modelBuilder.Entity<CompanyPhones>(entity => {
+            modelBuilder.Entity<CompanyPhones>(entity =>
+            {
                 entity.HasKey(e => new { e.CompanyId, e.PhoneNumber })
                     .HasName("PK_CompanyPhones_CompanyId_PhoneNumber");
 
@@ -252,7 +268,8 @@ namespace HMS.Api.Repositories.HMSDb
                     .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
-            modelBuilder.Entity<Countries>(entity => {
+            modelBuilder.Entity<Countries>(entity =>
+            {
                 entity.ToTable("Countries", "Location");
 
                 entity.Property(e => e.ArName)
@@ -274,31 +291,27 @@ namespace HMS.Api.Repositories.HMSDb
                 entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
             });
 
-            modelBuilder.Entity<Groups>(entity => {
+            modelBuilder.Entity<Groups>(entity =>
+            {
                 entity.ToTable("Groups", "HR");
 
                 entity.Property(e => e.Id).HasDefaultValueSql("(newid())");
-
-                entity.Property(e => e.ArName).HasMaxLength(200);
 
                 entity.Property(e => e.CreatedDate)
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
-                entity.Property(e => e.EnName)
-                    .IsRequired()
-                    .HasMaxLength(200);
-
-                entity.Property(e => e.FriName).HasMaxLength(200);
-
                 entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Name).HasMaxLength(200);
 
                 entity.HasOne(d => d.Company)
                     .WithMany(p => p.Groups)
                     .HasForeignKey(d => d.CompanyId);
             });
 
-            modelBuilder.Entity<Hotels>(entity => {
+            modelBuilder.Entity<Hotels>(entity =>
+            {
                 entity.ToTable("Hotels", "Hotel");
 
                 entity.Property(e => e.Id).HasDefaultValueSql("(newid())");
@@ -331,7 +344,8 @@ namespace HMS.Api.Repositories.HMSDb
                     .HasConstraintName("FK_Hotels_AreaId");
             });
 
-            modelBuilder.Entity<Nationalities>(entity => {
+            modelBuilder.Entity<Nationalities>(entity =>
+            {
                 entity.ToTable("Nationalities", "HR");
 
                 entity.Property(e => e.ArName)
@@ -353,7 +367,8 @@ namespace HMS.Api.Repositories.HMSDb
                 entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
             });
 
-            modelBuilder.Entity<Needs>(entity => {
+            modelBuilder.Entity<Needs>(entity =>
+            {
                 entity.ToTable("Needs", "Common");
 
                 entity.Property(e => e.Id).ValueGeneratedOnAdd();
@@ -377,7 +392,8 @@ namespace HMS.Api.Repositories.HMSDb
                 entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
             });
 
-            modelBuilder.Entity<Persons>(entity => {
+            modelBuilder.Entity<Persons>(entity =>
+            {
                 entity.ToTable("Persons", "HR");
 
                 entity.Property(e => e.Id).HasDefaultValueSql("(newid())");
@@ -390,37 +406,21 @@ namespace HMS.Api.Repositories.HMSDb
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
-                entity.Property(e => e.FatherArName).HasMaxLength(200);
+                entity.Property(e => e.FatherName).HasMaxLength(200);
 
-                entity.Property(e => e.FatherEnName).HasMaxLength(200);
-
-                entity.Property(e => e.FatherFriName).HasMaxLength(200);
-
-                entity.Property(e => e.FirstArName).HasMaxLength(200);
-
-                entity.Property(e => e.FirstEnName)
+                entity.Property(e => e.FirstName)
                     .IsRequired()
                     .HasMaxLength(200);
-
-                entity.Property(e => e.FirstFriName).HasMaxLength(200);
 
                 entity.Property(e => e.IdNumber).HasMaxLength(100);
 
-                entity.Property(e => e.LastArName).HasMaxLength(200);
+                entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.LastEnName)
+                entity.Property(e => e.LastName)
                     .IsRequired()
                     .HasMaxLength(200);
 
-                entity.Property(e => e.LastFriName).HasMaxLength(200);
-
-                entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
-
-                entity.Property(e => e.MotherArName).HasMaxLength(200);
-
-                entity.Property(e => e.MotherEnName).HasMaxLength(200);
-
-                entity.Property(e => e.MotherFriName).HasMaxLength(200);
+                entity.Property(e => e.MotherName).HasMaxLength(200);
 
                 entity.HasOne(d => d.Nationality)
                     .WithMany(p => p.Persons)
@@ -428,7 +428,8 @@ namespace HMS.Api.Repositories.HMSDb
                     .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
-            modelBuilder.Entity<PhoneTypes>(entity => {
+            modelBuilder.Entity<PhoneTypes>(entity =>
+            {
                 entity.ToTable("PhoneTypes", "Common");
 
                 entity.Property(e => e.Id).ValueGeneratedOnAdd();
@@ -452,7 +453,8 @@ namespace HMS.Api.Repositories.HMSDb
                 entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
             });
 
-            modelBuilder.Entity<ReservationGroups>(entity => {
+            modelBuilder.Entity<ReservationGroups>(entity =>
+            {
                 entity.HasKey(e => new { e.ReservationId, e.GroupId })
                     .HasName("PK_ReservationGroups_ReservationId_GroupId");
 
@@ -468,7 +470,8 @@ namespace HMS.Api.Repositories.HMSDb
                     .HasForeignKey(d => d.ReservationId);
             });
 
-            modelBuilder.Entity<ReservationRooms>(entity => {
+            modelBuilder.Entity<ReservationRooms>(entity =>
+            {
                 entity.ToTable("ReservationRooms", "Hotel");
 
                 entity.HasIndex(e => new { e.ReservationId, e.RoomId, e.PersonId })
@@ -497,7 +500,8 @@ namespace HMS.Api.Repositories.HMSDb
                     .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
-            modelBuilder.Entity<Reservations>(entity => {
+            modelBuilder.Entity<Reservations>(entity =>
+            {
                 entity.ToTable("Reservations", "Hotel");
 
                 entity.Property(e => e.Id).HasDefaultValueSql("(newid())");
@@ -535,7 +539,8 @@ namespace HMS.Api.Repositories.HMSDb
                     .HasConstraintName("FK_Reservations_AspUsers_UserId");
             });
 
-            modelBuilder.Entity<RoomNeeds>(entity => {
+            modelBuilder.Entity<RoomNeeds>(entity =>
+            {
                 entity.HasKey(e => new { e.RoomId, e.NeedId })
                     .HasName("PK_RoomNeeds_RoomId_NeedId");
 
@@ -558,7 +563,8 @@ namespace HMS.Api.Repositories.HMSDb
                     .HasForeignKey(d => d.RoomId);
             });
 
-            modelBuilder.Entity<Rooms>(entity => {
+            modelBuilder.Entity<Rooms>(entity =>
+            {
                 entity.ToTable("Rooms", "Hotel");
 
                 entity.HasIndex(e => e.RoomNumber)
@@ -578,7 +584,8 @@ namespace HMS.Api.Repositories.HMSDb
                     .HasForeignKey(d => d.HotelId);
             });
 
-            modelBuilder.Entity<Status>(entity => {
+            modelBuilder.Entity<Status>(entity =>
+            {
                 entity.ToTable("Status", "Common");
 
                 entity.Property(e => e.ArName)
@@ -598,6 +605,18 @@ namespace HMS.Api.Repositories.HMSDb
                     .HasMaxLength(200);
 
                 entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<UsersHotels>(entity =>
+            {
+                entity.HasKey(e => e.UserId)
+                    .HasName("PK_UsersHotels_UserId");
+
+                entity.HasIndex(e => new { e.UserId, e.HotelId })
+                    .HasName("Unique_UsersHotels_UserId_HotelId")
+                    .IsUnique();
+
+                entity.Property(e => e.UserId).ValueGeneratedNever();
             });
         }
     }

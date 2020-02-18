@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
 
   reservations: Reservation[];
   selectedReservation: Reservation;
-  activeState : string;
+  activeState: string;
 
   onLogout() {
     localStorage.removeItem('token');
@@ -60,7 +60,7 @@ export class HomeComponent implements OnInit {
 
   GroupReservationModal(): void {
     this.dialog.open(GroupReservationModalComponent, {
-      width: '800px'
+      width: '1000px'
     }).afterClosed().subscribe(result => {
       if (typeof result !== 'undefined')
         this.reservations.push(result);
@@ -89,20 +89,22 @@ export class HomeComponent implements OnInit {
 
   setSelectedReservation(reservation: Reservation) {
     this.selectedReservation = reservation;
-    this.activeState = reservation.id;    
+    this.activeState = reservation.id;
   }
 
   CheckIn() {
     if (typeof this.selectedReservation === 'undefined')
       return;
 
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+    console.log(this.selectedReservation);
+
+    this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
-      data: "Are you sure you want to Check in " + this.selectedReservation.Code + " ?"
+      data: "Are you sure you want to Check in " + this.selectedReservation.code + " ?"
     }).afterClosed().subscribe(result => {
       if (result) {
-        console.log(this.selectedReservation.id);
-        
+        console.log("checking");
+
         this.reservationService.CheckIn(this.selectedReservation.id).subscribe((result: Boolean) => {
           if (result)
             return;

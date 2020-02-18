@@ -22,25 +22,24 @@ export class ReservationService {
       'reservations/Check', JSON.stringify(reservation));
   }
 
-  Save(reservation: Reservation, personInfo: Person, group : Group) {
+  Save(reservation: Reservation, personInfo: Person, group: Group) {
     var param = {
       "Reservation": reservation,
       "Person": personInfo,
-      "Group" : group
-    }   
+      "Group": group
+    }
 
     return this.http.post(this.apiService.getApiUrl() +
       'reservations/SaveReservation', JSON.stringify(param));
   }
 
-  Delete(Id){
+  Delete(Id) {
     return this.http.delete(this.apiService.getApiUrl() +
       'reservations/' + Id);
   }
 
-  CheckIn(Id){
-    console.log(Id);
-    return this.http.put(this.apiService.getApiUrl() +
-      'reservations/CheckIn', JSON.stringify(Id));
+  CheckIn(Id) {
+    return this.http.post(this.apiService.getApiUrl() +
+      'reservations/CheckIn', Id);
   }
 }
