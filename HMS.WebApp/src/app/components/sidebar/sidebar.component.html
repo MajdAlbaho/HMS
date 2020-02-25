@@ -81,8 +81,37 @@
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->
+
+            
+
+            <footer class="sidebar-footer">
+                <a class="mr-4" onclick="openFullscreen();"><i class="fa fa-expand"></i></a>
+                <a class="mr-4" onclick=""><i class="fa fa-times"></i></a>
+            </footer>
+                <!-- /.card-footer -->
+        
+        
+        
         </div>
         <!-- /.sidebar -->
-    </aside>
 
+        
+
+    </aside>
+    
 </div>
+
+<script>
+    var elem = document.documentElement;
+    function openFullscreen() {
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.mozRequestFullScreen) { /* Firefox */
+        elem.mozRequestFullScreen();
+      } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) { /* IE/Edge */
+        elem.msRequestFullscreen();
+      }
+    }
+    </script>
