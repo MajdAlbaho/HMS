@@ -177,12 +177,12 @@
                                             <td>{{ reservation.guests }}</td>
                                             <td>
                                                 <span [className]="
-                            reservation.statusId == 0
-                              ? 'badge badge-info'
-                              : reservation.statusId == 1
-                              ? 'badge badge-warning'
-                              : 'badge badge-danger'
-                          ">{{ reservation.status.enName }}</span>
+                                                reservation.statusId == 0
+                                                ? 'badge badge-info'
+                                                : reservation.statusId == 1
+                                                ? 'badge badge-warning'
+                                                : 'badge badge-danger'
+                                            ">{{ reservation.status.enName }}</span>
                                             </td>
                                             <td>
                                                 <button class="btn btn-danger" (click)="deleteItem(reservation)">

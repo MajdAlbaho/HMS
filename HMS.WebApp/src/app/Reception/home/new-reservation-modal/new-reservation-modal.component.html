@@ -63,7 +63,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-outline-secondary  mb-2 ml-2" [disabled]="!checkReservationForm.valid">Check Available Rooms</button>
+                <button type="submit" class="btn btn-outline-dark  mb-2 ml-2" [disabled]="!checkReservationForm.valid">Check Available Rooms</button>
 
 
             </div>
@@ -147,7 +147,7 @@
                         <input type="number" required class="form-control" placeholder="ID Number" title="ID Number" name="idNumber" [(ngModel)]="personInfo.IdNumber" #idNumber="ngModel" [class.is-invalid]="idNumber.invalid && idNumber.touched">
                     </div>
                 </div>
-                <button type="button" class="btn btn-outline-secondary mb-2 ml-2" (click)="AddGuest()" [disabled]="!reservationDetailForm.valid">AddGuest</button>
+                <button type="button" class="btn btn-outline-dark mb-2 ml-2" (click)="AddGuest()" [disabled]="!reservationDetailForm.valid">AddGuest</button>
 
             </div>
 
