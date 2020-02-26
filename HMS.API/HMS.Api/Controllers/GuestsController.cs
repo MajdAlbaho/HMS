@@ -22,6 +22,7 @@ namespace HMS.Api.Controllers
             _mapper = mapper;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Get() {
             try {
                 return Ok(_mapper.Map<List<Person>>((await _personRepository.GetAllAsync())

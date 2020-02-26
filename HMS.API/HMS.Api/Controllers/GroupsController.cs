@@ -35,7 +35,7 @@ namespace HMS.Api.Controllers
         }
 
         [HttpGet("{reservationStartDate}")]
-        public async Task<IActionResult> GetGroupsByReservationStartDate(DateTime reservationStartDate) {
+        public async Task<IActionResult> GetGroupsByReservationStartDate([FromQuery]DateTime reservationStartDate) {
             try {
                 return Ok(_mapper.Map<List<Reservation>>(
                     await _groupRepository.GetGroupsByReservationStartDate(reservationStartDate)));

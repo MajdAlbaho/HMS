@@ -15,6 +15,8 @@ using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using System;
 using System.Text;
+using HMS.Api.Options;
+using Microsoft.OpenApi.Models;
 
 namespace HMS.Api
 {
@@ -73,6 +75,10 @@ namespace HMS.Api
                        .AllowAnyHeader();
             }));
 
+            services.AddSwaggerGen(c => {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "HMSApi", Version = "v1" });
+            });
+
             //Jwt Authentication
 
             var key = Encoding.UTF8.GetBytes(Configuration["ApplicationSettings:JWT_Secret"]);
@@ -107,6 +113,7 @@ namespace HMS.Api
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env) {
+
             app.Use(async (ctx, next) => {
                 await next();
                 if (ctx.Response.StatusCode == 204) {
@@ -114,11 +121,20 @@ namespace HMS.Api
                 }
             });
 
+            var swaggerOptions = new SwaggerOptions();
+            Configuration.GetSection(nameof(SwaggerOptions)).Bind(swaggerOptions);
+            app.UseSwagger(options => { options.RouteTemplate = swaggerOptions.JsonRoute; });
+
+            app.UseSwaggerUI(c => {
+                c.SwaggerEndpoint(swaggerOptions.UIEndPoint, swaggerOptions.Description);
+            });
+
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
             }
 
             app.UseCors("MyPolicy");
+            app.UseStaticFiles();
 
             app.UseAuthentication();
 

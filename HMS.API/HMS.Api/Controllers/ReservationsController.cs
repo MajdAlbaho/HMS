@@ -56,7 +56,7 @@ namespace HMS.Api.Controllers
 
         [HttpPost]
         [Route("SaveReservation")]
-        public async Task<IActionResult> SaveReservation(SingleReservationParam param) {
+        public async Task<IActionResult> SaveReservation([FromBody]SingleReservationParam param) {
             try {
                 var result = await _reservationRepository.SaveReservation(param.Reservation,
                     param.Person, param.Group);
@@ -68,8 +68,8 @@ namespace HMS.Api.Controllers
         }
 
         [HttpPost]
-        [Route("CheckIn/{id?}")]
-        public async Task<IActionResult> CheckIn(Guid id) {
+        [Route("CheckIn")]
+        public async Task<IActionResult> CheckIn([FromBody]Guid id) {
             if (id == Guid.Empty)
                 return BadRequest();
 
@@ -83,7 +83,7 @@ namespace HMS.Api.Controllers
 
         [HttpDelete]
         [Route("Delete/{id}")]
-        public async Task<IActionResult> Delete(Guid id) {
+        public async Task<IActionResult> Delete([FromQuery]Guid id) {
             try {
                 await _reservationRepository.DeleteAsync(id);
                 return Ok();

@@ -31,7 +31,7 @@ namespace HMS.Api.Controllers
         [HttpPost]
         [Route("Register")]
         //POST : /api/ApplicationUser/Register
-        public async Task<object> PostApplicationUser(ApplicationUserModel model) {
+        public async Task<object> PostApplicationUser([FromForm]ApplicationUserModel model) {
             model.Role = "Receptionist";
             var applicationUser = new ApplicationUser() {
                 UserName = model.UserName,
@@ -52,7 +52,7 @@ namespace HMS.Api.Controllers
         [HttpPost]
         [Route("Login")]
         //POST : /api/ApplicationUser/Login
-        public async Task<IActionResult> Login(LoginModel model) {
+        public async Task<IActionResult> Login([FromForm]LoginModel model) {
             try {
                 var user = await _userManager.FindByNameAsync(model.UserName);
                 if (user != null && await _userManager.CheckPasswordAsync(user, model.Password)) {
