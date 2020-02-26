@@ -70,7 +70,7 @@ export class HomeComponent implements OnInit {
   deleteItem(reservation: Reservation) {
     this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
-      data: "Are you sure you want to delete " + reservation.Code + " ?"
+      data: "Are you sure you want to delete " + reservation.code + " ?"
     }).afterClosed().subscribe(result => {
       if (result) {
         this.reservationService.Delete(reservation.id).subscribe(() => {

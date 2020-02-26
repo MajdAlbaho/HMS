@@ -121,7 +121,7 @@ export class GroupReservationModalComponent implements OnInit {
     this.reservation.RoomId = "";
 
     this.reservation.HotelId = "3AB92D5C-33D1-4D17-83F3-A1CC5E00C4CD";
-    this.reservation.Code = "RSV1098";
+    this.reservation.code = "RSV1098";
     this.reservation.UserId = "47009186-d2a8-426d-8ad7-af784ee8bb5d";
     this.reservation.TotalCost = this.TotalCost;
 

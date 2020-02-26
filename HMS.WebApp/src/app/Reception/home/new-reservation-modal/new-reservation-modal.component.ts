@@ -58,7 +58,7 @@ export class NewReservationModalComponent implements OnInit {
 
   SaveReservation() {
     this.reservation.HotelId = "3AB92D5C-33D1-4D17-83F3-A1CC5E00C4CD";
-    this.reservation.Code = "RSV1098";
+    this.reservation.code = "RSV1098";
     this.reservation.UserId = "1DC97D96-BB38-4D7C-BCA3-111BADE204CB";
     this.reservation.TotalCost = this.TotalCost;
 
