@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HMS.Models.Enum;
 
 namespace HMS.Api.Controllers
 {
@@ -74,16 +75,30 @@ namespace HMS.Api.Controllers
                 return BadRequest();
 
             try {
-                await _reservationRepository.CheckIn(id);
-                return Ok();
+                await _reservationRepository.ChangeStatus(id, StatusEnum.Arrive);
+                return Ok(true);
+            } catch (Exception e) {
+                return BadRequest(new { message = e.Message });
+            }
+        }
+
+        [HttpPost]
+        [Route("CheckOut")]
+        public async Task<IActionResult> CheckOut([FromBody]Guid id) {
+            if (id == Guid.Empty)
+                return BadRequest();
+
+            try {
+                await _reservationRepository.ChangeStatus(id, StatusEnum.CheckOut);
+                return Ok(true);
             } catch (Exception e) {
                 return BadRequest(new { message = e.Message });
             }
         }
 
         [HttpDelete]
-        [Route("Delete/{id}")]
-        public async Task<IActionResult> Delete([FromQuery]Guid id) {
+        [Route("Delete")]
+        public async Task<IActionResult> Delete([FromBody]Guid id) {
             try {
                 await _reservationRepository.DeleteAsync(id);
                 return Ok();

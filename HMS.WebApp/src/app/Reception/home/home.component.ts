@@ -96,23 +96,45 @@ export class HomeComponent implements OnInit {
     if (typeof this.selectedReservation === 'undefined')
       return;
 
-    console.log(this.selectedReservation);
-
     this.dialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: "Are you sure you want to Check in " + this.selectedReservation.code + " ?"
     }).afterClosed().subscribe(result => {
       if (result) {
-        console.log("checking");
-
         this.reservationService.CheckIn(this.selectedReservation.id).subscribe((result: Boolean) => {
-          if (result)
-            return;
+          if (result) {
+            this.selectedReservation.statusId = 1;
+            this.selectedReservation.status.enName = "Arrived";
+          }
         }, error => {
           this.toastr.error(error.error.message);
           this.toastr.error(error.message);
           console.log(error);
         });
+      }
+    });
+  }
+
+  CheckOut() {
+    if (typeof this.selectedReservation === 'undefined')
+      return;
+
+    this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: "Are you sure you want to Check out " + this.selectedReservation.code + " ?"
+    }).afterClosed().subscribe(result => {
+      if (result) {
+        this.reservationService.CheckOut(this.selectedReservation.id)
+          .subscribe((result: Boolean) => {
+            if (result) {
+              this.selectedReservation.statusId = 3;
+              this.selectedReservation.status.enName = "Out";
+            }
+          }, error => {
+            this.toastr.error(error.error.message);
+            this.toastr.error(error.message);
+            console.log(error);
+          });
       }
     });
   }

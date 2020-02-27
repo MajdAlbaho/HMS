@@ -42,4 +42,9 @@ export class ReservationService {
     return this.http.post(this.apiService.getApiUrl() +
       'reservations/CheckIn', JSON.stringify(Id));
   }
+
+  CheckOut(Id) {
+    return this.http.post(this.apiService.getApiUrl() +
+      'reservations/CheckOut', JSON.stringify(Id));
+  }
 }

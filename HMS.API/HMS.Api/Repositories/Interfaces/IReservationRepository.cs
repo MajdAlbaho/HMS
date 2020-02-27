@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HMS.Models;
+using HMS.Models.Enum;
 
 namespace HMS.Api.Repositories.Interfaces
 {
@@ -13,6 +14,6 @@ namespace HMS.Api.Repositories.Interfaces
     {
         Task<IEnumerable<Rooms>> CheckReservation(Reservation reservation);
         Task<Reservations> SaveReservation(Reservation reservation, List<Person> persons, Group group = null);
-        Task CheckIn(Guid id);
+        Task ChangeStatus(Guid id, StatusEnum status);
     }
 }
