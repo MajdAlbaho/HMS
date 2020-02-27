@@ -11,9 +11,7 @@ namespace HMS.Api.Repositories.HMSDb
         }
 
         public Guid Id { get; set; }
-        public string ArName { get; set; }
-        public string EnName { get; set; }
-        public string FriName { get; set; }
+        public string Name { get; set; }
         public Guid CompanyId { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? LastModifiedDate { get; set; }

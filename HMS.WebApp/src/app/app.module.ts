@@ -14,7 +14,7 @@ import { UserService } from './services/user.service';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { HomeComponent } from './Reception/home/home.component';
 import { GuestsComponent } from './Reception/guests/guests.component';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { DashboardComponent } from './Management/dashboard/dashboard.component';
@@ -29,10 +29,13 @@ import { NewReservationModalComponent } from './Reception/home/new-reservation-m
 import { GroupReservationModalComponent } from './Reception/home/group-reservation-modal/group-reservation-modal.component';
 import { ArchwizardModule } from 'angular-archwizard';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { AddGroupModalComponent } from './Reception/groups/add-group-modal/add-group-modal.component';
+import { CompaniesComponent } from './Management/companies/companies.component';
+import { AddCompanyComponent } from './Management/companies/add-company/add-company.component';
 
 
 export function createTranslateLoader(http: HttpClient) {
-	return new TranslateHttpLoader(http);
+  return new TranslateHttpLoader(http);
 }
 
 @NgModule({
@@ -53,7 +56,10 @@ export function createTranslateLoader(http: HttpClient) {
     CheckReservationModalComponent,
     NewReservationModalComponent,
     GroupReservationModalComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    AddGroupModalComponent,
+    CompaniesComponent,
+    AddCompanyComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,8 +72,8 @@ export function createTranslateLoader(http: HttpClient) {
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-          useFactory: createTranslateLoader, // exported factory function needed for AoT compilation
-          deps: [HttpClient]
+        useFactory: createTranslateLoader, // exported factory function needed for AoT compilation
+        deps: [HttpClient]
       }
     }),
     ToastrModule.forRoot({
@@ -83,6 +89,6 @@ export function createTranslateLoader(http: HttpClient) {
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   entryComponents: [CheckReservationModalComponent, NewReservationModalComponent, GroupReservationModalComponent,
-    ConfirmDialogComponent]
+    ConfirmDialogComponent, AddGroupModalComponent, AddCompanyComponent]
 })
 export class AppModule { }

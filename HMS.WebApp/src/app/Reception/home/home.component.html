@@ -1,45 +1,56 @@
 <app-sidebar></app-sidebar>
 
+
 <div class="wrapper">
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
         <!-- Left navbar links -->
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
+                <a class="nav-link" data-widget="pushmenu" href="#">
+                    <i class="fa fa-bars"></i>
+                </a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a class="nav-link hand_cursor" (click)="IndividualReservationModal()">New Reservation</a>
+                <a class="nav-link hand_cursor" (click)="IndividualReservationModal()">
+                    New Reservation
+                </a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a class="nav-link hand_cursor" (click)="GroupReservationModal()">Group Reservation</a>
+                <a class="nav-link hand_cursor" (click)="GroupReservationModal()">
+                    Group Reservation
+                </a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a class="nav-link hand_cursor" (click)="BookingCheck()">Booking Check</a>
+                <a class="nav-link hand_cursor" (click)="BookingCheck()">
+                    Booking Check
+                </a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="#" class="nav-link text-primary"><i class="fa fa-check" aria-hidden="true"></i>
-                    <span class="badge navbar-badge text-secondary">15</span>
-                Check in</a>
+                <a class="nav-link hand_cursor" (click)="CheckIn()">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                    <span class="badge navbar-badge text-primary">
+                        {{reservations?.length}}</span> Check in
+                </a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="#" class="nav-link text-danger"><i class="fa fa-sign-out" aria-hidden="true"></i>
-                    <span class="badge navbar-badge text-secondary">53</span>
-                Check out</a>
+                <a class="nav-link hand_cursor" (click)="CheckOut()">
+                    <i class="fa fa-sign-out" aria-hidden="true"></i>
+                    <span class="badge navbar-badge text-danger">{{reservations?.length}}</span> Check out
+                </a>
             </li>
         </ul>
 
 
-
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
-
             <!-- Notifications Dropdown Menu -->
-            <li class="">
+            <li class>
                 <a class="nav-link" data-toggle="dropdown" href="#">
                     <span>Ramez Bazna</span>
                 </a>
             </li>
+
 
             <!-- Notifications Dropdown Menu -->
             <li class="nav-item dropdown">
@@ -65,7 +76,9 @@
                         <span class="float-right text-muted text-sm">2 days</span>
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+                    <a href="#" class="dropdown-item dropdown-footer">
+                        See All Notifications
+                    </a>
                 </div>
             </li>
 
@@ -96,7 +109,6 @@
                     </a>
                 </div>
             </li>
-
         </ul>
     </nav>
     <!-- /.navbar -->
@@ -105,19 +117,13 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        <div class="content-header">
-
-        </div>
+        <div class="content-header"></div>
         <!-- /.content-header -->
+
 
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-
-
-
-
-
                 <!-- /.row -->
                 <div class="row">
                     <div class="col-12">
@@ -125,12 +131,16 @@
                             <div class="card-header">
                                 <h3 class="card-title">Reservations Table</h3>
 
+
                                 <div class="card-tools">
                                     <div class="input-group input-group-sm">
                                         <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
 
+
                                         <div class="input-group-append">
-                                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                            <button type="submit" class="btn btn-default">
+                                                <i class="fa fa-search"></i>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -148,23 +158,32 @@
                                             <th>Rooms</th>
                                             <th>Guests</th>
                                             <th>Status</th>
-                                            <th>Comment</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let reservation of reservations">
-                                            <td>{{reservation.code}}</td>
-                                            <td>{{reservation.reservationGroups[0]?.group?.enName}}</td>
-                                            <td>{{reservation.startDate | date:'dd/MM/yyyy'}}</td>
-                                            <td>{{reservation.endDate | date:'dd/MM/yyyy'}}</td>
-                                            <td>{{reservation.nights}}</td>
-                                            <td>{{reservation.rooms}}</td>
-                                            <td>{{reservation.guests}}</td>
+                                        <tr *ngFor="let reservation of reservations; let i = index" (click)="setSelectedReservation(reservation)" [class.active]="reservation.id === activeState">
+                                            <td>{{ reservation.code }}</td>
                                             <td>
-                                                <span [className]="reservation.statusId == 0 ? 'badge badge-info'
-                                                : reservation.statusId == 1 ? 'badge badge-warning' : 'badge badge-danger'">
-                                                    {{reservation.status.enName}}
-                                                </span>
+                                                {{ reservation.reservationGroups[0]?.group?.enName }}
+                                            </td>
+                                            <td>
+                                                {{ reservation.startDate | date: "dd/MM/yyyy" }}
+                                            </td>
+                                            <td>
+                                                {{ reservation.endDate | date: "dd/MM/yyyy" }}
+                                            </td>
+                                            <td>{{ reservation.nights }}</td>
+                                            <td>{{ reservation.rooms }}</td>
+                                            <td>{{ reservation.guests }}</td>
+                                            <td>
+                                                <span [className]="
+                                                reservation.statusId == 0
+                                                ? 'badge badge-info'
+                                                : reservation.statusId == 1
+                                                ? 'badge badge-warning'
+                                                : 'badge badge-danger'
+                                            ">{{ reservation.status.enName }}</span>
                                             </td>
                                             <td>
                                                 <button class="btn btn-danger" (click)="deleteItem(reservation)">
@@ -181,13 +200,8 @@
                     </div>
                 </div>
                 <!-- /.row -->
-
-
-
-
-
             </div>
-            <!--/. container-fluid -->
+            <!-- /. container-fluid -->
         </section>
         <!-- /.content -->
     </div>

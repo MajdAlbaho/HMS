@@ -22,7 +22,7 @@ namespace HMS.Api.Repositories
             var reservations = await Context.ReservationRooms
                 .Include(e => e.Reservation)
                 .Include(e => e.Person)
-                .Where(e => e.Reservation.StartDate >= DateTime.Now.Date && e.Reservation.StartDate <= DateTime.Now.Date)
+                .Where(e => e.Reservation.EndDate >= DateTime.Now.Date && e.Reservation.StartDate <= DateTime.Now.Date)
                 .ToListAsync();
 
             foreach (var room in rooms) {

@@ -115,10 +115,11 @@
                                 <ul class="users-list clearfix">
                                     <li *ngFor="let room of hotelRoom.rooms">
                                         <h3 class="text-danger">{{room.roomNumber}}</h3>
-                                        <a class="users-list-name">{{room.reservationRooms[0]?.reservation.endDate | date:'dd/MM/yyyy'}}</a>
-                                        <span class="users-list-date" *ngFor="let reservation of room.reservationRooms">
-                                                {{reservation.person?.firstArName}}
-                                                {{reservation.person?.lastArName}}
+                                        <a class="users-list-date">{{room.reservationRooms[0]?.reservation.startDate | date:'dd/MM'}} -
+                                            {{room.reservationRooms[0]?.reservation.endDate | date:'dd/MM'}}
+                                        </a>
+                                        <span class="users-list-name" *ngFor="let reservation of room.reservationRooms">
+                                                Ramez Bazna
                                             </span>
                                     </li>
                                 </ul>

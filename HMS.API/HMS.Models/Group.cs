@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace HMS.Models
 {
-    public class Group : ModelBaseMultiLang<Guid>
+    public class Group : ModelBase<Guid>
     {
         public Guid CompanyId { get; set; }
+        public string Name { get; set; }
 
         public Company Company { get; set; }
 

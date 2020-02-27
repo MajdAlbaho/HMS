@@ -39,15 +39,8 @@ namespace HMS.Api.Repositories.HMSDb
         public virtual DbSet<RoomNeeds> RoomNeeds { get; set; }
         public virtual DbSet<Rooms> Rooms { get; set; }
         public virtual DbSet<Status> Status { get; set; }
+        public virtual DbSet<UsersHotels> UsersHotels { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Data Source=RAMEZ-PC;Initial Catalog=HMS;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-            }
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -304,19 +297,13 @@ namespace HMS.Api.Repositories.HMSDb
 
                 entity.Property(e => e.Id).HasDefaultValueSql("(newid())");
 
-                entity.Property(e => e.ArName).HasMaxLength(200);
-
                 entity.Property(e => e.CreatedDate)
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
-                entity.Property(e => e.EnName)
-                    .IsRequired()
-                    .HasMaxLength(200);
-
-                entity.Property(e => e.FriName).HasMaxLength(200);
-
                 entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Name).HasMaxLength(200);
 
                 entity.HasOne(d => d.Company)
                     .WithMany(p => p.Groups)
@@ -419,37 +406,21 @@ namespace HMS.Api.Repositories.HMSDb
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
-                entity.Property(e => e.FatherArName).HasMaxLength(200);
+                entity.Property(e => e.FatherName).HasMaxLength(200);
 
-                entity.Property(e => e.FatherEnName).HasMaxLength(200);
-
-                entity.Property(e => e.FatherFriName).HasMaxLength(200);
-
-                entity.Property(e => e.FirstArName).HasMaxLength(200);
-
-                entity.Property(e => e.FirstEnName)
+                entity.Property(e => e.FirstName)
                     .IsRequired()
                     .HasMaxLength(200);
-
-                entity.Property(e => e.FirstFriName).HasMaxLength(200);
 
                 entity.Property(e => e.IdNumber).HasMaxLength(100);
 
-                entity.Property(e => e.LastArName).HasMaxLength(200);
+                entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.LastEnName)
+                entity.Property(e => e.LastName)
                     .IsRequired()
                     .HasMaxLength(200);
 
-                entity.Property(e => e.LastFriName).HasMaxLength(200);
-
-                entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
-
-                entity.Property(e => e.MotherArName).HasMaxLength(200);
-
-                entity.Property(e => e.MotherEnName).HasMaxLength(200);
-
-                entity.Property(e => e.MotherFriName).HasMaxLength(200);
+                entity.Property(e => e.MotherName).HasMaxLength(200);
 
                 entity.HasOne(d => d.Nationality)
                     .WithMany(p => p.Persons)
@@ -634,6 +605,18 @@ namespace HMS.Api.Repositories.HMSDb
                     .HasMaxLength(200);
 
                 entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<UsersHotels>(entity =>
+            {
+                entity.HasKey(e => e.UserId)
+                    .HasName("PK_UsersHotels_UserId");
+
+                entity.HasIndex(e => new { e.UserId, e.HotelId })
+                    .HasName("Unique_UsersHotels_UserId_HotelId")
+                    .IsUnique();
+
+                entity.Property(e => e.UserId).ValueGeneratedNever();
             });
         }
     }

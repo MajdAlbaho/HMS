@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HMS.Models.Enum;
 
 namespace HMS.Api.Controllers
 {
@@ -27,7 +28,7 @@ namespace HMS.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll() {
             try {
-                return Ok(_mapper.Map<List<HMS.Models.Reservation>>(
+                return Ok(_mapper.Map<List<Reservation>>(
                     await _reservationRepository.GetAllAsync()));
             } catch (Exception e) {
                 return BadRequest(e.Message);
@@ -55,19 +56,49 @@ namespace HMS.Api.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> SaveReservation(SingleReservationParam param) {
+        [Route("SaveReservation")]
+        public async Task<IActionResult> SaveReservation([FromBody]SingleReservationParam param) {
             try {
-                await _reservationRepository.SaveReservation(param.Reservation,
+                var result = await _reservationRepository.SaveReservation(param.Reservation,
                     param.Person, param.Group);
 
-                return Ok();
+                return Ok(_mapper.Map<Reservation>(result));
             } catch (Exception e) {
                 return BadRequest(new { message = e.Message });
             }
         }
 
-        [HttpDelete("{Id}")]
-        public async Task<IActionResult> Delete(Guid id) {
+        [HttpPost]
+        [Route("CheckIn")]
+        public async Task<IActionResult> CheckIn([FromBody]Guid id) {
+            if (id == Guid.Empty)
+                return BadRequest();
+
+            try {
+                await _reservationRepository.ChangeStatus(id, StatusEnum.Arrive);
+                return Ok(true);
+            } catch (Exception e) {
+                return BadRequest(new { message = e.Message });
+            }
+        }
+
+        [HttpPost]
+        [Route("CheckOut")]
+        public async Task<IActionResult> CheckOut([FromBody]Guid id) {
+            if (id == Guid.Empty)
+                return BadRequest();
+
+            try {
+                await _reservationRepository.ChangeStatus(id, StatusEnum.CheckOut);
+                return Ok(true);
+            } catch (Exception e) {
+                return BadRequest(new { message = e.Message });
+            }
+        }
+
+        [HttpDelete]
+        [Route("Delete")]
+        public async Task<IActionResult> Delete([FromBody]Guid id) {
             try {
                 await _reservationRepository.DeleteAsync(id);
                 return Ok();

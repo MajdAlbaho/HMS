@@ -86,43 +86,89 @@
         <div class="row">
 
           <div class="col-8">
-            <div class="card">
+            <div class="card card-warning">
+              <div class="card-header">
+                <h3 class="card-title">Contact Us</h3>
+              </div>
+              <!-- /.card-header -->
 
-                <div class="card-header">
-              <h3 class="card-title">Contact Us</h3>
-            </div>
-            <!-- /.card-header -->
-            <!-- form start -->
-            <form class="form-horizontal">
+
               <div class="card-body">
                 
-                  <div class="form-group row">
-                      <label class="col-sm-2 control-label">CLASS</label>
-                      <img class="img-thumbnail">
-                    </div>
+              <div class="form-group row">
+                <div class="input-group mb-2">
+                  <div class="input-group-prepend">
+                      <div class="input-group-text">Sender</div>
+                  </div>
+                  <input disabled type="text"  placeholder="Citea Apart Hotel"  class="form-control">
+              </div>
+              </div>
 
+              <div class="form-group row">
+                <label class="col-sm-2 control-label">Category</label>
+                <select required title="Room Type" (change)="resetRooms()" class="browser-default custom-select" name="roomType" [(ngModel)]="reservation.RoomType">
+                  <option selected value="1">Reception</option>
+                  <option value="2">Finance</option>
+                  <option value="3">Management</option>
+                </select>
+              </div>
 
-                <div class="form-group row">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Your Name</label>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label>Your Message</label>
+                    <textarea class="form-control" rows="3" placeholder="Enter your message..."></textarea>
+                  </div>
                 </div>
-                <div class="form-group row">
-                  <label for="inputPassword3" class="col-sm-2 control-label">Comment</label>
-                </div>
+               
+              </div>
 
-                </div>
-              <!-- /.card-body -->
+              </div>
+            <!-- /.card-body -->
+
+              
               <div class="card-footer">
                 <button type="submit" class="btn btn-info float-right">Send</button>
               </div>
               <!-- /.card-footer -->
-            </form>
+
+            </div>
+            <!-- /.card -->
           </div>
-          <!-- /.card -->
+          <!-- /.col -->
 
 
 
 
-        </div>
+
+
+
+          
+                    <!-- Guests -->
+                    <div class="col-md-4">
+                      <div class="card card-info">
+                          <div class="card-header border-transparent">
+                              <h3 class="card-title">CLASS .Software Solutions</h3>
+
+                              
+                          </div>
+                          <!-- /.card-header -->
+                          <div class="card-body p-0">
+                            <a target="_blank" href="https://www.facebook.com/CiteaApartHotel">
+                              <img src="../../../assets/img/CLASS.jpg" class="img-thumbnail border-0"></a>
+            
+                          </div>
+                          <!-- /.card-body -->
+
+                      </div>
+                      <!-- /.card -->
+                  </div>
+
+
+
+
+
+
 
         </div>
         <!-- /.row -->
@@ -133,3 +179,25 @@
 </div>
 <!-- ./wrapper -->
 
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
