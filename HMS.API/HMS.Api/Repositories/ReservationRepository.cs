@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HMS.Models.Enum;
 using Status = HMS.Api.Repositories.HMSDb.Status;
 
 namespace HMS.Api.Repositories
@@ -102,12 +103,12 @@ namespace HMS.Api.Repositories
             }
         }
 
-        public async Task CheckIn(Guid id) {
+        public async Task ChangeStatus(Guid id, StatusEnum status) {
             using (var transaction = Context.Database.BeginTransaction()) {
                 try {
                     var reservation =
                         await Context.Reservations.FirstOrDefaultAsync(e => e.Id == id);
-                    reservation.StatusId = 1;
+                    reservation.StatusId = (int)status;
                     await Context.SaveChangesAsync();
 
                     transaction.Commit();
