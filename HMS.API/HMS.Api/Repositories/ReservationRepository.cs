@@ -48,39 +48,30 @@ namespace HMS.Api.Repositories
                 .ToListAsync();
         }
 
-        public async Task<Reservations> SaveReservation(Reservation reservation, List<Person> persons, Group group = null) {
+        public async Task<Reservations> SaveReservation(Reservations reservation, List<Persons> persons,
+            List<ReservationRooms> rooms) {
             using (var transaction = Context.Database.BeginTransaction()) {
                 try {
-                    persons.ForEach(e => e.Id = Guid.NewGuid());
-
-                    var dbReservation = _mapper.Map<Reservations>(reservation);
-                    var dbPersons = _mapper.Map<List<Persons>>(persons);
-
-                    await Context.Reservations.AddAsync(dbReservation);
-                    await Context.Persons.AddRangeAsync(dbPersons);
-                    dbReservation.UserId = "47009186-d2a8-426d-8ad7-af784ee8bb5d";
+                    await Context.Reservations.AddAsync(reservation);
+                    await Context.Persons.AddRangeAsync(persons);
+                    reservation.UserId = "47009186-d2a8-426d-8ad7-af784ee8bb5d";
 
                     await Context.SaveChangesAsync();
 
-                    if (group != null && !string.IsNullOrEmpty(group.Name)) {
-                        if (group.Id == Guid.Empty) {
-                            group.CompanyId = Guid.Parse("D78AEBF1-AA9A-472D-B0CC-3BD52917CB05");
-                            var dbGroup = _mapper.Map<Groups>(group);
-                            await Context.Groups.AddAsync(dbGroup);
+                    if (reservation.ReservationGroups != null && reservation.ReservationGroups.Count > 0) {
+                        foreach (var group in reservation.ReservationGroups) {
+                            if (!Context.Groups.Any(e => e.Id == group.GroupId)) {
+                                group.Group.CompanyId = Guid.Parse("D78AEBF1-AA9A-472D-B0CC-3BD52917CB05");
+                                Context.Groups.Add(group.Group);
+                            }
+
+                            Context.ReservationGroups.Add(group);
                             await Context.SaveChangesAsync();
-
-                            group.Id = dbGroup.Id;
                         }
-
-                        await Context.ReservationGroups.AddAsync(new ReservationGroups() {
-                            GroupId = group.Id,
-                            ReservationId = dbReservation.Id
-                        });
-                        await Context.SaveChangesAsync();
                     }
 
-                    await Context.ReservationRooms.AddRangeAsync(persons.Select(e => new ReservationRooms() {
-                        ReservationId = dbReservation.Id,
+                    await Context.ReservationRooms.AddRangeAsync(rooms.Select(e => new ReservationRooms() {
+                        ReservationId = reservation.Id,
                         PersonId = e.Id,
                         RoomId = e.RoomId
                     }));
@@ -94,7 +85,7 @@ namespace HMS.Api.Repositories
                         .ThenInclude(e => e.Room)
                         .Include(e => e.ReservationGroups)
                         .ThenInclude(e => e.Group)
-                        .FirstOrDefaultAsync(e => e.Id == dbReservation.Id);
+                        .FirstOrDefaultAsync(e => e.Id == reservation.Id);
 
                 } catch (Exception ex) {
                     transaction.Rollback();

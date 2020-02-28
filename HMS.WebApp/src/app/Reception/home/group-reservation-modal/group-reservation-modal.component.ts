@@ -57,6 +57,11 @@ export class GroupReservationModalComponent implements OnInit {
 
   groups: Group[];
 
+  LogCurrentGroup() {
+    console.log(this.group);
+
+  }
+
   ValidateNumber(num) {
     this.adultsHasError = num === undefined || num <= 0;
   }
@@ -117,15 +122,16 @@ export class GroupReservationModalComponent implements OnInit {
   }
 
   SaveReservation() {
-    console.log(this.reservation);
-    this.reservation.RoomId = "";
-
     this.reservation.HotelId = "3AB92D5C-33D1-4D17-83F3-A1CC5E00C4CD";
     this.reservation.code = "RSV1098";
     this.reservation.UserId = "47009186-d2a8-426d-8ad7-af784ee8bb5d";
     this.reservation.TotalCost = this.TotalCost;
+    this.reservation.ReservationGroups = [];
+    this.reservation.ReservationGroups.push(this.group);
 
-    this.reservationService.Save(this.reservation, this.persons, this.group)
+    console.log(this.reservation);
+
+    this.reservationService.Save(this.reservation, this.persons)
       .subscribe(response => {
         this.dialogRef.close(response);
       }, error => {

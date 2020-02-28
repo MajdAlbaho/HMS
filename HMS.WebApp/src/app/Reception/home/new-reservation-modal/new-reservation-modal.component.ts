@@ -63,7 +63,7 @@ export class NewReservationModalComponent implements OnInit {
     this.reservation.TotalCost = this.TotalCost;
 
 
-    this.reservationService.Save(this.reservation, this.persons, null).subscribe(response => {
+    this.reservationService.Save(this.reservation, this.persons).subscribe(response => {
       this.dialogRef.close(response);
     }, error => {
       this.toastr.error(error.error.message);

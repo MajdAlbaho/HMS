@@ -57,10 +57,19 @@ namespace HMS.Api.Controllers
 
         [HttpPost]
         [Route("SaveReservation")]
-        public async Task<IActionResult> SaveReservation([FromBody]SingleReservationParam param) {
+        public async Task<IActionResult> SaveReservation([FromBody]ReservationParam param) {
             try {
-                var result = await _reservationRepository.SaveReservation(param.Reservation,
-                    param.Person, param.Group);
+                param.Person.ForEach(e => e.Id = Guid.NewGuid());
+
+                var dbReservation = _mapper.Map<Reservations>(param.Reservation);
+                var dbPersons = _mapper.Map<List<Persons>>(param.Person);
+                var dbPersonRooms = param.Person.Select(e => new ReservationRooms() {
+                    RoomId = e.RoomId,
+                    PersonId = e.Id
+                }).ToList();
+
+                var result = await _reservationRepository.SaveReservation(dbReservation,
+                    dbPersons, dbPersonRooms);
 
                 return Ok(_mapper.Map<Reservation>(result));
             } catch (Exception e) {
@@ -98,7 +107,7 @@ namespace HMS.Api.Controllers
 
         [HttpDelete]
         [Route("Delete")]
-        public async Task<IActionResult> Delete([FromBody]Guid id) {
+        public async Task<IActionResult> Delete([FromQuery]Guid id) {
             try {
                 await _reservationRepository.DeleteAsync(id);
                 return Ok();

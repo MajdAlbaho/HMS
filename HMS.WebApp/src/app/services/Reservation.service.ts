@@ -22,11 +22,10 @@ export class ReservationService {
       'reservations/Check', JSON.stringify(reservation));
   }
 
-  Save(reservation: Reservation, personInfo: Person, group: Group) {
+  Save(reservation: Reservation, personInfo: Person) {
     var param = {
       "Reservation": reservation,
-      "Person": personInfo,
-      "Group": group
+      "Person": personInfo
     }
 
     return this.http.post(this.apiService.getApiUrl() +
@@ -35,7 +34,7 @@ export class ReservationService {
 
   Delete(Id) {
     return this.http.delete(this.apiService.getApiUrl() +
-      'reservations/' + Id);
+      'reservations/Delete/?id=' + Id);
   }
 
   CheckIn(Id) {

@@ -60,8 +60,9 @@
         <div class="col-auto">
             <label>Select a group</label>
             <div class="input-group mb-2">
-                <select class="browser-default custom-select" [(ngModel)]="reservation.group">
-                    <option *ngFor="let group of groups" value="{{group.id}}">
+                <input type="button" (click)="LogCurrentGroup()">
+                <select class="browser-default custom-select" [(ngModel)]="group">
+                    <option *ngFor="let group of groups" [ngValue]="group">
                         {{group.name}}
                     </option>
                 </select>

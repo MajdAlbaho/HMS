@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace HMS.Api.Models.parameters
 {
-    public class SingleReservationParam
+    public class ReservationParam
     {
         public List<Person> Person { get; set; }
         public Reservation Reservation { get; set; }
-        public Group Group { get; set; }
     }
 }
