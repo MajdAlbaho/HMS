@@ -1,0 +1,83 @@
+<div>
+    <button type="button" class="close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<h5 class="text-uppercase">New Company</h5>
+
+<hr class="style1">
+
+
+<!-- Company Details -->
+<form #checkReservationForm="ngForm" (ngSubmit)="checkReservation()">
+    <div class="row mt-4">
+
+        <div class="col-5">
+            <label class="sr-only" for="inlineFormInputGroup">Company Name</label>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-building-o"></i></div>
+                </div>
+                <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Company Name" title="Company Name">
+            </div>
+        </div>
+       
+    </div>
+
+    <div class="row mt-2">
+
+        <div class="col-auto">
+            <label class="sr-only" for="Birthdate">Phone (1)</label>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-phone"></i></div>
+                </div>
+                <input type="number" required class="form-control" placeholder="Phone (1)" title="Phone (1)">
+            </div>
+        </div>
+
+        <div class="col-auto">
+            <label class="sr-only" for="Birthdate">Phone (2)</label>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-phone"></i></div>
+                </div>
+                <input type="number" required class="form-control" placeholder="Phone (2)" title="Phone (2)">
+            </div>
+        </div>
+
+        <div class="col-auto">
+            <label class="sr-only" for="Birthdate">Phone (3)</label>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-phone"></i></div>
+                </div>
+                <input type="number" required class="form-control" placeholder="Phone (3)" title="Phone (3)">
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row mt-2">
+
+        <div class="col-8">
+            <label class="sr-only" for="inlineFormInputGroup">Address</label>
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-building-o"></i></div>
+                </div>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+        </div>
+
+    </div>
+<!-- // Company Details -->
+
+    <div class="modal-footer mt-3">
+        <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
+        <button type="button" type="submit" class="btn btn-primary" [disabled]="!checkReservationForm.valid || adultsHasError">Save</button>
+    </div>
+
+
+</form>
