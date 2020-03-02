@@ -8,7 +8,7 @@ export class ApiService {
   constructor() { }
 
   getApiUrl() {
-    return 'http://localhost:173/api/';
+    return 'http://localhost:62173/api/';
   }
 }
 
