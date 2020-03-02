@@ -6,17 +6,18 @@ import { ReservationService } from 'src/app/services/Reservation.service';
 import { Person } from 'src/app/models/Person';
 import { LoginComponent } from '../../../auth/user/login/login.component';
 
+
 @Component({
-  selector: 'app-add-group-modal',
-  templateUrl: './add-group-modal.component.html',
-  styleUrls: ['./add-group-modal.component.css']
+  selector: 'app-add-company-modal',
+  templateUrl: './add-company-modal.component.html',
+  styleUrls: ['./add-company-modal.component.css']
 })
-export class AddGroupModalComponent implements OnInit {
+export class AddCompanyModalComponent implements OnInit {
 
   constructor(
     private toastr: ToastrService,
     public reservationService: ReservationService,
-    public dialogRef: MatDialogRef<AddGroupModalComponent>,
+    public dialogRef: MatDialogRef<AddCompanyModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data) { }
 
   close(): void {

@@ -128,7 +128,7 @@ export class HomeComponent implements OnInit {
           .subscribe((result: Boolean) => {
             if (result) {
               this.selectedReservation.statusId = 3;
-              this.selectedReservation.status.enName = "Out";
+              this.selectedReservation.status.enName = "Checked Out";
             }
           }, error => {
             this.toastr.error(error.error.message);
