@@ -30,9 +30,9 @@ import { GroupReservationModalComponent } from './Reception/home/group-reservati
 import { ArchwizardModule } from 'angular-archwizard';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { AddGroupModalComponent } from './Reception/groups/add-group-modal/add-group-modal.component';
-import { CompaniesComponent } from './Management/companies/companies.component';
-import { AddCompanyComponent } from './Management/companies/add-company/add-company.component';
 import { AddCompanyModalComponent } from './Reception/groups/add-company-modal/add-company-modal.component';
+import { AddGuestModalComponent } from './Reception/guests/add-guest-modal/add-guest-modal.component';
+import { StaticReportsComponent } from './Management/reports/static-reports/static-reports.component';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -59,8 +59,9 @@ export function createTranslateLoader(http: HttpClient) {
     GroupReservationModalComponent,
     ConfirmDialogComponent,
     AddGroupModalComponent,
-    CompaniesComponent,
     AddCompanyModalComponent,
+    AddGuestModalComponent,
+    StaticReportsComponent,
   ],
   imports: [
     BrowserModule,
@@ -90,6 +91,6 @@ export function createTranslateLoader(http: HttpClient) {
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   entryComponents: [CheckReservationModalComponent, NewReservationModalComponent, GroupReservationModalComponent,
-    ConfirmDialogComponent, AddGroupModalComponent, AddCompanyModalComponent]
+    ConfirmDialogComponent, AddGroupModalComponent, AddCompanyModalComponent, AddGuestModalComponent]
 })
 export class AppModule { }
