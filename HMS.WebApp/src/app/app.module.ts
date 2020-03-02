@@ -32,6 +32,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
 import { AddGroupModalComponent } from './Reception/groups/add-group-modal/add-group-modal.component';
 import { CompaniesComponent } from './Management/companies/companies.component';
 import { AddCompanyComponent } from './Management/companies/add-company/add-company.component';
+import { AddCompanyModalComponent } from './Reception/groups/add-company-modal/add-company-modal.component';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -59,7 +60,7 @@ export function createTranslateLoader(http: HttpClient) {
     ConfirmDialogComponent,
     AddGroupModalComponent,
     CompaniesComponent,
-    AddCompanyComponent,
+    AddCompanyModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -89,6 +90,6 @@ export function createTranslateLoader(http: HttpClient) {
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   entryComponents: [CheckReservationModalComponent, NewReservationModalComponent, GroupReservationModalComponent,
-    ConfirmDialogComponent, AddGroupModalComponent, AddCompanyComponent]
+    ConfirmDialogComponent, AddGroupModalComponent, AddCompanyModalComponent]
 })
 export class AppModule { }

@@ -60,33 +60,12 @@
         <div class="col-auto">
             <label>Select a group</label>
             <div class="input-group mb-2">
-                <input type="button" (click)="LogCurrentGroup()">
                 <select class="browser-default custom-select" [(ngModel)]="group">
                     <option *ngFor="let group of groups" [ngValue]="group">
                         {{group.name}}
                     </option>
                 </select>
 
-                <div class="row mt-4">
-
-                    <div class="col-5">
-                        <label class="sr-only" for="inlineFormInputGroup">Room Number</label>
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text"><i class="fa fa-key"></i></div>
-                            </div>
-                            <select title="Room Number" class="browser-default custom-select" (change)="enableNextStep = true" name="roomNumber" [(ngModel)]="reservation.RoomId">
-                                <option *ngFor="let availableRoom of availableRooms" value="{{availableRoom.id}}">
-                                    {{availableRoom.roomNumber}}
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <button type="submit" class="btn btn-outline-dark  mb-2 ml-2" [disabled]="!checkReservationForm.valid">Check Available Rooms</button>
-
-
-                </div>
             </div>
             <div class="col-auto">
                 <button type="button" class="btn btn-primary" (click)="AddNewGroup()">Add Group</button>

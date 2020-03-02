@@ -57,11 +57,6 @@ export class GroupReservationModalComponent implements OnInit {
 
   groups: Group[];
 
-  LogCurrentGroup() {
-    console.log(this.group);
-
-  }
-
   ValidateNumber(num) {
     this.adultsHasError = num === undefined || num <= 0;
   }

@@ -14,31 +14,31 @@ import { AddCompanyModalComponent } from './add-company-modal/add-company-modal.
 })
 export class GroupsComponent implements OnInit {
 
-  constructor(private groupService : GroupService, private toastr: ToastrService, public dialog: MatDialog) { }
-  groups : any;
-  arrivalGroups : any;
+  constructor(private groupService: GroupService, private toastr: ToastrService, public dialog: MatDialog) { }
+  groups: any;
+  arrivalGroups: any;
 
   ngOnInit() {
     this.groupService.getGroups().subscribe(response => {
       this.groups = response;
     }
-    ,error => {
-      this.toastr.error(error.message);
-      console.log(error);
-    });
+      , error => {
+        this.toastr.error(error.message);
+        console.log(error);
+      });
 
     var utc = new Date();
     utc.setDate(utc.getDate() + 1);
-    var result = utc.toJSON().slice(0,10).replace(/-/g,'-');
+    var result = utc.toJSON().slice(0, 10).replace(/-/g, '-');
 
     this.groupService.getGroupsByReservationStartDate(result).subscribe(response => {
-      this.arrivalGroups = response;      
+      this.arrivalGroups = response;
     }
-    ,error => {
-      this.toastr.error(error.message);
-      console.log(error);
-    });
-    
+      , error => {
+        this.toastr.error(error.message);
+        console.log(error);
+      });
+
   }
 
   AddNewGroupModal(): void {
@@ -50,7 +50,7 @@ export class GroupsComponent implements OnInit {
     });
   }
 
-  AddNewCompanyModal(): void {
+  AddNewCompanyModal() {
     this.dialog.open(AddCompanyModalComponent, {
       width: '800px'
     }).afterClosed().subscribe(result => {
