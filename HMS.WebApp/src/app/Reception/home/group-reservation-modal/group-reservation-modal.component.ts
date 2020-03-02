@@ -4,7 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { Reservation } from 'src/app/models/Reservation';
 import { Person } from 'src/app/models/Person';
-import { Group } from '../../../models/Group';
+import { Group, ReservationGroup } from '../../../models/Group';
 import { AddGroupModalComponent } from '../../groups/add-group-modal/add-group-modal.component';
 import { GroupService } from '../../../services/group.service';
 
@@ -126,10 +126,14 @@ export class GroupReservationModalComponent implements OnInit {
     this.reservation.code = "RSV1098";
     this.reservation.UserId = "47009186-d2a8-426d-8ad7-af784ee8bb5d";
     this.reservation.TotalCost = this.TotalCost;
+
     this.reservation.ReservationGroups = [];
-    this.reservation.ReservationGroups.push(this.group);
+    var item = new ReservationGroup();
+    item.Group = this.group;
+    this.reservation.ReservationGroups.push(item);
 
     console.log(this.reservation);
+    console.log(this.persons);
 
     this.reservationService.Save(this.reservation, this.persons)
       .subscribe(response => {

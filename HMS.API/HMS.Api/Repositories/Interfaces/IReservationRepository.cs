@@ -13,7 +13,7 @@ namespace HMS.Api.Repositories.Interfaces
     public interface IReservationRepository : IRepositoryBase<Reservations, Guid>
     {
         Task<IEnumerable<Rooms>> CheckReservation(Reservation reservation);
-        Task<Reservations> SaveReservation(Reservations reservation, List<Persons> persons, List<ReservationRooms> rooms);
+        Task<Reservations> SaveReservation(Reservations reservation, List<Persons> persons);
         Task ChangeStatus(Guid id, StatusEnum status);
     }
 }

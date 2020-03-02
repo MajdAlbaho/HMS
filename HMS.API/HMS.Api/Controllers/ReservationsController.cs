@@ -62,14 +62,13 @@ namespace HMS.Api.Controllers
                 param.Person.ForEach(e => e.Id = Guid.NewGuid());
 
                 var dbReservation = _mapper.Map<Reservations>(param.Reservation);
-                var dbPersons = _mapper.Map<List<Persons>>(param.Person);
-                var dbPersonRooms = param.Person.Select(e => new ReservationRooms() {
+                dbReservation.ReservationRooms = param.Person.Select(e => new ReservationRooms() {
                     RoomId = e.RoomId,
                     PersonId = e.Id
                 }).ToList();
-
+                var dbPersons = _mapper.Map<List<Persons>>(param.Person);
                 var result = await _reservationRepository.SaveReservation(dbReservation,
-                    dbPersons, dbPersonRooms);
+                    dbPersons);
 
                 return Ok(_mapper.Map<Reservation>(result));
             } catch (Exception e) {

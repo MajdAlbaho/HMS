@@ -110,7 +110,7 @@
                             <div class="input-group-prepend">
                                 <div class="input-group-text"><i class="fa fa-user"></i></div>
                             </div>
-                            <input cdkFocusInitial required type="text" placeholder="First Name" title="First name" name="firstName" [(ngModel)]="personInfo.FirstEnName" #firstname="ngModel" [class.is-invalid]="firstname.invalid && firstname.touched" class="form-control">
+                            <input cdkFocusInitial required type="text" placeholder="First Name" title="First name" name="firstName" [(ngModel)]="personInfo.FirstName" #firstname="ngModel" [class.is-invalid]="firstname.invalid && firstname.touched" class="form-control">
                         </div>
                     </div>
 
@@ -120,7 +120,7 @@
                             <div class="input-group-prepend">
                                 <div class="input-group-text"><i class="fa fa-user"></i></div>
                             </div>
-                            <input type="text" required placeholder="Last Name" title="Last name" name="lastName" [(ngModel)]="personInfo.LastEnName" #lastName="ngModel" [class.is-invalid]="lastName.invalid && lastName.touched" class="form-control">
+                            <input type="text" required placeholder="Last Name" title="Last name" name="lastName" [(ngModel)]="personInfo.LastName" #lastName="ngModel" [class.is-invalid]="lastName.invalid && lastName.touched" class="form-control">
                         </div>
                     </div>
 
@@ -205,8 +205,8 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let person of persons">
-                            <td>{{person?.FirstEnName}}</td>
-                            <td>{{person?.LastEnName}}</td>
+                            <td>{{person?.FirstName}}</td>
+                            <td>{{person?.LastName}}</td>
                             <td>Organization</td>
                             <td>{{person?.Gender}}</td>
                             <td>{{person?.Nationality}}</td>

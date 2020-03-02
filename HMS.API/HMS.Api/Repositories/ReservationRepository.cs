@@ -48,33 +48,19 @@ namespace HMS.Api.Repositories
                 .ToListAsync();
         }
 
-        public async Task<Reservations> SaveReservation(Reservations reservation, List<Persons> persons,
-            List<ReservationRooms> rooms) {
+        public async Task<Reservations> SaveReservation(Reservations reservation, List<Persons> persons) {
             using (var transaction = Context.Database.BeginTransaction()) {
                 try {
-                    await Context.Reservations.AddAsync(reservation);
+                    Context.Entry(reservation).State = EntityState.Added;
+
+                    foreach (var reservationGroup in reservation.ReservationGroups) {
+                        Context.Entry(reservationGroup).State = EntityState.Added;
+                    }
+                    Context.ReservationRooms.AddRange(reservation.ReservationRooms);
+
                     await Context.Persons.AddRangeAsync(persons);
                     reservation.UserId = "47009186-d2a8-426d-8ad7-af784ee8bb5d";
 
-                    await Context.SaveChangesAsync();
-
-                    if (reservation.ReservationGroups != null && reservation.ReservationGroups.Count > 0) {
-                        foreach (var group in reservation.ReservationGroups) {
-                            if (!Context.Groups.Any(e => e.Id == group.GroupId)) {
-                                group.Group.CompanyId = Guid.Parse("D78AEBF1-AA9A-472D-B0CC-3BD52917CB05");
-                                Context.Groups.Add(group.Group);
-                            }
-
-                            Context.ReservationGroups.Add(group);
-                            await Context.SaveChangesAsync();
-                        }
-                    }
-
-                    await Context.ReservationRooms.AddRangeAsync(rooms.Select(e => new ReservationRooms() {
-                        ReservationId = reservation.Id,
-                        PersonId = e.Id,
-                        RoomId = e.RoomId
-                    }));
                     await Context.SaveChangesAsync();
 
                     transaction.Commit();

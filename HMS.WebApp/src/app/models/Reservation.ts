@@ -1,4 +1,4 @@
-import { Group } from './Group';
+import { Group, ReservationGroup } from './Group';
 export class Reservation {
   id: string;
   code: string;
@@ -12,7 +12,7 @@ export class Reservation {
   Adults: number
   RoomType: number;
   RoomId: string;
-  ReservationGroups: Group[];
+  ReservationGroups: ReservationGroup[];
 
   status: Status;
 }
