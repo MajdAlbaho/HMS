@@ -11,7 +11,9 @@
                 <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="#" class="nav-link" data-toggle="modal" data-target="#exampleModal">New Guest</a>
+                <a class="nav-link hand_cursor" (click)="AddNewGuestModal()">
+                    New Guest
+                </a>
             </li>
         </ul>
 
@@ -129,7 +131,9 @@
                                     </thead>
                                     <tbody>
                                         <tr *ngFor="let guest of guests">
-                                            <td>{{guest.firstEnName}}</td>
+                                            <td><a href="http://example.com">
+                                                Ramez Bazna
+                                              </a></td>
                                             <td>28</td>
                                             <td>919</td>
                                             <td>2</td>

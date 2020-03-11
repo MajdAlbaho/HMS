@@ -30,8 +30,6 @@ import { GroupReservationModalComponent } from './Reception/home/group-reservati
 import { ArchwizardModule } from 'angular-archwizard';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { AddGroupModalComponent } from './Reception/groups/add-group-modal/add-group-modal.component';
-import { CompaniesComponent } from './Management/companies/companies.component';
-import { AddCompanyComponent } from './Management/companies/add-company/add-company.component';
 import { AddCompanyModalComponent } from './Reception/groups/add-company-modal/add-company-modal.component';
 import { OrderModule } from 'ngx-order-pipe';
 import { AddPersonModalComponent } from './Reception/persons/add-person-modal/add-person-modal.component';
@@ -61,7 +59,6 @@ export function createTranslateLoader(http: HttpClient) {
     GroupReservationModalComponent,
     ConfirmDialogComponent,
     AddGroupModalComponent,
-    CompaniesComponent,
     AddCompanyModalComponent,
     AddPersonModalComponent
   ],
