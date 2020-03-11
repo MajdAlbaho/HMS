@@ -54,11 +54,23 @@
         </div>
         <select class="browser-default custom-select" name="nationality" [(ngModel)]="personInfo.Nationality">
           <option value="0">Syrian</option>
+          <option value="1">Iraqi</option>
+          <option value="2">Iran</option>
         </select>
       </div>
     </div>
 
-
+    <div class="col-auto">
+      <label class="sr-only" for="inlineFormInputGroup">BirthDate</label>
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text"><i class="fa fa-venus-mars"></i></div>
+        </div>
+        <input type="date" required placeholder="Birthdate" title="Birthdate" name="birthDate"
+          [(ngModel)]="personInfo.BirthDate" #birthDate="ngModel"
+          [class.is-invalid]="birthDate.invalid && birthDate.touched" class="form-control">
+      </div>
+    </div>
     <div class="col-auto">
       <label class="sr-only" for="Birthdate">ID Number</label>
       <div class="input-group mb-2">

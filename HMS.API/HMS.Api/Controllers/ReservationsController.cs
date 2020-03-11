@@ -59,8 +59,6 @@ namespace HMS.Api.Controllers
         [Route("SaveReservation")]
         public async Task<IActionResult> SaveReservation([FromBody]ReservationParam param) {
             try {
-                param.Person.ForEach(e => e.Id = Guid.NewGuid());
-
                 var dbReservation = _mapper.Map<Reservations>(param.Reservation);
                 dbReservation.ReservationRooms = param.Person.Select(e => new ReservationRooms() {
                     RoomId = e.RoomId,

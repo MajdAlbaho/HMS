@@ -1,0 +1,7 @@
+.hand_cursor {
+  cursor: pointer;
+}
+
+.active {
+  background-color: lightgray;
+}

@@ -109,7 +109,7 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
-                <table class="table table-hover">
+                <table class="table table-hover table-wrap">
                   <thead>
                     <tr>
                       <th>First name</th>
@@ -123,7 +123,7 @@
                       <td>{{ person.lastName }}</td>
                       <td>{{ person.idNumber }}</td>
                       <td>
-                        <button class="btn btn-danger btn-sm" (click)="OnSelectPerson(person)">
+                        <button class="btn btn-danger btn-sm" type="button" (click)="OnSelectPerson(person)">
                           Add
                         </button>
                       </td>
@@ -150,12 +150,12 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let person of persons">
-              <td>{{person.FirstName}}</td>
-              <td>{{person.LastName}}</td>
-              <td>{{person.Gender}}</td>
-              <td>{{person.Nationality}}</td>
-              <td>{{person.IdNumber}}</td>
+            <tr *ngFor="let person of selectedPersons">
+              <td>{{person.firstName}}</td>
+              <td>{{person.lastName}}</td>
+              <td>{{person.gender}}</td>
+              <td>{{person.nationality}}</td>
+              <td>{{person.idNumber}}</td>
             </tr>
           </tbody>
         </table>
@@ -188,7 +188,7 @@
       <div class="modal-footer mt-3">
         <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
         <button type="button" class="btn btn-primary" awPreviousStep>Previous Step</button>
-        <input type="submit" class="btn btn-primary" [disabled]="this.persons.length == 0" value="Finish" />
+        <input type="submit" class="btn btn-primary" [disabled]="this.selectedPersons.length == 0" value="Finish" />
       </div>
     </form>
 

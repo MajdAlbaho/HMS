@@ -27,7 +27,7 @@ export class NewReservationModalComponent implements OnInit {
   }
 
   reservation = new Reservation();
-  persons: any;
+  selectedPersons: any;
   TotalCost: number;
   BaseTotalCost: number;
   enableNextStep: boolean;
@@ -35,7 +35,7 @@ export class NewReservationModalComponent implements OnInit {
   personsList: Person[];
 
   ngOnInit() {
-    this.persons = new Array();
+    this.selectedPersons = new Array();
     this.personService.getAll().subscribe((response: Person[]) => {
       this.personsList = response;
     });
@@ -50,7 +50,8 @@ export class NewReservationModalComponent implements OnInit {
     this.dialog.open(AddPersonModalComponent, {
       width: '350px'
     }).afterClosed().subscribe(result => {
-
+      if (typeof result !== 'undefined')
+        this.personsList.push(result);
     });
   }
 
@@ -62,8 +63,6 @@ export class NewReservationModalComponent implements OnInit {
 
     this.reservationService.Check(this.reservation).subscribe(response => {
       this.availableRooms = response;
-      console.log(this.availableRooms);
-
     }, error => {
       this.toastr.error(error.error.message);
       this.toastr.error(error.message);
@@ -78,7 +77,7 @@ export class NewReservationModalComponent implements OnInit {
     this.reservation.TotalCost = this.TotalCost;
 
 
-    this.reservationService.Save(this.reservation, this.persons).subscribe(response => {
+    this.reservationService.Save(this.reservation, this.selectedPersons).subscribe(response => {
       this.dialogRef.close(response);
     }, error => {
       this.toastr.error(error.error.message);
@@ -89,10 +88,11 @@ export class NewReservationModalComponent implements OnInit {
 
   OnSelectPerson(selectedPerson) {
     var room = this.availableRooms.find(e => e.id == this.reservation.RoomId);
-    if (this.persons.length < room.totalBeds) {
+    if (this.selectedPersons.length < room.totalBeds) {
       var person = Object.assign({}, selectedPerson);
       person.RoomId = room.id;
-      this.persons.push(person);
+      this.selectedPersons.push(person);
+      this.personsList.splice(this.personsList.indexOf(selectedPerson), 1);
     }
   }
 

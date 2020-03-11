@@ -58,7 +58,6 @@ namespace HMS.Api.Repositories
                     }
                     Context.ReservationRooms.AddRange(reservation.ReservationRooms);
 
-                    await Context.Persons.AddRangeAsync(persons);
                     reservation.UserId = "47009186-d2a8-426d-8ad7-af784ee8bb5d";
 
                     await Context.SaveChangesAsync();

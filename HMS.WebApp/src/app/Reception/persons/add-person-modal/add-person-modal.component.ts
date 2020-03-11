@@ -25,12 +25,8 @@ export class AddPersonModalComponent implements OnInit {
     console.log(this.personInfo);
 
     this.personService.add(this.personInfo).subscribe(response => {
-      if (response) {
-        this.toast.success('Added');
-        this.close();
-      }
-      else
-        this.toast.error('Failed');
+      this.toast.success('Added');
+      this.dialogRef.close(response);
     });
   }
 

@@ -7,6 +7,7 @@ import { Person } from 'src/app/models/Person';
 import { Group, ReservationGroup } from '../../../models/Group';
 import { AddGroupModalComponent } from '../../groups/add-group-modal/add-group-modal.component';
 import { GroupService } from '../../../services/group.service';
+import { PersonService } from '../../../services/person.service';
 
 @Component({
   selector: 'app-group-reservation-modal',
@@ -17,7 +18,9 @@ export class GroupReservationModalComponent implements OnInit {
 
   constructor(
     private reservationService: ReservationService, private toastr: ToastrService, private groupService: GroupService,
-    public dialogRef: MatDialogRef<GroupReservationModalComponent>, public dialog: MatDialog,
+    public dialogRef: MatDialogRef<GroupReservationModalComponent>,
+    public personService: PersonService,
+    public dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data) { }
 
   close(): void {
@@ -25,7 +28,10 @@ export class GroupReservationModalComponent implements OnInit {
   }
   ngOnInit() {
     this.personInfo.SetDefaultValue();
-    this.persons = new Array();
+    this.selectedPersons = new Array();
+    this.personService.getAll().subscribe((response: Person[]) => {
+      this.personsList = response;
+    });
     this.reservation.TotalCost = 0;
 
     this.groupService.getGroups().subscribe((response: Group[]) => {
@@ -47,13 +53,17 @@ export class GroupReservationModalComponent implements OnInit {
   personInfo = new Person();
   group = new Group();
 
-  persons: any;
   adultsHasError: boolean;
   availableRooms: any;
   TotalCost: number = 0;
   BaseTotalCost: number;
   Days: number;
   DiscountValue: number = 0;
+  personsList: Person[];
+  selectedPersons: any;
+  selectedPerson: Person;
+
+  activeState: string;
 
   groups: Group[];
 
@@ -70,9 +80,10 @@ export class GroupReservationModalComponent implements OnInit {
     });
   }
 
-  AddGuest() {
-    this.personInfo.RoomId = this.reservation.RoomId;
-    this.persons.push(Object.assign({}, this.personInfo));
+  AddSelectedPerson() {
+    this.selectedPerson.RoomId = this.reservation.RoomId;
+    this.selectedPersons.push(Object.assign({}, this.selectedPerson));
+    this.personsList.splice(this.personsList.indexOf(this.selectedPerson), 1);
 
     var room = this.availableRooms.find(e => e.id == this.reservation.RoomId);
     if (room == undefined)
@@ -127,10 +138,7 @@ export class GroupReservationModalComponent implements OnInit {
     item.Group = this.group;
     this.reservation.ReservationGroups.push(item);
 
-    console.log(this.reservation);
-    console.log(this.persons);
-
-    this.reservationService.Save(this.reservation, this.persons)
+    this.reservationService.Save(this.reservation, this.selectedPersons)
       .subscribe(response => {
         this.dialogRef.close(response);
       }, error => {
@@ -138,5 +146,10 @@ export class GroupReservationModalComponent implements OnInit {
         this.toastr.error(error.message);
         console.log(error);
       });
+  }
+
+  setSelectedPerson(person) {
+    this.selectedPerson = person;
+    this.activeState = person.id;
   }
 }
