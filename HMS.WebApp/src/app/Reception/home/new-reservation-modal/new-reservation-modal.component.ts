@@ -1,10 +1,12 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { Reservation } from 'src/app/models/Reservation';
 import { ReservationService } from 'src/app/services/Reservation.service';
 import { Person } from 'src/app/models/Person';
 import { LoginComponent } from '../../../auth/user/login/login.component';
+import { PersonService } from '../../../services/person.service';
+import { AddPersonModalComponent } from '../../persons/add-person-modal/add-person-modal.component';
 
 @Component({
   selector: 'app-new-reservation-modal',
@@ -16,7 +18,8 @@ export class NewReservationModalComponent implements OnInit {
   constructor(
     private toastr: ToastrService,
     public reservationService: ReservationService,
-    public dialogRef: MatDialogRef<NewReservationModalComponent>,
+    public personService: PersonService,
+    public dialogRef: MatDialogRef<NewReservationModalComponent>, public dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data) { }
 
   close(): void {
@@ -24,21 +27,31 @@ export class NewReservationModalComponent implements OnInit {
   }
 
   reservation = new Reservation();
-  personInfo = new Person();
   persons: any;
   TotalCost: number;
   BaseTotalCost: number;
   enableNextStep: boolean;
   availableRooms: any;
+  personsList: Person[];
 
   ngOnInit() {
-    this.personInfo.SetDefaultValue();
     this.persons = new Array();
+    this.personService.getAll().subscribe((response: Person[]) => {
+      this.personsList = response;
+    });
 
     if (this.data !== null) {
       this.reservation.StartDate = this.data.StartDate;
       this.reservation.EndDate = this.data.EndDate;
     }
+  }
+
+  AddPerson() {
+    this.dialog.open(AddPersonModalComponent, {
+      width: '350px'
+    }).afterClosed().subscribe(result => {
+
+    });
   }
 
   checkAvailableRooms() {
@@ -49,6 +62,8 @@ export class NewReservationModalComponent implements OnInit {
 
     this.reservationService.Check(this.reservation).subscribe(response => {
       this.availableRooms = response;
+      console.log(this.availableRooms);
+
     }, error => {
       this.toastr.error(error.error.message);
       this.toastr.error(error.message);
@@ -72,10 +87,10 @@ export class NewReservationModalComponent implements OnInit {
     });
   }
 
-  AddGuest() {
+  OnSelectPerson(selectedPerson) {
     var room = this.availableRooms.find(e => e.id == this.reservation.RoomId);
     if (this.persons.length < room.totalBeds) {
-      var person = Object.assign({}, this.personInfo);
+      var person = Object.assign({}, selectedPerson);
       person.RoomId = room.id;
       this.persons.push(person);
     }

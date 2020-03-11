@@ -5,3 +5,4 @@ npm install ionicons
 
 
 npm install --save angular-archwizard
+npm install ngx-order-pipe --save

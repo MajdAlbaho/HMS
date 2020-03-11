@@ -33,6 +33,8 @@ import { AddGroupModalComponent } from './Reception/groups/add-group-modal/add-g
 import { CompaniesComponent } from './Management/companies/companies.component';
 import { AddCompanyComponent } from './Management/companies/add-company/add-company.component';
 import { AddCompanyModalComponent } from './Reception/groups/add-company-modal/add-company-modal.component';
+import { OrderModule } from 'ngx-order-pipe';
+import { AddPersonModalComponent } from './Reception/persons/add-person-modal/add-person-modal.component';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -61,6 +63,7 @@ export function createTranslateLoader(http: HttpClient) {
     AddGroupModalComponent,
     CompaniesComponent,
     AddCompanyModalComponent,
+    AddPersonModalComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +83,8 @@ export function createTranslateLoader(http: HttpClient) {
     ToastrModule.forRoot({
       progressBar: true
     }),
-    FormsModule
+    FormsModule,
+    OrderModule
   ],
   providers: [UserService, {
     provide: HTTP_INTERCEPTORS,
@@ -90,6 +94,7 @@ export function createTranslateLoader(http: HttpClient) {
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   entryComponents: [CheckReservationModalComponent, NewReservationModalComponent, GroupReservationModalComponent,
-    ConfirmDialogComponent, AddGroupModalComponent, AddCompanyModalComponent]
+    ConfirmDialogComponent, AddGroupModalComponent, AddCompanyModalComponent,
+    AddPersonModalComponent]
 })
 export class AppModule { }

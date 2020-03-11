@@ -1,7 +1,7 @@
 <div>
     <button type="button" class="close" (click)="close()">
-        <span aria-hidden="true">&times;</span>
-    </button>
+    <span aria-hidden="true">&times;</span>
+  </button>
 </div>
 
 <h5 class="text-uppercase">Group Reservation</h5>
@@ -42,7 +42,8 @@
                     </div>
                 </div>
                 <div class="col-auto">
-                    <button type="submit" class="btn btn-outline-secondary " [disabled]="!checkReservationForm.valid">Check Available Rooms</button>
+                    <button type="submit" class="btn btn-outline-secondary " [disabled]="!checkReservationForm.valid">Check
+            Available Rooms</button>
                 </div>
 
                 <div *ngIf="availableRooms">
@@ -61,10 +62,10 @@
             <label>Select a group</label>
             <div class="input-group mb-2">
                 <select class="browser-default custom-select" [(ngModel)]="group">
-                    <option *ngFor="let group of groups" [ngValue]="group">
-                        {{group.name}}
-                    </option>
-                </select>
+          <option *ngFor="let group of groups" [ngValue]="group">
+            {{group.name}}
+          </option>
+        </select>
 
             </div>
             <div class="col-auto">
@@ -73,7 +74,7 @@
             <div class="modal-footer mt-3">
                 <button type="button" class="btn btn-secondary" (click)="close()">Close</button>
                 <button type="button" class="btn btn-primary" (click)="Next()" [disabled]="availableRooms == undefined || availableRooms?.length === 0" awNextStep>Next
-                    Step</button>
+          Step</button>
             </div>
         </div>
     </aw-wizard-step>
@@ -123,9 +124,9 @@
                                 <div class="input-group-text"><i class="fa fa-venus-mars"></i></div>
                             </div>
                             <select name="gender" class="browser-default custom-select" [(ngModel)]="personInfo.Gender" [value]="1">
-                                <option value="true" selected>Male</option>
-                                <option value="false">Female</option>
-                            </select>
+                <option value="true" selected>Male</option>
+                <option value="false">Female</option>
+              </select>
                         </div>
                     </div>
                     <div class="col-auto">
@@ -135,8 +136,8 @@
                                 <div class="input-group-text"><i class="fa fa-flag"></i></div>
                             </div>
                             <select class="browser-default custom-select" name="nationality" [(ngModel)]="personInfo.Nationality">
-                                <option value="0">Syrian</option>
-                            </select>
+                <option value="0">Syrian</option>
+              </select>
                         </div>
                     </div>
 
@@ -158,10 +159,11 @@
                                 <div class="input-group-text"><i class="fa fa-key"></i></div>
                             </div>
                             <select title="Room Number" class="browser-default custom-select" (change)="enableNextStep = true" name="roomNumber" [(ngModel)]="reservation.RoomId">
-                                <option *ngFor="let availableRoom of availableRooms" value="{{availableRoom.id}}">
-                                    {{availableRoom.roomNumber}}
-                                </option>
-                            </select>
+                <option *ngFor="let availableRoom of availableRooms | orderBy: 'floorNumber' | orderBy: 'roomNumber'"
+                  value="{{availableRoom.id}}">
+                  Floor : {{availableRoom.roomNumber}} - Room number : {{availableRoom.roomNumber}}
+                </option>
+              </select>
                         </div>
                     </div>
                     <button type="button" class="btn btn-outline-secondary  mb-2 ml-2" (click)="AddGuest()" [disabled]="!groupReservationForm.valid">AddGuest</button>
