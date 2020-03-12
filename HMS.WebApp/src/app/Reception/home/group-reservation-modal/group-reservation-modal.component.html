@@ -142,7 +142,7 @@
                 name="roomNumber" [(ngModel)]="reservation.RoomId">
                 <option *ngFor="let availableRoom of availableRooms | orderBy: 'floorNumber' | orderBy: 'roomNumber'"
                   value="{{availableRoom.id}}">
-                  Floor : {{availableRoom.roomNumber}} - Room number : {{availableRoom.roomNumber}}
+                  Floor : {{availableRoom.floorNumber}} - Room number : {{availableRoom.roomNumber}}
                 </option>
               </select>
             </div>

@@ -41,6 +41,7 @@ namespace HMS.Api.Repositories
                             (reservation.EndDate >= e.Reservation.StartDate &&
                              reservation.EndDate <= e.Reservation.EndDate))
                 .Select(e => e.Room)
+                .Distinct()
                 .ToListAsync();
 
             return await Context.Rooms

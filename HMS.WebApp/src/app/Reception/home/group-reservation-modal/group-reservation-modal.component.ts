@@ -81,6 +81,10 @@ export class GroupReservationModalComponent implements OnInit {
   }
 
   AddSelectedPerson() {
+    if (typeof (this.selectedPerson) === 'undefined' || this.selectedPerson == null
+      || this.reservation.RoomId == null)
+      return;
+
     this.selectedPerson.RoomId = this.reservation.RoomId;
     this.selectedPersons.push(Object.assign({}, this.selectedPerson));
     this.personsList.splice(this.personsList.indexOf(this.selectedPerson), 1);
@@ -102,6 +106,8 @@ export class GroupReservationModalComponent implements OnInit {
       this.availableRooms.splice(index, 1);
       this.reservation.RoomId = null;
     }
+
+    this.selectedPerson = null;
   }
 
   AddNewGroup() {
